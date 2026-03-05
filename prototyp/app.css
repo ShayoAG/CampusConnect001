@@ -1,0 +1,1078 @@
+@layer app.base, app.layout, app.diagram, app.inspector;
+
+@layer app.base {
+  :root[data-skin="admin-intelligence"] {
+    --text-3: color-mix(in oklch, var(--text-2) 70%, transparent);
+    --ring-sdg: color-mix(in oklch, var(--ai-brand-magenta) 9%, var(--surface) 91%);
+    --ring-onprem: color-mix(in oklch, var(--ai-brand-green) 14%, var(--surface) 86%);
+    --ring-de-region: color-mix(in oklch, var(--ai-brand-green) 10%, var(--surface) 90%);
+    --ring-eu: color-mix(in oklch, var(--ai-brand-green) 9%, var(--bg) 91%);
+    --ring-us: color-mix(in oklch, var(--ai-brand-magenta) 6%, var(--bg) 94%);
+    --ring-stroke: color-mix(in oklch, var(--border) 72%, var(--ai-brand-magenta) 28%);
+    --edge-dim-opacity: 0.18;
+    --node-dim-opacity: 0.32;
+  }
+
+  :root[data-skin="admin-intelligence"] * {
+    box-sizing: border-box;
+  }
+
+  :root[data-skin="admin-intelligence"] body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(1200px 600px at 8% -20%, color-mix(in oklch, var(--ai-brand-magenta) 13%, transparent) 0%, transparent 55%),
+      radial-gradient(900px 500px at 95% 0%, color-mix(in oklch, var(--ai-brand-green) 15%, transparent) 0%, transparent 52%),
+      var(--bg);
+    color: var(--text-1);
+  }
+}
+
+@layer app.layout {
+  :root[data-skin="admin-intelligence"] .app-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    border-radius: 0;
+    padding: var(--space-1) var(--space-4);
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  :root[data-skin="admin-intelligence"] .app-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 200px;
+  }
+
+  :root[data-skin="admin-intelligence"] .app-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 700;
+    opacity: 0.9;
+  }
+
+  :root[data-skin="admin-intelligence"] .app-title {
+    font-size: clamp(1.08rem, 0.95vw + 0.85rem, 1.55rem);
+    line-height: 1.05;
+    color: var(--text-on-brand);
+  }
+
+  :root[data-skin="admin-intelligence"] .app-controls {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--space-2);
+    padding: var(--space-2);
+    border-radius: var(--radius-m);
+    background: color-mix(in oklch, var(--surface) 90%, transparent);
+    border: 1px solid color-mix(in oklch, var(--border) 70%, transparent);
+    color: var(--text-1);
+    max-width: 1260px;
+    flex: 1;
+  }
+
+  :root[data-skin="admin-intelligence"] .control-field {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-2);
+    min-width: auto;
+    white-space: nowrap;
+    color: var(--text-1);
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  :root[data-skin="admin-intelligence"] .control-field span {
+    color: color-mix(in oklch, var(--text-1) 75%, var(--text-2) 25%);
+    font-size: 0.79rem;
+  }
+
+  :root[data-skin="admin-intelligence"] .control-field select {
+    min-height: 38px;
+    min-width: 260px;
+    font-size: 0.84rem;
+    font-weight: 600;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+  }
+
+  :root[data-skin="admin-intelligence"] .segment {
+    display: inline-flex;
+    gap: var(--space-1);
+    border-radius: var(--radius-m);
+    background: var(--bg-muted);
+    padding: var(--space-1);
+    border: 1px solid var(--border-subtle);
+  }
+
+  :root[data-skin="admin-intelligence"] .segment-btn {
+    border: 0;
+    border-radius: calc(var(--radius-m) - 3px);
+    background: transparent;
+    color: var(--text-2);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    padding: 0.4rem 0.65rem;
+    cursor: pointer;
+    transition:
+      color var(--transition-base),
+      background-color var(--transition-base),
+      box-shadow var(--transition-base);
+  }
+
+  :root[data-skin="admin-intelligence"] .segment-btn:hover {
+    color: var(--text-1);
+  }
+
+  :root[data-skin="admin-intelligence"] .segment-btn:focus-visible {
+    outline: none;
+    box-shadow: var(--shadow-focus);
+  }
+
+  :root[data-skin="admin-intelligence"] .segment-btn.is-active {
+    background: var(--surface);
+    color: var(--text-1);
+    box-shadow: var(--shadow-s);
+  }
+
+  :root[data-skin="admin-intelligence"] .app-main {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 380px;
+    gap: var(--space-4);
+    padding: var(--space-4);
+    height: calc(100vh - 62px);
+    max-height: calc(100vh - 62px);
+    min-height: calc(100vh - 62px);
+    overflow: hidden;
+  }
+
+  :root[data-skin="admin-intelligence"] .app-controls .lss-btn {
+    min-height: 38px;
+    padding: 0.42rem 0.92rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  :root[data-skin="admin-intelligence"] .diagram-shell,
+  :root[data-skin="admin-intelligence"] .inspector {
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-m);
+    padding: 0;
+    min-height: 0;
+    height: 100%;
+  }
+
+  :root[data-skin="admin-intelligence"] .diagram-shell:hover,
+  :root[data-skin="admin-intelligence"] .inspector:hover {
+    transform: none;
+    border-color: var(--border-subtle);
+    box-shadow: var(--shadow-m);
+  }
+
+  :root[data-skin="admin-intelligence"] .diagram-shell {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  :root[data-skin="admin-intelligence"] .diagram-meta {
+    padding: var(--space-3) var(--space-5);
+    border-bottom: 1px solid var(--border-subtle);
+    background: color-mix(in oklch, var(--bg-muted) 86%, var(--surface) 14%);
+  }
+
+  :root[data-skin="admin-intelligence"] .diagram-meta-grid {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  :root[data-skin="admin-intelligence"] .scenario-description {
+    margin: 0;
+    color: var(--text-2);
+    font-size: 0.79rem;
+    font-weight: 700;
+  }
+
+  :root[data-skin="admin-intelligence"] .trust-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  :root[data-skin="admin-intelligence"] .trust-chip {
+    display: inline-flex;
+    align-items: center;
+    border-radius: var(--radius-full);
+    border: 1px solid color-mix(in oklch, var(--border) 64%, var(--ai-brand-green) 36%);
+    background: color-mix(in oklch, var(--surface) 86%, var(--ai-brand-green) 14%);
+    padding: 0.22rem 0.58rem;
+    font-size: 0.67rem;
+    color: var(--text-1);
+    font-weight: 700;
+  }
+
+  :root[data-skin="admin-intelligence"] .svg-wrap {
+    position: relative;
+    overflow: hidden;
+    min-height: 0;
+    height: 100%;
+    background:
+      radial-gradient(760px 300px at 50% 10%, color-mix(in oklch, var(--ai-brand-green) 8%, transparent), transparent 80%),
+      radial-gradient(900px 420px at 80% 95%, color-mix(in oklch, var(--ai-brand-magenta) 8%, transparent), transparent 72%),
+      color-mix(in oklch, var(--bg) 90%, var(--surface) 10%);
+  }
+
+  :root[data-skin="admin-intelligence"] #architecture-svg {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    touch-action: none;
+    user-select: none;
+    cursor: grab;
+  }
+
+  :root[data-skin="admin-intelligence"] .svg-wrap.is-dragging #architecture-svg {
+    cursor: grabbing;
+  }
+
+  :root[data-skin="admin-intelligence"] .legend {
+    position: absolute;
+    right: var(--space-4);
+    bottom: var(--space-4);
+    z-index: 8;
+    padding: var(--space-4);
+    min-width: 245px;
+    gap: var(--space-2);
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-m);
+    pointer-events: none;
+  }
+
+  :root[data-skin="admin-intelligence"] .legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 0.75rem;
+    color: var(--text-2);
+    font-weight: 600;
+  }
+
+  :root[data-skin="admin-intelligence"] .legend-line {
+    width: 28px;
+    border-top: 2px solid transparent;
+    flex-shrink: 0;
+  }
+
+  :root[data-skin="admin-intelligence"] .legend-line--pii {
+    border-color: var(--ai-brand-magenta);
+  }
+
+  :root[data-skin="admin-intelligence"] .legend-line--non-pii {
+    border-color: var(--ai-brand-green);
+  }
+
+  :root[data-skin="admin-intelligence"] .legend-line--optional {
+    border-color: var(--ai-brand-green);
+    border-top-style: dashed;
+  }
+
+  :root[data-skin="admin-intelligence"] .legend-shield {
+    font-size: 0.95rem;
+    flex-shrink: 0;
+  }
+
+  :root[data-skin="admin-intelligence"] .legend-node {
+    display: inline-flex;
+    width: 26px;
+    height: 14px;
+    border: 1.4px solid var(--border);
+    background: color-mix(in oklch, var(--surface) 88%, var(--bg-muted) 12%);
+    flex-shrink: 0;
+  }
+
+  :root[data-skin="admin-intelligence"] .legend-node--build {
+    border-radius: 4px;
+  }
+
+  :root[data-skin="admin-intelligence"] .legend-node--service {
+    border-radius: 999px;
+    border-style: dashed;
+    border-color: color-mix(in oklch, var(--border) 56%, var(--ai-brand-green) 44%);
+  }
+
+  :root[data-skin="admin-intelligence"] .tooltip {
+    position: absolute;
+    z-index: 30;
+    max-width: 290px;
+    border: 1px solid var(--border);
+    background: color-mix(in oklch, var(--surface) 96%, transparent);
+    color: var(--text-1);
+    border-radius: var(--radius-s);
+    box-shadow: var(--shadow-l);
+    font-size: 0.74rem;
+    padding: var(--space-2) var(--space-3);
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity var(--transition-base), transform var(--transition-base);
+  }
+
+  :root[data-skin="admin-intelligence"] .tooltip.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 1560px) {
+    :root[data-skin="admin-intelligence"] .app-main {
+      grid-template-columns: minmax(0, 1fr) 350px;
+    }
+
+    :root[data-skin="admin-intelligence"] .control-field {
+      min-width: auto;
+    }
+
+    :root[data-skin="admin-intelligence"] .control-field select {
+      min-width: 220px;
+    }
+  }
+
+  @media (max-width: 1320px) {
+    :root[data-skin="admin-intelligence"] .app-header {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    :root[data-skin="admin-intelligence"] .app-controls {
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      max-width: none;
+    }
+
+    :root[data-skin="admin-intelligence"] .control-field {
+      flex-direction: column;
+      align-items: flex-start;
+      min-width: 180px;
+      white-space: normal;
+    }
+
+    :root[data-skin="admin-intelligence"] .control-field select {
+      min-width: 220px;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    :root[data-skin="admin-intelligence"] .app-main {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: minmax(420px, 1fr) minmax(280px, 36vh);
+      height: auto;
+      min-height: calc(100vh - 118px);
+      max-height: none;
+      overflow: visible;
+    }
+
+    :root[data-skin="admin-intelligence"] .inspector {
+      min-height: 260px;
+    }
+
+    :root[data-skin="admin-intelligence"] #architecture-svg {
+      min-height: 460px;
+    }
+  }
+
+  @media (max-width: 840px) {
+    :root[data-skin="admin-intelligence"] .app-main {
+      padding: var(--space-3);
+      gap: var(--space-3);
+    }
+
+    :root[data-skin="admin-intelligence"] .app-controls {
+      gap: var(--space-2);
+      padding: var(--space-2);
+    }
+
+    :root[data-skin="admin-intelligence"] .control-field {
+      min-width: 100%;
+    }
+
+    :root[data-skin="admin-intelligence"] .segment {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    :root[data-skin="admin-intelligence"] .legend {
+      position: static;
+      margin: var(--space-4);
+      pointer-events: auto;
+    }
+  }
+}
+
+@layer app.diagram {
+  :root[data-skin="admin-intelligence"] .zone-ring {
+    stroke: var(--ring-stroke);
+    stroke-width: 1.75;
+  }
+
+  :root[data-skin="admin-intelligence"] .zone-ring--sdg-campus {
+    fill: var(--ring-sdg);
+  }
+
+  :root[data-skin="admin-intelligence"] .zone-ring--on-prem {
+    fill: var(--ring-onprem);
+  }
+
+  :root[data-skin="admin-intelligence"] .zone-ring--de-region {
+    fill: var(--ring-de-region);
+  }
+
+  :root[data-skin="admin-intelligence"] .zone-ring--eu-cloud {
+    fill: var(--ring-eu);
+  }
+
+  :root[data-skin="admin-intelligence"] .zone-ring--us-global {
+    fill: var(--ring-us);
+  }
+
+  :root[data-skin="admin-intelligence"] .zone-label {
+    fill: var(--text-2);
+    font-size: 1.08rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-anchor: middle;
+    pointer-events: none;
+  }
+
+  :root[data-skin="admin-intelligence"] .cluster-box {
+    fill: color-mix(in oklch, var(--surface) 80%, transparent);
+    stroke: color-mix(in oklch, var(--border) 65%, var(--ai-brand-magenta) 35%);
+    stroke-width: 1.2;
+    stroke-dasharray: 8 6;
+    rx: 14;
+    ry: 14;
+  }
+
+  :root[data-skin="admin-intelligence"] .cluster-title {
+    fill: var(--text-2);
+    font-size: 0.84rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  :root[data-skin="admin-intelligence"] .cluster-desc {
+    fill: var(--text-3);
+    font-size: 0.67rem;
+    font-weight: 500;
+    display: none;
+  }
+
+  :root[data-skin="admin-intelligence"] .edge-group {
+    transition: opacity var(--transition-base);
+  }
+
+  :root[data-skin="admin-intelligence"] .edge-group.is-dimmed {
+    opacity: var(--edge-dim-opacity);
+  }
+
+  :root[data-skin="admin-intelligence"] .edge-path {
+    fill: none;
+    stroke-width: 2.35;
+    transition: stroke-width var(--transition-base);
+  }
+
+  :root[data-skin="admin-intelligence"] .edge-path.pii {
+    stroke: var(--ai-brand-magenta);
+  }
+
+  :root[data-skin="admin-intelligence"] .edge-path.non-pii {
+    stroke: var(--ai-brand-green);
+  }
+
+  :root[data-skin="admin-intelligence"] .edge-path.dashed {
+    stroke-dasharray: 9 7;
+  }
+
+  :root[data-skin="admin-intelligence"] .edge-group.is-optional .edge-path {
+    opacity: 0.62;
+  }
+
+  :root[data-skin="admin-intelligence"] .edge-group.is-optional:hover .edge-path,
+  :root[data-skin="admin-intelligence"] .edge-group.is-optional:focus-within .edge-path,
+  :root[data-skin="admin-intelligence"] .edge-group.is-optional.is-selected .edge-path {
+    opacity: 1;
+  }
+
+  :root[data-skin="admin-intelligence"] .edge-hit {
+    fill: none;
+    stroke: transparent;
+    stroke-width: 18;
+    cursor: pointer;
+  }
+
+  :root[data-skin="admin-intelligence"] .edge-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    fill: var(--text-1);
+    stroke: color-mix(in oklch, var(--surface) 94%, transparent);
+    stroke-width: 4;
+    paint-order: stroke;
+    text-anchor: middle;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity var(--transition-base);
+  }
+
+  :root[data-skin="admin-intelligence"] .edge-group:hover .edge-label,
+  :root[data-skin="admin-intelligence"] .edge-group:focus-within .edge-label,
+  :root[data-skin="admin-intelligence"] .edge-group.is-selected .edge-label {
+    opacity: 1;
+  }
+
+  :root[data-skin="admin-intelligence"] .edge-group:hover .edge-path,
+  :root[data-skin="admin-intelligence"] .edge-group:focus-within .edge-path,
+  :root[data-skin="admin-intelligence"] .edge-group.is-selected .edge-path {
+    stroke-width: 4;
+  }
+
+  :root[data-skin="admin-intelligence"] .edge-hit:focus-visible {
+    outline: none;
+  }
+
+  :root[data-skin="admin-intelligence"] .edge-hit:focus-visible ~ .edge-path {
+    filter: drop-shadow(0 0 0.3rem color-mix(in oklch, var(--focus) 55%, transparent));
+  }
+
+  :root[data-skin="admin-intelligence"] .node-group {
+    cursor: pointer;
+    transition: opacity var(--transition-base);
+  }
+
+  :root[data-skin="admin-intelligence"] .node-group.is-dimmed {
+    opacity: var(--node-dim-opacity);
+  }
+
+  :root[data-skin="admin-intelligence"] .node-rect {
+    fill: color-mix(in oklch, var(--surface) 94%, transparent);
+    stroke: var(--border);
+    stroke-width: 1.2;
+    transition:
+      stroke var(--transition-base),
+      stroke-width var(--transition-base),
+      filter var(--transition-base),
+      transform var(--transition-base);
+  }
+
+  :root[data-skin="admin-intelligence"] .node-group.is-service .node-rect {
+    stroke-dasharray: 8 6;
+    stroke: color-mix(in oklch, var(--border) 56%, var(--ai-brand-green) 44%);
+    fill: color-mix(in oklch, var(--surface) 86%, var(--ai-brand-green) 14%);
+  }
+
+  :root[data-skin="admin-intelligence"] .node-group.is-platform .node-rect {
+    stroke: color-mix(in oklch, var(--border) 48%, var(--ai-brand-magenta) 52%);
+    stroke-width: 1.9;
+    fill: color-mix(in oklch, var(--surface) 84%, var(--ai-brand-magenta) 16%);
+  }
+
+  :root[data-skin="admin-intelligence"] .node-group.is-build .node-rect {
+    stroke-dasharray: none;
+  }
+
+  :root[data-skin="admin-intelligence"] .node-class-strip {
+    fill: color-mix(in oklch, var(--text-2) 20%, var(--border) 80%);
+  }
+
+  :root[data-skin="admin-intelligence"] .node-class-strip.pii {
+    fill: var(--ai-brand-magenta);
+  }
+
+  :root[data-skin="admin-intelligence"] .node-class-strip.non-pii {
+    fill: var(--ai-brand-green);
+  }
+
+  :root[data-skin="admin-intelligence"] .node-class-strip.mixed {
+    fill: color-mix(in oklch, var(--ai-brand-magenta) 55%, var(--ai-brand-green) 45%);
+  }
+
+  :root[data-skin="admin-intelligence"] .node-class-strip.system {
+    fill: color-mix(in oklch, var(--text-2) 60%, var(--border) 40%);
+  }
+
+  :root[data-skin="admin-intelligence"] .node-group[data-data-class="pii"] .node-rect {
+    fill: color-mix(in oklch, var(--ai-brand-magenta) 9%, var(--surface) 91%);
+  }
+
+  :root[data-skin="admin-intelligence"] .node-group[data-data-class="non-pii"] .node-rect {
+    fill: color-mix(in oklch, var(--ai-brand-green) 8%, var(--surface) 92%);
+  }
+
+  :root[data-skin="admin-intelligence"] .node-group[data-data-class="mixed"] .node-rect {
+    fill: color-mix(in oklch, var(--ai-brand-magenta) 5%, color-mix(in oklch, var(--ai-brand-green) 7%, var(--surface) 93%));
+  }
+
+  :root[data-skin="admin-intelligence"] .node-group.is-optional .node-rect,
+  :root[data-skin="admin-intelligence"] .node-group.is-external .node-rect {
+    stroke-dasharray: 7 5;
+  }
+
+  :root[data-skin="admin-intelligence"] .node-group.is-zone-violation .node-rect {
+    stroke: color-mix(in oklch, var(--ai-brand-magenta) 72%, #d03838 28%);
+    stroke-width: 2.4;
+    filter: drop-shadow(0 0 0.35rem color-mix(in oklch, var(--ai-brand-magenta) 30%, transparent));
+  }
+
+  :root[data-skin="admin-intelligence"] .node-group:hover .node-rect,
+  :root[data-skin="admin-intelligence"] .node-group:focus-visible .node-rect,
+  :root[data-skin="admin-intelligence"] .node-group.is-selected .node-rect {
+    stroke: var(--ai-brand-magenta);
+    stroke-width: 2.4;
+    filter: drop-shadow(0 8px 14px color-mix(in oklch, var(--ai-brand-magenta) 25%, transparent));
+  }
+
+  :root[data-skin="admin-intelligence"] .node-group:focus-visible {
+    outline: none;
+  }
+
+  :root[data-skin="admin-intelligence"] .node-title {
+    fill: var(--text-1);
+    font-size: 0.94rem;
+    font-weight: 700;
+  }
+
+  :root[data-skin="admin-intelligence"] .node-platform-title {
+    fill: var(--text-1);
+    font-size: 0.96rem;
+    font-weight: 800;
+  }
+
+  :root[data-skin="admin-intelligence"] .node-platform-note {
+    fill: var(--text-2);
+    font-size: 0.72rem;
+    font-weight: 700;
+  }
+
+  :root[data-skin="admin-intelligence"] .moodle-logo {
+    opacity: 0.96;
+    pointer-events: none;
+  }
+
+  :root[data-skin="admin-intelligence"] .node-inner-lti {
+    fill: color-mix(in oklch, var(--surface) 82%, var(--ai-brand-green) 18%);
+    stroke: color-mix(in oklch, var(--border) 52%, var(--ai-brand-green) 48%);
+    stroke-width: 1.2;
+    stroke-dasharray: 5 3;
+  }
+
+  :root[data-skin="admin-intelligence"] .node-inner-title {
+    fill: var(--text-1);
+    font-size: 0.8rem;
+    font-weight: 800;
+  }
+
+  :root[data-skin="admin-intelligence"] .node-ui-badge {
+    stroke-width: 1;
+  }
+
+  :root[data-skin="admin-intelligence"] .node-ui-badge.course {
+    fill: color-mix(in oklch, var(--surface) 78%, var(--ai-brand-green) 22%);
+    stroke: color-mix(in oklch, var(--ai-brand-green) 72%, black 28%);
+  }
+
+  :root[data-skin="admin-intelligence"] .node-ui-badge.author {
+    fill: color-mix(in oklch, var(--surface) 76%, var(--ai-brand-magenta) 24%);
+    stroke: color-mix(in oklch, var(--ai-brand-magenta) 72%, black 28%);
+  }
+
+  :root[data-skin="admin-intelligence"] .node-ui-badge-text {
+    fill: var(--text-1);
+    text-anchor: middle;
+    font-size: 0.69rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+  }
+
+  :root[data-skin="admin-intelligence"] .embedded-item {
+    cursor: pointer;
+  }
+
+  :root[data-skin="admin-intelligence"] .embedded-item:focus-visible {
+    outline: none;
+  }
+
+  :root[data-skin="admin-intelligence"] .embedded-item:hover .node-inner-lti,
+  :root[data-skin="admin-intelligence"] .embedded-item.is-selected .node-inner-lti {
+    stroke: color-mix(in oklch, var(--ai-brand-magenta) 58%, var(--ai-brand-green) 42%);
+    stroke-width: 2;
+    filter: drop-shadow(0 4px 8px color-mix(in oklch, var(--ai-brand-magenta) 18%, transparent));
+  }
+
+  :root[data-skin="admin-intelligence"] .embedded-item:hover .node-ui-badge,
+  :root[data-skin="admin-intelligence"] .embedded-item.is-selected .node-ui-badge {
+    stroke-width: 1.8;
+    filter: drop-shadow(0 3px 6px color-mix(in oklch, var(--ai-brand-magenta) 18%, transparent));
+  }
+
+  :root[data-skin="admin-intelligence"] .node-service-dot {
+    fill: color-mix(in oklch, var(--ai-brand-green) 84%, white 16%);
+    stroke: color-mix(in oklch, var(--ai-brand-green) 72%, black 28%);
+    stroke-width: 0.9;
+  }
+
+  :root[data-skin="admin-intelligence"] .node-service-dot.pii {
+    fill: color-mix(in oklch, var(--ai-brand-magenta) 84%, white 16%);
+    stroke: color-mix(in oklch, var(--ai-brand-magenta) 72%, black 28%);
+  }
+
+  :root[data-skin="admin-intelligence"] .node-service-mark {
+    fill: color-mix(in oklch, white 90%, var(--text-1) 10%);
+    font-size: 0.5rem;
+    font-weight: 900;
+    text-anchor: middle;
+    pointer-events: none;
+  }
+
+  :root[data-skin="admin-intelligence"] .node-subtitle {
+    fill: var(--text-3);
+    font-size: 0.74rem;
+    font-weight: 600;
+  }
+
+  :root[data-skin="admin-intelligence"] .node-icon {
+    font-size: 0.9rem;
+    pointer-events: none;
+  }
+
+  :root[data-skin="admin-intelligence"] .provider-pill {
+    fill: color-mix(in oklch, var(--bg-muted) 70%, var(--surface) 30%);
+    stroke: color-mix(in oklch, var(--border) 70%, var(--ai-brand-green) 30%);
+    stroke-width: 0.8;
+  }
+
+  :root[data-skin="admin-intelligence"] .provider-pill-text {
+    fill: var(--text-2);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-anchor: middle;
+  }
+
+  :root[data-skin="admin-intelligence"] .node-logo-tag {
+    fill: var(--text-2);
+    font-size: 0.56rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    text-anchor: end;
+    pointer-events: none;
+  }
+}
+
+@layer app.inspector {
+  :root[data-skin="admin-intelligence"] .inspector {
+    display: grid;
+    grid-template-rows: auto auto minmax(0, 1fr);
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  :root[data-skin="admin-intelligence"] .inspector-header {
+    padding: var(--space-5);
+    border-bottom: 1px solid var(--border-subtle);
+    background: color-mix(in oklch, var(--bg-muted) 90%, var(--surface) 10%);
+  }
+
+  :root[data-skin="admin-intelligence"] .inspector-header h2 {
+    margin: 0;
+    font-size: 1.25rem;
+  }
+
+  :root[data-skin="admin-intelligence"] .inspector-header p {
+    margin: var(--space-2) 0 0;
+    font-size: var(--small);
+    color: var(--text-2);
+  }
+
+  :root[data-skin="admin-intelligence"] .inspector-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-1);
+    padding: var(--space-2);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  :root[data-skin="admin-intelligence"] .tab-btn {
+    border: 0;
+    border-radius: var(--radius-s);
+    background: transparent;
+    color: var(--text-2);
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: var(--space-2) var(--space-1);
+    cursor: pointer;
+    transition: background-color var(--transition-base), color var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  :root[data-skin="admin-intelligence"] .tab-btn:hover {
+    color: var(--text-1);
+    background: color-mix(in oklch, var(--surface) 88%, var(--ai-brand-green) 12%);
+  }
+
+  :root[data-skin="admin-intelligence"] .tab-btn.is-active {
+    color: var(--text-1);
+    background: color-mix(in oklch, var(--ai-brand-magenta) 14%, var(--surface) 86%);
+    box-shadow: var(--shadow-s);
+  }
+
+  :root[data-skin="admin-intelligence"] .tab-btn:focus-visible {
+    outline: none;
+    box-shadow: var(--shadow-focus);
+  }
+
+  :root[data-skin="admin-intelligence"] .inspector-content {
+    overflow: auto;
+    min-height: 0;
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  :root[data-skin="admin-intelligence"] .inspector-empty {
+    padding: var(--space-5);
+    border-radius: var(--radius-m);
+    background: color-mix(in oklch, var(--bg-muted) 82%, var(--surface) 18%);
+    border: 1px solid var(--border-subtle);
+  }
+
+  :root[data-skin="admin-intelligence"] .inspector-empty p {
+    margin: 0;
+    color: var(--text-2);
+    font-size: var(--small);
+  }
+
+  :root[data-skin="admin-intelligence"] .inspector-empty ul {
+    margin: var(--space-3) 0 0;
+    padding-left: 1.1rem;
+    color: var(--text-2);
+    display: grid;
+    gap: var(--space-2);
+    font-size: var(--small);
+  }
+
+  :root[data-skin="admin-intelligence"] .section {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  :root[data-skin="admin-intelligence"] .section h3 {
+    margin: 0;
+    font-size: 0.78rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--text-2);
+  }
+
+  :root[data-skin="admin-intelligence"] .section p {
+    margin: 0;
+    color: var(--text-1);
+    font-size: var(--small);
+    line-height: 1.45;
+  }
+
+  :root[data-skin="admin-intelligence"] .section ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    color: var(--text-1);
+    display: grid;
+    gap: var(--space-2);
+    font-size: var(--small);
+  }
+
+  :root[data-skin="admin-intelligence"] .story-steps {
+    margin: 0;
+    padding-left: 1.1rem;
+    display: grid;
+    gap: var(--space-2);
+    color: var(--text-1);
+    font-size: var(--small);
+  }
+
+  :root[data-skin="admin-intelligence"] .detail-block {
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-s);
+    background: color-mix(in oklch, var(--surface) 90%, var(--bg-muted) 10%);
+    padding: var(--space-2) var(--space-3);
+  }
+
+  :root[data-skin="admin-intelligence"] .detail-block > summary {
+    cursor: pointer;
+    color: var(--text-2);
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  :root[data-skin="admin-intelligence"] .detail-block[open] > summary {
+    margin-bottom: var(--space-3);
+  }
+
+  :root[data-skin="admin-intelligence"] .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
+
+  :root[data-skin="admin-intelligence"] .meta-item {
+    padding: var(--space-3);
+    border-radius: var(--radius-s);
+    border: 1px solid var(--border-subtle);
+    background: color-mix(in oklch, var(--surface) 88%, var(--bg-muted) 12%);
+    display: grid;
+    gap: var(--space-1);
+  }
+
+  :root[data-skin="admin-intelligence"] .meta-item span:first-child {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-3);
+    font-weight: 700;
+  }
+
+  :root[data-skin="admin-intelligence"] .meta-item span:last-child {
+    font-size: var(--small);
+    font-weight: 700;
+  }
+
+  :root[data-skin="admin-intelligence"] .data-badge {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    border-radius: var(--radius-full);
+    padding: 0.25rem 0.58rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 800;
+    border: 1px solid transparent;
+  }
+
+  :root[data-skin="admin-intelligence"] .data-badge.pii {
+    background: color-mix(in oklch, var(--ai-brand-magenta) 20%, var(--surface) 80%);
+    color: color-mix(in oklch, var(--ai-brand-magenta) 76%, black 24%);
+    border-color: color-mix(in oklch, var(--ai-brand-magenta) 35%, transparent);
+  }
+
+  :root[data-skin="admin-intelligence"] .data-badge.non-pii {
+    background: color-mix(in oklch, var(--ai-brand-green) 22%, var(--surface) 78%);
+    color: color-mix(in oklch, var(--ai-brand-green) 80%, black 20%);
+    border-color: color-mix(in oklch, var(--ai-brand-green) 35%, transparent);
+  }
+
+  :root[data-skin="admin-intelligence"] .data-badge.mixed,
+  :root[data-skin="admin-intelligence"] .data-badge.system {
+    background: color-mix(in oklch, var(--text-2) 20%, var(--surface) 80%);
+    color: var(--text-2);
+    border-color: var(--border);
+  }
+
+  :root[data-skin="admin-intelligence"] .flow-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  :root[data-skin="admin-intelligence"] .flow-item {
+    display: grid;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-s);
+    background: color-mix(in oklch, var(--surface) 88%, var(--bg-muted) 12%);
+  }
+
+  :root[data-skin="admin-intelligence"] .flow-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    font-size: 0.76rem;
+    font-weight: 700;
+  }
+
+  :root[data-skin="admin-intelligence"] .flow-route {
+    font-size: 0.74rem;
+    color: var(--text-2);
+  }
+
+  :root[data-skin="admin-intelligence"] .flow-select {
+    width: fit-content;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-1);
+    font-size: 0.72rem;
+    font-weight: 700;
+    border-radius: var(--radius-s);
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+  }
+
+  :root[data-skin="admin-intelligence"] .flow-select:hover {
+    border-color: color-mix(in oklch, var(--border) 65%, var(--ai-brand-magenta) 35%);
+  }
+
+  :root[data-skin="admin-intelligence"] .flow-select:focus-visible {
+    outline: none;
+    box-shadow: var(--shadow-focus);
+  }
+
+  :root[data-skin="admin-intelligence"] .faq-item {
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-s);
+    padding: var(--space-3);
+    background: color-mix(in oklch, var(--surface) 88%, var(--bg-muted) 12%);
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  :root[data-skin="admin-intelligence"] .faq-item p {
+    margin: 0;
+    font-size: var(--small);
+  }
+
+  :root[data-skin="admin-intelligence"] .faq-item p:first-child {
+    color: var(--text-2);
+    font-weight: 700;
+  }
+
+  @media (max-width: 1100px) {
+    :root[data-skin="admin-intelligence"] .inspector {
+      min-height: 280px;
+    }
+
+    :root[data-skin="admin-intelligence"] .inspector-content {
+      padding: var(--space-4);
+    }
+  }
+
+  @media (max-width: 640px) {
+    :root[data-skin="admin-intelligence"] .inspector-tabs {
+      grid-template-columns: 1fr;
+    }
+
+    :root[data-skin="admin-intelligence"] .meta-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}

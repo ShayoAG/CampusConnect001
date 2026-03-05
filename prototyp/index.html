@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="de" data-skin="admin-intelligence" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CampusConnect – Zielarchitektur</title>
+    <link rel="stylesheet" href="tokens.css" />
+    <link rel="stylesheet" href="components.css" />
+    <link rel="stylesheet" href="app.css" />
+  </head>
+  <body>
+    <header class="app-header lss-navbar">
+      <div class="app-brand">
+        <p class="app-eyebrow">RWTH CampusConnect</p>
+        <h1 class="app-title">CampusConnect – Zielarchitektur</h1>
+      </div>
+
+      <div class="app-controls" role="group" aria-label="Dashboard-Steuerung">
+        <label class="control-field" for="scenario-select">
+          <span>Szenario</span>
+          <select id="scenario-select" class="lss-input"></select>
+        </label>
+
+        <div class="control-field" aria-label="Datenklasse filtern">
+          <span>Datenklasse</span>
+          <div class="segment" id="filter-segment" role="group" aria-label="Datenklassen-Filter">
+            <button type="button" class="segment-btn is-active" data-filter="all">Alle</button>
+            <button type="button" class="segment-btn" data-filter="pii">Nur PII</button>
+            <button type="button" class="segment-btn" data-filter="non-pii">Nur non-PII</button>
+          </div>
+        </div>
+
+        <button id="optional-toggle" type="button" class="lss-btn lss-btn--secondary" aria-pressed="true">
+          Optionale Services: an
+        </button>
+        <button id="theme-toggle" type="button" class="lss-btn lss-btn--secondary" aria-label="Theme umschalten">
+          Theme: Dark
+        </button>
+        <button id="reset-view" type="button" class="lss-btn lss-btn--primary">Reset / Fit</button>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <section class="diagram-shell lss-card" aria-label="Architekturdiagramm">
+        <div class="diagram-meta">
+          <div class="diagram-meta-grid">
+            <p id="scenario-description" class="scenario-description"></p>
+            <div class="trust-strip" aria-label="Sicherheits- und Integrationsprinzipien">
+              <span class="trust-chip">PII bleibt lokal (DE/on-prem)</span>
+              <span class="trust-chip">Externe Aufrufe nur non-PII</span>
+              <span class="trust-chip">Policy + Logging erzwingen Regeln</span>
+              <span class="trust-chip">Integration in Moodle/LTI</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="svg-wrap" id="svg-wrap">
+          <svg id="architecture-svg" viewBox="0 0 1760 1080" role="img" aria-label="CampusConnect Architekturdiagramm">
+            <defs id="svg-defs"></defs>
+            <g id="viewport">
+              <g id="rings-layer"></g>
+              <g id="groups-layer"></g>
+              <g id="edges-layer"></g>
+              <g id="nodes-layer"></g>
+            </g>
+          </svg>
+
+          <div class="legend lss-card" aria-label="Legende">
+            <div class="legend-item">
+              <span class="legend-line legend-line--pii"></span>
+              <span>PII / nur lokal</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-line legend-line--non-pii"></span>
+              <span>non-PII / extern erlaubt</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-line legend-line--optional"></span>
+              <span>optional / externe Services</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-shield">🛡️</span>
+              <span>Policy enforced</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-node legend-node--build"></span>
+              <span>Zu entwickelnder Baustein</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-node legend-node--service"></span>
+              <span>Genutzter Service</span>
+            </div>
+          </div>
+
+          <div id="tooltip" class="tooltip" role="tooltip" aria-hidden="true"></div>
+        </div>
+      </section>
+
+      <aside class="inspector lss-card" id="inspector" aria-label="Inspector">
+        <header class="inspector-header">
+          <h2 id="inspector-title">Inspector</h2>
+          <p id="inspector-subtitle">Klicke eine Komponente oder einen Datenfluss.</p>
+        </header>
+
+        <div class="inspector-tabs" role="tablist" aria-label="Inspector Tabs">
+          <button type="button" class="tab-btn is-active" role="tab" aria-selected="true" data-tab="info">Info</button>
+          <button type="button" class="tab-btn" role="tab" aria-selected="false" data-tab="flows">Datenflüsse</button>
+          <button type="button" class="tab-btn" role="tab" aria-selected="false" data-tab="security">Sicherheit & Policies</button>
+        </div>
+
+        <div id="inspector-content" class="inspector-content"></div>
+      </aside>
+    </main>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

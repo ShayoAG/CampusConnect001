@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en" data-skin="admin-intelligence" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Intelligence Theme Preview</title>
+    <link rel="stylesheet" href="../core/foundations.css" />
+    <link rel="stylesheet" href="./tokens.css" />
+    <link rel="stylesheet" href="./components.css" />
+    <style>
+      @layer skin.preview {
+        :root[data-skin="admin-intelligence"] .preview-body {
+          min-height: 100vh;
+          background: var(--bg);
+          color: var(--text-1);
+          padding: var(--space-10);
+        }
+
+        :root[data-skin="admin-intelligence"] .preview-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: var(--space-8);
+        }
+
+        :root[data-skin="admin-intelligence"] .preview-grid {
+          display: grid;
+          gap: var(--space-6);
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          margin-block: var(--space-8);
+        }
+
+        :root[data-skin="admin-intelligence"] .preview-stack {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-4);
+        }
+
+        :root[data-skin="admin-intelligence"] .preview-section {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-4);
+        }
+
+        :root[data-skin="admin-intelligence"] .preview-section > h2 {
+          font-size: var(--h2);
+        }
+
+        :root[data-skin="admin-intelligence"] .preview-metadata {
+          display: flex;
+          gap: var(--space-4);
+          flex-wrap: wrap;
+        }
+
+        :root[data-skin="admin-intelligence"] .preview-theme-toggle {
+          display: inline-flex;
+          align-items: center;
+          gap: var(--space-2);
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-m);
+          padding: var(--space-2) var(--space-4);
+          color: var(--text-1);
+          cursor: pointer;
+          transition: background-color var(--transition-base);
+        }
+
+        :root[data-skin="admin-intelligence"] .preview-theme-toggle:hover {
+          background: color-mix(in oklch, var(--surface) 80%, var(--ai-brand-green) 20%);
+        }
+
+        :root[data-skin="admin-intelligence"] .preview-card-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+          gap: var(--space-4);
+        }
+
+        :root[data-skin="admin-intelligence"] .preview-dual {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+          gap: var(--space-6);
+        }
+
+        :root[data-skin="admin-intelligence"] .preview-dual__item {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-3);
+        }
+
+        :root[data-skin="admin-intelligence"] .preview-dual__label {
+          font-weight: 600;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
+          color: var(--text-2);
+        }
+
+        :root[data-skin="admin-intelligence"] .preview-dual__frame {
+          width: 100%;
+          min-height: 460px;
+          border: 0;
+          border-radius: var(--radius-l);
+          box-shadow: var(--shadow-m);
+          background: var(--surface);
+          overflow: hidden;
+        }
+
+        :root[data-skin="admin-intelligence"] .preview-progress-group {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-3);
+        }
+
+        :root[data-skin="admin-intelligence"] .preview-form {
+          display: grid;
+          gap: var(--space-4);
+        }
+
+        :root[data-skin="admin-intelligence"] .preview-footer {
+          margin-top: var(--space-10);
+          display: flex;
+          justify-content: space-between;
+          font-size: var(--small);
+          color: var(--text-2);
+        }
+      }
+    </style>
+  </head>
+  <body class="preview-body">
+    <header class="preview-header">
+      <nav class="lss-navbar">
+        <span class="lss-navbar__brand">Admin Intelligence</span>
+        <div class="preview-metadata">
+          <a href="#buttons">Buttons</a>
+          <a href="#cards">Cards</a>
+          <a href="#forms">Forms</a>
+          <a href="#hierarchy">Hierarchy</a>
+        </div>
+      </nav>
+      <button id="preview-theme-toggle" class="preview-theme-toggle" type="button">
+        <span>Switch to dark</span>
+      </button>
+    </header>
+
+    <main class="preview-stack">
+      <section id="buttons" class="preview-section">
+        <h2>Buttons</h2>
+        <div class="preview-grid">
+          <div class="lss-card">
+            <h3>Primary Actions</h3>
+            <p>Primary buttons use magenta with contrast-safe text.</p>
+            <div class="preview-stack">
+              <button class="lss-btn lss-btn--primary" type="button">New Report</button>
+              <button class="lss-btn lss-btn--primary" type="button" disabled>Disabled</button>
+            </div>
+          </div>
+          <div class="lss-card">
+            <h3>Secondary Actions</h3>
+            <p>Secondary buttons rely on surface backgrounds and border accents.</p>
+            <div class="preview-stack">
+              <button class="lss-btn lss-btn--secondary" type="button">View Analytics</button>
+              <button class="lss-btn lss-btn--secondary" type="button" aria-disabled="true">Disabled</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="dual-mode" class="preview-section">
+        <h2>Dual Mode Gallery</h2>
+        <p>Side-by-side render of core components to confirm parity between light and dark modes.</p>
+        <div class="preview-dual">
+          <figure class="preview-dual__item">
+            <figcaption class="preview-dual__label">Light mode</figcaption>
+            <iframe
+              title="Light mode gallery"
+              class="preview-dual__frame"
+              loading="lazy"
+              srcdoc='<!DOCTYPE html><html lang="en" data-skin="admin-intelligence" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="../core/foundations.css"><link rel="stylesheet" href="./tokens.css"><link rel="stylesheet" href="./components.css"><style>body{margin:var(--space-5);background:var(--bg);color:var(--text-1);font-family:var(--font-body);display:flex;flex-direction:column;gap:var(--space-4);} .stack{display:flex;flex-direction:column;gap:var(--space-3);} .preview-metadata{display:flex;gap:var(--space-3);} </style></head><body><nav class="lss-navbar"><span class="lss-navbar__brand">AI Console</span><div class="preview-metadata"><a href="#">Insights</a><a href="#">Alerts</a><a href="#">Teams</a></div></nav><div class="stack"><button class="lss-btn lss-btn--primary" type="button">Create Report</button><button class="lss-btn lss-btn--secondary" type="button">Schedule</button></div><div class="lss-card"><h3 class="lss-card__title">Health Score</h3><p>Highlights key compliance metrics.</p><div class="lss-progress"><div class="lss-progress__bar" style="width:72%"></div></div></div></body></html>'
+            ></iframe>
+          </figure>
+          <figure class="preview-dual__item">
+            <figcaption class="preview-dual__label">Dark mode</figcaption>
+            <iframe
+              title="Dark mode gallery"
+              class="preview-dual__frame"
+              loading="lazy"
+              srcdoc='<!DOCTYPE html><html lang="en" data-skin="admin-intelligence" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="../core/foundations.css"><link rel="stylesheet" href="./tokens.css"><link rel="stylesheet" href="./components.css"><style>body{margin:var(--space-5);background:var(--bg);color:var(--text-1);font-family:var(--font-body);display:flex;flex-direction:column;gap:var(--space-4);} .stack{display:flex;flex-direction:column;gap:var(--space-3);} .preview-metadata{display:flex;gap:var(--space-3);} </style></head><body><nav class="lss-navbar"><span class="lss-navbar__brand">AI Console</span><div class="preview-metadata"><a href="#">Insights</a><a href="#">Alerts</a><a href="#">Teams</a></div></nav><div class="stack"><button class="lss-btn lss-btn--primary" type="button">Launch Playbook</button><button class="lss-btn lss-btn--secondary" type="button">Archive</button></div><div class="lss-card"><h3 class="lss-card__title">Response SLA</h3><p>Track automation driven response speed.</p><div class="lss-progress"><div class="lss-progress__bar" style="width:92%"></div></div></div></body></html>'
+            ></iframe>
+          </figure>
+        </div>
+      </section>
+
+      <section id="progress" class="preview-section">
+        <h2>Progress Indicators</h2>
+        <div class="lss-card">
+          <p>Gradients transition from magenta to green to reinforce completion.</p>
+          <div class="preview-progress-group">
+            <div class="lss-progress">
+              <div class="lss-progress__bar" style="width: 35%"></div>
+            </div>
+            <div class="lss-progress">
+              <div class="lss-progress__bar" style="width: 65%"></div>
+            </div>
+            <div class="lss-progress">
+              <div class="lss-progress__bar" style="width: 95%"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="cards" class="preview-section">
+        <h2>Data Cards</h2>
+        <div class="preview-card-grid">
+          <article class="lss-card lss-card--interactive">
+            <h3 class="lss-card__title">Team Performance</h3>
+            <p>Magenta highlights draw attention to critical metrics.</p>
+            <div class="lss-card__footer">
+              <span class="text-secondary">Updated 3 mins ago</span>
+              <button class="lss-btn lss-btn--secondary" type="button">Details</button>
+            </div>
+          </article>
+          <article class="lss-card">
+            <h3 class="lss-card__title">Security Score</h3>
+            <p>Focus on compliance and deviation tracking across regions.</p>
+            <div class="lss-progress">
+              <div class="lss-progress__bar" style="width: 82%"></div>
+            </div>
+            <div class="lss-card__footer">
+              <span class="text-secondary">82% completion</span>
+              <button class="lss-btn lss-btn--primary" type="button">Improve</button>
+            </div>
+          </article>
+          <article class="lss-card">
+            <h3 class="lss-card__title">Forecast</h3>
+            <p>Blend gradients and spacing to emphasize upcoming milestones.</p>
+            <ul class="stack">
+              <li>North Region — 87%</li>
+              <li>Central Region — 73%</li>
+              <li>South Region — 91%</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="forms" class="preview-section">
+        <h2>Forms & Focus States</h2>
+        <div class="preview-grid">
+          <form class="lss-card preview-form">
+            <label class="stack">
+              <span>Agent Name</span>
+              <input class="lss-input" type="text" placeholder="Jordan Carter" />
+            </label>
+            <label class="stack">
+              <span>Email</span>
+              <input class="lss-input lss-input--error" type="email" value="agent@example" />
+              <small>Error: Please enter a valid email.</small>
+            </label>
+            <label class="stack">
+              <span>Team</span>
+              <input class="lss-input" type="text" value="Security Ops" disabled />
+            </label>
+            <button class="lss-btn lss-btn--primary" type="submit">Submit</button>
+          </form>
+
+          <div class="lss-card stack">
+            <h3>Quiz Options</h3>
+            <button class="lss-quiz__option" type="button">
+              <span>Option A</span>
+              <small>Keyboard focus and hover highlight</small>
+            </button>
+            <button class="lss-quiz__option lss-quiz__option--selected" type="button">
+              <span>Option B</span>
+              <small>Selected state using brand magenta</small>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="hierarchy" class="preview-section">
+        <h2>Visual Hierarchy</h2>
+        <div class="preview-grid">
+          <div class="lss-card">
+            <h3>Video Overview</h3>
+            <p>Rounded container shows media focus.</p>
+            <div class="lss-video" style="aspect-ratio: 16 / 9; background: var(--bg-muted)">
+              <!-- Placeholder for embedded media -->
+            </div>
+          </div>
+          <div class="lss-card">
+            <h3>Metrics Summary</h3>
+            <p>Demonstrates spacing scale and text hierarchy within list layouts.</p>
+            <ul class="stack">
+              <li><strong>Incidents Resolved:</strong> 112</li>
+              <li><strong>Average SLA:</strong> 28m</li>
+              <li><strong>Escalations:</strong> 4</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="preview-footer">
+      <span>WCAG AA contrast verified with axe-core checklist.</span>
+      <span>Theme version 1.0.0</span>
+    </footer>
+
+    <script>
+      const toggleButton = document.getElementById("preview-theme-toggle");
+      const root = document.documentElement;
+
+      function updateLabel() {
+        const theme = root.dataset.theme;
+        toggleButton.firstElementChild.textContent =
+          theme === "light" ? "Switch to dark" : "Switch to light";
+      }
+
+      toggleButton.addEventListener("click", () => {
+        root.dataset.theme = root.dataset.theme === "light" ? "dark" : "light";
+        updateLabel();
+      });
+
+      updateLabel();
+    </script>
+  </body>
+</html>

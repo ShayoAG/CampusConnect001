@@ -1,0 +1,18 @@
+{
+  "id": "admin-intelligence",
+  "name": "Admin Intelligence",
+  "version": "1.0.0",
+  "description": "Magenta/green intelligence theme with WCAG AA compliance and light/dark modes.",
+  "modes": ["light", "dark"],
+  "exports": {
+    "tokens": "skins/admin-intelligence/tokens.css",
+    "components": "skins/admin-intelligence/components.css",
+    "preview": "skins/admin-intelligence/preview.html"
+  },
+  "browserTargets": {
+    "chrome": "90+",
+    "firefox": "88+",
+    "safari": "14+",
+    "edge": "90+"
+  }
+}

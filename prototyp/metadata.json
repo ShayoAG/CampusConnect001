@@ -1,0 +1,5 @@
+{
+  "name": "CampusConnect Architecture Dashboard",
+  "description": "Interactive visualization of system architecture, security zones, and data flows.",
+  "requestFramePermissions": []
+}
