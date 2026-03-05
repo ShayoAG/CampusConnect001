@@ -729,7 +729,7 @@ export const ARCHITECTURE_DATA = {
     },
     {
       id: 'roadmap-1-sdg',
-      label: 'Roadmap 1/5 – SDG CAMPUS',
+      label: 'Architektur 1/5 – SDG CAMPUS',
       description: 'Start in der bestehenden SDG CAMPUS Umgebung: Moodle als Basis, LTI fuer Course UI und Author UI.',
       disableDimming: true,
       strictNodeScope: true,
@@ -741,7 +741,7 @@ export const ARCHITECTURE_DATA = {
     },
     {
       id: 'roadmap-2-onprem',
-      label: 'Roadmap 2/5 – On-Prem Ausbau',
+      label: 'Architektur 2/5 – On-Prem Ausbau',
       description: 'Ergaenzung der lokalen On-Prem-Server fuer Core- und KI-Capabilities.',
       disableDimming: true,
       visibleZoneIds: ['sdg-campus', 'on-prem'],
@@ -762,7 +762,7 @@ export const ARCHITECTURE_DATA = {
     },
     {
       id: 'roadmap-3-de',
-      label: 'Roadmap 3/5 – DE Region (OpenAI Germany)',
+      label: 'Architektur 3/5 – DE Region (OpenAI Germany)',
       description: 'Optionaler DE-Gateway fuer spezialisierte KI-Aufrufe ueber OpenAI Germany als SAP-Service.',
       disableDimming: true,
       visibleZoneIds: ['sdg-campus', 'on-prem', 'de-region'],
@@ -784,7 +784,7 @@ export const ARCHITECTURE_DATA = {
     },
     {
       id: 'roadmap-4-eu',
-      label: 'Roadmap 4/5 – EU Cloud Services',
+      label: 'Architektur 4/5 – EU Cloud Services',
       description: 'Optionale EU-Services fuer Lokalisierung und Sprachmediation.',
       disableDimming: true,
       visibleZoneIds: ['sdg-campus', 'on-prem', 'de-region', 'eu-cloud'],
@@ -808,7 +808,7 @@ export const ARCHITECTURE_DATA = {
     },
     {
       id: 'roadmap-5-global',
-      label: 'Roadmap 5/5 – US/Global Services',
+      label: 'Architektur 5/5 – US/Global Services',
       description: 'Weitere spezialisierte Services in US/Global, weiterhin nur non-PII und policy-gesteuert.',
       disableDimming: true,
       visibleZoneIds: ['sdg-campus', 'on-prem', 'de-region', 'eu-cloud', 'us-global'],
