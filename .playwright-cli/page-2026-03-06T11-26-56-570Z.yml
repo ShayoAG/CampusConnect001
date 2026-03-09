@@ -1,0 +1,112 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - paragraph [ref=e4]: RWTH CampusConnect
+      - heading "CampusConnect – Zielarchitektur" [level=1] [ref=e5]
+      - paragraph [ref=e6]: Datenschutzfeste KI-Unterstuetzung direkt im Moodle-Oekosystem statt als parallele Inselloesung.
+    - group "Dashboard-Steuerung" [ref=e7]:
+      - generic "Hauptansicht" [ref=e8]:
+        - generic [ref=e9]: Hauptansicht
+        - tablist "Hauptansichten" [ref=e10]:
+          - tab "Architektur-Ebenen" [selected] [ref=e11] [cursor=pointer]
+          - tab "Nutzungsszenarien" [ref=e12] [cursor=pointer]
+          - tab "Sicherheit & Datenfluesse" [ref=e13] [cursor=pointer]
+          - tab "RWTH-APs" [ref=e14] [cursor=pointer]
+      - generic [ref=e15]:
+        - generic [ref=e16]: Ebene
+        - combobox "Ebene" [ref=e17]:
+          - option "Ebene 0 - Ausgangssituation" [selected]
+          - option "Ebene 1 - Plattform"
+          - option "Ebene 2 - Lokaler Kern"
+          - option "Ebene 3 - Externe Services"
+          - option "Ebene 4 - Gesamtbild"
+      - generic "Datenklasse filtern" [ref=e18]:
+        - generic [ref=e19]: Datenklasse
+        - group "Datenklassen-Filter" [ref=e20]:
+          - button "Alle" [ref=e21] [cursor=pointer]
+          - button "Nur PII" [ref=e22] [cursor=pointer]
+          - button "Nur non-PII" [ref=e23] [cursor=pointer]
+      - generic "Schnellaktionen" [ref=e24]:
+        - button "Informationsleiste ausblenden" [ref=e25] [cursor=pointer]:
+          - img [ref=e26]
+        - button "Optionale Services ausblenden" [pressed] [ref=e29] [cursor=pointer]:
+          - img [ref=e30]
+        - button "Dark-Theme aktivieren" [ref=e32] [cursor=pointer]:
+          - img [ref=e33]
+        - button "Ansicht zentrieren" [ref=e35] [cursor=pointer]:
+          - img [ref=e36]
+  - main [ref=e39]:
+    - region "Architekturdiagramm" [ref=e40]:
+      - generic [ref=e43]:
+        - paragraph [ref=e44]: Architektur-Ebenen
+        - heading "Ebene 0 - Ausgangssituation" [level=2] [ref=e241]
+        - paragraph [ref=e46]: Bestehende SDG-Campus Moodle-Plattform fuer digitale Lernangebote als Ausgangsbasis vor CampusConnect-Erweiterungen.
+      - generic [ref=e47]:
+        - img "CampusConnect Architekturdiagramm" [ref=e48]:
+          - generic [ref=e49]:
+            - generic [ref=e50]:
+              - generic: SDG-Campus / Moodle
+            - generic [ref=e245]: SDG-Campus / Moodle
+            - generic [ref=e65]:
+              - button "Element Moodle LMS, Zone SDG-Campus / Moodle, Datenklasse system" [ref=e246] [cursor=pointer]:
+                - generic [ref=e248]: Moodle LMS (bestehend)
+              - button "Element Lehrende / Autor:innen, Zone SDG-Campus / Moodle, Datenklasse mixed" [ref=e249] [cursor=pointer]:
+                - generic [ref=e255]: Lehrende
+              - button "Element Studierende, Zone SDG-Campus / Moodle, Datenklasse mixed" [ref=e256] [cursor=pointer]:
+                - generic [ref=e262]: Studierende
+        - tooltip
+    - complementary "Inspector" [ref=e155]:
+      - generic [ref=e156]:
+        - heading "Argumente & AP-Bezug" [level=2] [ref=e157]
+        - paragraph [ref=e158]: Nutzen, Datenschutz, Policies und Auftraggeber-APs zur aktuellen Auswahl.
+      - tablist "Inspector Tabs" [ref=e159]:
+        - tab "Info" [selected] [ref=e160] [cursor=pointer]
+        - tab "Datenflüsse" [ref=e161] [cursor=pointer]
+        - tab "Sicherheit & Policies" [ref=e162] [cursor=pointer]
+      - generic [ref=e163]:
+        - generic [ref=e263]:
+          - paragraph [ref=e264]:
+            - strong [ref=e265]: Architektur-Ebenen - Ebene 0 - Ausgangssituation
+          - paragraph [ref=e266]: Bestehende SDG-Campus Moodle-Plattform fuer digitale Lernangebote als Ausgangsbasis vor CampusConnect-Erweiterungen.
+        - generic [ref=e267]:
+          - heading "Argumentationslinie" [level=3] [ref=e268]
+          - paragraph [ref=e269]: Die Sicht zeigt nur die bestehende SDG-Campus Moodle-Plattform als digitale Ausgangsbasis vor jeder CampusConnect-Erweiterung.
+        - generic [ref=e270]:
+          - heading "AP-Bezug" [level=3] [ref=e271]
+          - paragraph [ref=e272]: Macht klar, dass auf einer vorhandenen Lernplattform aufgebaut wird und kein Parallel-Frontend noetig ist.
+        - generic [ref=e273]:
+          - heading "Datenschutzsignal" [level=3] [ref=e274]
+          - paragraph [ref=e275]: Kurs- und Nutzungskontext verbleiben vollstaendig im bestehenden Plattformrahmen.
+        - generic [ref=e276]:
+          - heading "Optionale Erweiterung" [level=3] [ref=e277]
+          - paragraph [ref=e278]: Noch keine LTI-, KI- oder externen Servicepfade sichtbar.
+        - generic [ref=e279]:
+          - heading "In 3 Schritten erklaert" [level=3] [ref=e280]
+          - list [ref=e281]:
+            - listitem [ref=e282]: Ausgangsbasis ist die bestehende SDG-Campus Moodle-Plattform fuer Lernangebote zu nachhaltiger Entwicklung und Zukunftsthemen.
+            - listitem [ref=e283]: Lehrende und Studierende bewegen sich zunaechst nur im vertrauten Moodle-Kern ohne Zusatzoberflaechen.
+            - listitem [ref=e284]: CampusConnect erweitert spaeter genau diese Plattform ueber LTI und lokale Services statt ein neues LMS einzufuehren.
+        - generic [ref=e285]:
+          - heading "Leseschluessel" [level=3] [ref=e286]
+          - list [ref=e287]:
+            - listitem [ref=e288]: Plattform-Karte = bestehendes Kernsystem (Moodle).
+            - listitem [ref=e289]: Rechteck = lokaler Architekturbaustein.
+            - listitem [ref=e290]: Akteur-Chip = Rolle im Prozess (Lehrende, Studierende, QS/Betrieb).
+            - listitem [ref=e291]: Service-Badge = optionale externe Erweiterung.
+            - listitem [ref=e292]: Magenta Linie = PII (lokal), Gruen Linie = non-PII.
+        - generic [ref=e293]:
+          - heading "Warum ist das sicher?" [level=3] [ref=e294]
+          - list [ref=e295]:
+            - listitem [ref=e296]: PII bleibt lokal im DE/On-Prem Kern.
+            - listitem [ref=e297]: Externe Aufrufe sind ausschliesslich non-PII und optional.
+            - listitem [ref=e298]: Alle externen Requests laufen ueber die zentrale AI Workflow & Policy Engine.
+            - listitem [ref=e299]: QA/Freigabe und Logging sichern Governance und Nachvollziehbarkeit.
+            - listitem [ref=e300]: SDG-Campus und DE/On-Prem bleiben visuell und architektonisch die Haupt-Ebenen.
+        - generic [ref=e301]:
+          - heading "Bezug zu den APs" [level=3] [ref=e302]
+          - paragraph [ref=e303]: Diese Sicht verweist auf die folgenden Arbeitspakete des Auftraggebers.
+          - article [ref=e305]:
+            - generic [ref=e306]:
+              - generic [ref=e307]: AP 2.07
+              - paragraph [ref=e308]: Integration in die Lernplattform
+            - paragraph [ref=e309]: Moodle LMS inkl. LTI Interface, Course UI, Author UI und lokale Integrationspfade

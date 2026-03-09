@@ -1,0 +1,171 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - paragraph [ref=e4]: RWTH CampusConnect
+      - heading "CampusConnect – Zielarchitektur" [level=1] [ref=e5]
+      - paragraph [ref=e6]: Datenschutzfeste KI-Unterstuetzung direkt im Moodle-Oekosystem statt als parallele Inselloesung.
+    - group "Dashboard-Steuerung" [ref=e7]:
+      - generic "Hauptansicht" [ref=e8]:
+        - generic [ref=e9]: Hauptansicht
+        - tablist "Hauptansichten" [ref=e10]:
+          - tab "Architektur-Ebenen" [selected] [ref=e11] [cursor=pointer]
+          - tab "Nutzungsszenarien" [ref=e12] [cursor=pointer]
+          - tab "Sicherheit & Datenfluesse" [ref=e13] [cursor=pointer]
+          - tab "RWTH-APs" [ref=e14] [cursor=pointer]
+      - generic [ref=e15]:
+        - generic [ref=e16]: Ebene
+        - combobox "Ebene" [ref=e17]:
+          - option "Ebene 0 - Ausgangssituation"
+          - option "Ebene 1 - Plattform"
+          - option "Ebene 2 - Lokaler Kern"
+          - option "Ebene 3 - Externe Services" [selected]
+          - option "Ebene 4 - Gesamtbild"
+      - generic "Datenklasse filtern" [ref=e18]:
+        - generic [ref=e19]: Datenklasse
+        - group "Datenklassen-Filter" [ref=e20]:
+          - button "Alle" [ref=e21] [cursor=pointer]
+          - button "Nur PII" [ref=e22] [cursor=pointer]
+          - button "Nur non-PII" [ref=e23] [cursor=pointer]
+      - generic "Schnellaktionen" [ref=e24]:
+        - button "Informationsleiste ausblenden" [ref=e25] [cursor=pointer]:
+          - img [ref=e26]
+        - button "Optionale Services ausblenden" [pressed] [ref=e29] [cursor=pointer]:
+          - img [ref=e30]
+        - button "Dark-Theme aktivieren" [ref=e32] [cursor=pointer]:
+          - img [ref=e33]
+        - button "Ansicht zentrieren" [ref=e35] [cursor=pointer]:
+          - img [ref=e36]
+  - main [ref=e39]:
+    - region "Architekturdiagramm" [ref=e40]:
+      - generic [ref=e43]:
+        - paragraph [ref=e44]: Architektur-Ebenen
+        - heading "Ebene 3 - Externe Services" [level=2] [ref=e242]
+        - paragraph [ref=e46]: OpenAI, EU- und US/Global-Services als kontrollierte externe Pfade fuer non-PII.
+      - generic [ref=e47]:
+        - img "CampusConnect Architekturdiagramm" [ref=e48]:
+          - generic [ref=e49]:
+            - generic [ref=e50]:
+              - generic: US/Global (optional)
+              - generic: EU Cloud (optional)
+              - generic: DE / On-Prem Kern
+              - generic: SDG-Campus / Moodle
+            - generic [ref=e55]:
+              - generic [ref=e249]: SDG-Campus / Moodle
+              - generic [ref=e250] [cursor=pointer]:
+                - generic [ref=e252]: AI Content Core
+                - button "Container AI Content Core, Zone DE / On-Prem, 4 Bausteine" [ref=e253]
+              - generic [ref=e254] [cursor=pointer]:
+                - generic [ref=e256]: LMS AI Workflow Engine
+                - button "Container LMS AI Workflow Engine, Zone DE / On-Prem, 4 Bausteine" [ref=e257]
+            - generic [ref=e67]:
+              - button "Element Moodle LMS, Zone SDG-Campus / Moodle, Datenklasse system" [ref=e258] [cursor=pointer]:
+                - generic [ref=e260]: Moodle LMS (bestehend)
+                - button "LTI Interface, system" [ref=e261]:
+                  - generic [ref=e263]: LTI Interface
+                - button "Course UI, mixed" [ref=e264]:
+                  - generic [ref=e266]: Course UI
+                - button "Author UI, non-PII" [ref=e267]:
+                  - generic [ref=e269]: Author UI
+              - button "Element SKIS, Zone DE / On-Prem, Datenklasse PII" [ref=e270] [cursor=pointer]:
+                - generic [ref=e273]: SKIS
+              - button "Element Content & Competency Store, Zone DE / On-Prem, Datenklasse non-PII" [ref=e274] [cursor=pointer]:
+                - generic [ref=e277]: Content & Competency
+                - generic [ref=e278]: Store
+              - button "Element Learning Resource Store (LRS), Zone DE / On-Prem, Datenklasse non-PII" [ref=e279] [cursor=pointer]:
+                - generic [ref=e282]: Learning Resource
+                - generic [ref=e283]: Store (LRS)
+              - button "Element Asset & Media Library, Zone DE / On-Prem, Datenklasse non-PII" [ref=e284] [cursor=pointer]:
+                - generic [ref=e287]: Asset & Media Library
+              - button "Element Authoring Studio, Zone DE / On-Prem, Datenklasse non-PII" [ref=e288] [cursor=pointer]:
+                - generic [ref=e291]: Authoring Studio
+              - button "Element Learning Insights Engine, Zone DE / On-Prem, Datenklasse PII" [ref=e292] [cursor=pointer]:
+                - generic [ref=e295]: Learning Insights
+                - generic [ref=e296]: Engine
+              - button "Element Adaptive Pathway Engine, Zone DE / On-Prem, Datenklasse mixed" [ref=e297] [cursor=pointer]:
+                - generic [ref=e300]: Adaptive Pathway
+                - generic [ref=e301]: Engine
+              - button "Element Learning Companion, Zone DE / On-Prem, Datenklasse mixed" [ref=e302] [cursor=pointer]:
+                - generic [ref=e305]: Learning Companion
+              - button "Element Lehrende / Autor:innen, Zone SDG-Campus / Moodle, Datenklasse mixed" [ref=e306] [cursor=pointer]:
+                - generic [ref=e312]: Lehrende
+              - button "Element Studierende, Zone SDG-Campus / Moodle, Datenklasse mixed" [ref=e313] [cursor=pointer]:
+                - generic [ref=e319]: Studierende
+              - button "Element Qualitaetssicherung / Freigabe, Zone DE / On-Prem, Datenklasse system" [ref=e320] [cursor=pointer]:
+                - generic [ref=e326]: QA/Freigabe
+              - button "Element Plattformbetrieb, Zone DE / On-Prem, Datenklasse system" [ref=e327] [cursor=pointer]:
+                - generic [ref=e333]: Betrieb
+              - button "Element OpenAI Germany, Zone DE / On-Prem, Datenklasse non-PII" [ref=e334] [cursor=pointer]:
+                - generic [ref=e335]: OpenAI Germany
+              - button "Element OpenAI Enterprise, Zone EU Cloud (optional), Datenklasse non-PII" [ref=e337] [cursor=pointer]:
+                - generic [ref=e338]: OpenAI Enterprise
+              - button "Element Mistral-AI, Zone EU Cloud (optional), Datenklasse non-PII" [ref=e340] [cursor=pointer]:
+                - generic [ref=e341]: Mistral-AI
+              - button "Element Eleven Labs, Zone US/Global (externe Services, optional), Datenklasse non-PII" [ref=e343] [cursor=pointer]:
+                - generic [ref=e344]: Eleven Labs
+        - tooltip
+    - complementary "Inspector" [ref=e156]:
+      - generic [ref=e157]:
+        - heading "Argumente & AP-Bezug" [level=2] [ref=e158]
+        - paragraph [ref=e159]: Nutzen, Datenschutz, Policies und Auftraggeber-APs zur aktuellen Auswahl.
+      - tablist "Inspector Tabs" [ref=e160]:
+        - tab "Info" [selected] [ref=e161] [cursor=pointer]
+        - tab "Datenflüsse" [ref=e162] [cursor=pointer]
+        - tab "Sicherheit & Policies" [ref=e163] [cursor=pointer]
+      - generic [ref=e164]:
+        - generic [ref=e346]:
+          - paragraph [ref=e347]:
+            - strong [ref=e348]: Architektur-Ebenen - Ebene 3 - Externe Services
+          - paragraph [ref=e349]: OpenAI, EU- und US/Global-Services als kontrollierte externe Pfade fuer non-PII.
+        - generic [ref=e350]:
+          - heading "Argumentationslinie" [level=3] [ref=e351]
+          - paragraph [ref=e352]: Hier werden die externen Servicepfade und ihre Governance-Leitplanken sichtbar gemacht.
+        - generic [ref=e353]:
+          - heading "AP-Bezug" [level=3] [ref=e354]
+          - paragraph [ref=e355]: "Zeigt klar: externe Integration erscheint erst nach dem lokalen Kern und bleibt kontrolliert sowie austauschbar."
+        - generic [ref=e356]:
+          - heading "Datenschutzsignal" [level=3] [ref=e357]
+          - paragraph [ref=e358]: PII-Daten bleiben weiterhin im lokalen Kern.
+        - generic [ref=e359]:
+          - heading "Optionale Erweiterung" [level=3] [ref=e360]
+          - paragraph [ref=e361]: Badges markieren die externen Services entlang EU/US-Zonen.
+        - generic [ref=e362]:
+          - heading "In 3 Schritten erklaert" [level=3] [ref=e363]
+          - list [ref=e364]:
+            - listitem [ref=e365]: Externe Services erscheinen erst auf dieser Ebene als Badges entlang der aeußeren Schutzzonen.
+            - listitem [ref=e366]: Alle externen Aufrufe laufen zentral ueber die LMS AI Workflow Engine.
+            - listitem [ref=e367]: Datenklasse fuer externe Pfade bleibt konsequent non-PII.
+        - generic [ref=e368]:
+          - heading "Leseschluessel" [level=3] [ref=e369]
+          - list [ref=e370]:
+            - listitem [ref=e371]: Plattform-Karte = bestehendes Kernsystem (Moodle).
+            - listitem [ref=e372]: Rechteck = lokaler Architekturbaustein.
+            - listitem [ref=e373]: Akteur-Chip = Rolle im Prozess (Lehrende, Studierende, QS/Betrieb).
+            - listitem [ref=e374]: Service-Badge = optionale externe Erweiterung.
+            - listitem [ref=e375]: Magenta Linie = PII (lokal), Gruen Linie = non-PII.
+        - generic [ref=e376]:
+          - heading "Warum ist das sicher?" [level=3] [ref=e377]
+          - list [ref=e378]:
+            - listitem [ref=e379]: PII bleibt lokal im DE/On-Prem Kern.
+            - listitem [ref=e380]: Externe Aufrufe sind ausschliesslich non-PII und optional.
+            - listitem [ref=e381]: Alle externen Requests laufen ueber die zentrale LMS AI Workflow Engine.
+            - listitem [ref=e382]: QA/Freigabe und Logging sichern Governance und Nachvollziehbarkeit.
+            - listitem [ref=e383]: SDG-Campus und DE/On-Prem bleiben visuell und architektonisch die Haupt-Ebenen.
+        - generic [ref=e384]:
+          - heading "Bezug zu den APs" [level=3] [ref=e385]
+          - paragraph [ref=e386]: Diese Sicht verweist auf die folgenden Arbeitspakete des Auftraggebers.
+          - generic [ref=e387]:
+            - article [ref=e388]:
+              - generic [ref=e389]:
+                - generic [ref=e390]: AP 2.05
+                - paragraph [ref=e391]: KI-Tutor / Assistenz
+              - paragraph [ref=e392]: Learning Companion, LMS AI Workflow Engine, SKIS, optionale Modellanbindung
+            - article [ref=e393]:
+              - generic [ref=e394]:
+                - generic [ref=e395]: AP 2.06
+                - paragraph [ref=e396]: Mehrsprachigkeit
+              - paragraph [ref=e397]: Mistral-AI, OpenAI Enterprise und workflow-gepruefte Sprachpfade fuer non-PII
+            - article [ref=e398]:
+              - generic [ref=e399]:
+                - generic [ref=e400]: AP 2.09
+                - paragraph [ref=e401]: Governance / Ethik / Handreichungen
+              - paragraph [ref=e402]: LMS AI Workflow Engine, QA/Freigabe, Logging, kontrollierte externe Pfade

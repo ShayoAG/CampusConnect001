@@ -1,0 +1,186 @@
+{
+  "canvas": {
+    "width": 1760,
+    "height": 1080,
+    "centerX": 720,
+    "centerY": 560
+  },
+  "layout": {
+    "preserveManualPositions": true
+  },
+  "zones": [
+    {
+      "id": "sdg-campus",
+      "title": "SDG-Campus / Moodle"
+    },
+    {
+      "id": "de-onprem",
+      "title": "DE / On-Prem"
+    },
+    {
+      "id": "eu-cloud",
+      "title": "EU Cloud (optional)"
+    },
+    {
+      "id": "us-global",
+      "title": "US/Global (externe Services, optional)"
+    }
+  ],
+  "zoneEmphasis": {
+    "default": {
+      "sdg-campus": 1,
+      "de-onprem": 0.94,
+      "eu-cloud": 0.46,
+      "us-global": 0.34
+    },
+    "byViewMode": {
+      "overview": {
+        "sdg-campus": 1,
+        "de-onprem": 0.92,
+        "eu-cloud": 0.4,
+        "us-global": 0.28
+      },
+      "architecture-layers": {
+        "sdg-campus": 1,
+        "de-onprem": 0.96,
+        "eu-cloud": 0.42,
+        "us-global": 0.3
+      },
+      "usage-scenarios": {
+        "sdg-campus": 1,
+        "de-onprem": 0.94,
+        "eu-cloud": 0.44,
+        "us-global": 0.34
+      },
+      "security-flows": {
+        "sdg-campus": 0.92,
+        "de-onprem": 0.96,
+        "eu-cloud": 0.48,
+        "us-global": 0.42
+      },
+      "rwth-aps": {
+        "sdg-campus": 0.96,
+        "de-onprem": 0.98,
+        "eu-cloud": 0.5,
+        "us-global": 0.4
+      }
+    }
+  },
+  "rings": [
+    {
+      "id": "us-global",
+      "title": "US/Global (optional)",
+      "rx": 842,
+      "ry": 690,
+      "labelOffsetY": 48,
+      "className": "zone-ring--us-global"
+    },
+    {
+      "id": "eu-cloud",
+      "title": "EU Cloud (optional)",
+      "rx": 760,
+      "ry": 520,
+      "labelOffsetY": 48,
+      "className": "zone-ring--eu-cloud"
+    },
+    {
+      "id": "de-onprem",
+      "title": "DE / On-Prem Kern",
+      "rx": 680,
+      "ry": 390,
+      "labelOffsetY": 46,
+      "className": "zone-ring--de-onprem"
+    },
+    {
+      "id": "sdg-campus",
+      "title": "SDG-Campus / Moodle",
+      "rx": 255,
+      "ry": 255,
+      "labelOffsetY": 42,
+      "className": "zone-ring--sdg-campus"
+    }
+  ],
+  "groups": [
+    {
+      "id": "sdg-campus-cluster",
+      "label": "SDG-Campus / Moodle",
+      "zone": "sdg-campus",
+      "x": 560,
+      "y": 412,
+      "width": 312,
+      "height": 294,
+      "nodeIds": [
+        "moodle-lms"
+      ],
+      "description": "Bestehende Moodle-Plattform inkl. LTI, Course UI und Author UI."
+    },
+    {
+      "id": "core-cluster",
+      "label": "LMS AI Content Core",
+      "selectable": true,
+      "zone": "de-onprem",
+      "x": 126,
+      "y": 384,
+      "width": 300,
+      "height": 354,
+      "nodeIds": [
+        "skis",
+        "content-core",
+        "lrs",
+        "asset-media-library"
+      ],
+      "description": "Lokaler Wissens- und Datenkern mit Student Knowledge Information System (SKIS), Content & Competence Store (CCS), Learning Resource Store (LRS) und Asset & Media Library (AML).",
+      "shortDescription": "Lokaler Wissens- und RAG-Kern fuer studentischen Kontext, Kurslogik, Basismaterialien und Medien.",
+      "purpose": [
+        "Fuehrt studentischen Kontext, Kompetenzbasis, Authoring-Quellen und Medien als lokale Datenbasis zusammen.",
+        "Versorgt LIE, APE, LCT und AAS mit kontrollierbarem RAG- und Inhaltskontext.",
+        "Haelt PII, Kurslogik und Basismaterialien lokal versionierbar und fuer Praesentationen klar strukturierbar."
+      ],
+      "flowSummary": "Student Knowledge Information System (SKIS), Content & Competence Store (CCS), Learning Resource Store (LRS) und Asset & Media Library (AML) bilden zusammen den lokalen Daten- und RAG-Kern, auf dem Authoring, Insights, Pathways und Tutor nachvollziehbar arbeiten.",
+      "securityNotes": [
+        "SKIS haelt definitiv PII ausschliesslich im lokalen DE/On-Prem Kern.",
+        "Learning Resource Store (LRS) und Asset & Media Library (AML) bleiben als lokale RAG- und Medienbasis on-prem.",
+        "Freigaben und optionale externe Erweiterungen greifen erst ueber die LMS AI Workflow Engine."
+      ],
+      "inspectorSummary": {
+        "relevance": "Der Container ist das Wissens- und RAG-Fundament der Architektur: studentischer Kontext, Kurslogik, Quellenmaterialien und Medien werden lokal zusammengefuehrt.",
+        "localData": "SKIS haelt PII-nahe Lernhistorien lokal; Content & Competence Store (CCS), Learning Resource Store (LRS) und Asset & Media Library (AML) bleiben als on-prem Datenbasis steuerbar.",
+        "governance": "Die Datengrundlage fuer Empfehlungen, Authoring und Personalisierung bleibt versionierbar, nachvollziehbar und an lokale Freigabe- und Workflow-Regeln gebunden."
+      }
+    },
+    {
+      "id": "capabilities-cluster",
+      "label": "LMS AI Workflow Engine",
+      "selectable": true,
+      "zone": "de-onprem",
+      "x": 1012,
+      "y": 384,
+      "width": 318,
+      "height": 354,
+      "nodeIds": [
+        "authoring-studio",
+        "insights-engine",
+        "pathway-engine",
+        "learning-companion"
+      ],
+      "description": "Router und Orchestrierungsschicht fuer AI Authoring Studio (AAS), Learning Insight Engine (LIE), Adaptive Pathway Engine (APE) und Learning Companion Tutor (LCT); uebernimmt Aufgabenverteilung, Policy-Gates, Logging und optionale Service-Anbindung.",
+      "shortDescription": "Lokale Workflow-, Routing- und Kontrollschicht fuer AAS, LIE, APE und LCT.",
+      "purpose": [
+        "Wirkt als Router fuer KI-Aufgaben direkt am LMS und verteilt Requests an die passende lokale Funktion.",
+        "Kapselt AAS, LIE, APE und LCT in einer gemeinsamen Workflow-Schicht mit einheitlichen Regeln.",
+        "Uebernimmt Datenklassifizierung, Logging, Freigabeanbindung und spaetere externe Service-Wege ohne Bruch der Plattformlogik."
+      ],
+      "flowSummary": "Der Container nimmt Arbeitsauftraege aus der Plattform auf, verteilt sie an die passenden KI-Bausteine und fuehrt Ergebnisse kontrolliert an Moodle oder optional an freigegebene externe Services weiter.",
+      "securityNotes": [
+        "Die Orchestrierung bleibt im lokalen Kern und arbeitet auf vorbereitetem Kontext statt auf ungefilterter Datenausleitung.",
+        "Optionale externe Services werden nur ueber kontrollierte Datenklassen-, Logging- und Freigabe-Pfade angeschlossen.",
+        "Die Trennung der Faehigkeiten macht sichtbar, welche KI welche Aufgabe uebernimmt und wo Governance greift."
+      ],
+      "inspectorSummary": {
+        "relevance": "Hier sitzt der Router der Architektur: AAS, LIE, APE und LCT werden als klar getrennte KI-Aufgaben orchestriert.",
+        "localData": "Der Workflow bleibt lokal verankert; nur freigegebene non-PII Kontexte duerfen spaeter an weitere Services gehen.",
+        "governance": "Die Verteilung von Aufgaben, Datenklassen, Logging und Freigaben bleibt nachvollziehbar und als einheitliche Steuerungsschicht sichtbar."
+      }
+    }
+  ]
+}

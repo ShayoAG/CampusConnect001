@@ -1,0 +1,149 @@
+- generic [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - paragraph [ref=e4]: RWTH CampusConnect
+      - heading "CampusConnect – Zielarchitektur" [level=1] [ref=e5]
+      - paragraph [ref=e6]: Datenschutzfeste KI-Unterstuetzung direkt im Moodle-Oekosystem statt als parallele Inselloesung.
+    - group "Dashboard-Steuerung" [ref=e7]:
+      - generic "Hauptansicht" [ref=e8]:
+        - generic [ref=e9]: Hauptansicht
+        - tablist "Hauptansichten" [ref=e10]:
+          - tab "Architektur-Ebenen" [ref=e11] [cursor=pointer]
+          - tab "Nutzungsszenarien" [selected] [ref=e12] [cursor=pointer]
+          - tab "Sicherheit & Datenfluesse" [ref=e13] [cursor=pointer]
+          - tab "RWTH-APs" [ref=e14] [cursor=pointer]
+      - generic [ref=e15]:
+        - generic [ref=e16]: Szenario
+        - combobox "Szenario" [ref=e241]:
+          - option "Kurs erstellen" [selected]
+          - option "Kurs nutzen"
+          - option "Tutor & Lernpfad"
+          - option "Uebersetzung / Mehrsprachigkeit"
+          - option "Sicherheit & Governance"
+      - generic "Datenklasse filtern" [ref=e18]:
+        - generic [ref=e19]: Datenklasse
+        - group "Datenklassen-Filter" [ref=e20]:
+          - button "Alle" [ref=e21] [cursor=pointer]
+          - button "Nur PII" [ref=e22] [cursor=pointer]
+          - button "Nur non-PII" [ref=e23] [cursor=pointer]
+      - generic "Schnellaktionen" [ref=e24]:
+        - button "Informationsleiste einblenden" [active] [pressed] [ref=e505] [cursor=pointer]:
+          - img [ref=e26]
+        - button "Optionale Services ausblenden" [pressed] [ref=e29] [cursor=pointer]:
+          - img [ref=e30]
+        - button "Dark-Theme aktivieren" [ref=e32] [cursor=pointer]:
+          - img [ref=e33]
+        - button "Ansicht zentrieren" [ref=e35] [cursor=pointer]:
+          - img [ref=e36]
+  - main [ref=e39]:
+    - region "Architekturdiagramm" [ref=e40]:
+      - generic [ref=e43]:
+        - paragraph [ref=e44]: Nutzungsszenarien
+        - heading "Kurs erstellen" [level=2] [ref=e242]
+        - paragraph [ref=e46]: Von Authoring ueber Qualitaetssicherung bis zur Bereitstellung in Moodle.
+      - generic [ref=e47]:
+        - img "CampusConnect Architekturdiagramm" [ref=e48]:
+          - generic [ref=e49]:
+            - generic [ref=e50]:
+              - generic: US/Global (optional)
+              - generic: EU Cloud (optional)
+              - generic: DE / On-Prem Kern
+              - generic: SDG-Campus / Moodle
+            - generic [ref=e55]:
+              - generic [ref=e512]: SDG-Campus / Moodle
+              - button "Container AI Content Core, Zone DE / On-Prem, 4 Bausteine" [ref=e513] [cursor=pointer]:
+                - generic [ref=e515]: AI Content Core
+              - button "Container LMS AI Workflow Engine, Zone DE / On-Prem, 4 Bausteine" [ref=e516] [cursor=pointer]:
+                - generic [ref=e518]: LMS AI Workflow Engine
+            - generic [ref=e65]:
+              - button "Element Moodle LMS, Zone SDG-Campus / Moodle, Datenklasse system" [ref=e519] [cursor=pointer]:
+                - generic [ref=e521]: Moodle LMS (bestehend)
+                - button "LTI Interface, system" [ref=e522]:
+                  - generic [ref=e524]: LTI Interface
+                - button "Course UI, mixed" [ref=e525]:
+                  - generic [ref=e527]: Course UI
+                - button "Author UI, non-PII" [ref=e528]:
+                  - generic [ref=e530]: Author UI
+              - button "Element AI Workflow & Policy Engine, Zone DE / On-Prem, Datenklasse system" [ref=e531] [cursor=pointer]:
+                - generic [ref=e534]: AI Workflow & Policy
+                - generic [ref=e535]: Engine
+                - generic: Shield
+              - button "Element SKIS, Zone DE / On-Prem, Datenklasse non-PII" [ref=e536] [cursor=pointer]:
+                - generic [ref=e539]: SKIS
+              - button "Element Content & Competency Core, Zone DE / On-Prem, Datenklasse non-PII" [ref=e540] [cursor=pointer]:
+                - generic [ref=e543]: Content & Competency
+                - generic [ref=e544]: Core
+              - button "Element Learning Record Store (LRS), Zone DE / On-Prem, Datenklasse PII" [ref=e545] [cursor=pointer]:
+                - generic [ref=e548]: Learning Record Store
+                - generic [ref=e549]: (LRS)
+              - button "Element Authoring Studio, Zone DE / On-Prem, Datenklasse non-PII" [ref=e550] [cursor=pointer]:
+                - generic [ref=e553]: Authoring Studio
+              - button "Element Learning Insights Engine, Zone DE / On-Prem, Datenklasse PII" [ref=e554] [cursor=pointer]:
+                - generic [ref=e557]: Learning Insights
+                - generic [ref=e558]: Engine
+              - button "Element Adaptive Pathway Engine, Zone DE / On-Prem, Datenklasse mixed" [ref=e559] [cursor=pointer]:
+                - generic [ref=e562]: Adaptive Pathway
+                - generic [ref=e563]: Engine
+              - button "Element Learning Companion, Zone DE / On-Prem, Datenklasse mixed" [ref=e564] [cursor=pointer]:
+                - generic [ref=e567]: Learning Companion
+              - button "Element Lehrende / Autor:innen, Zone SDG-Campus / Moodle, Datenklasse mixed" [ref=e568] [cursor=pointer]:
+                - generic [ref=e574]: Lehrende
+              - button "Element Qualitaetssicherung / Freigabe, Zone DE / On-Prem, Datenklasse system" [ref=e575] [cursor=pointer]:
+                - generic [ref=e581]: QA/Freigabe
+              - button "Element Mistral-AI, Zone EU Cloud (optional), Datenklasse non-PII" [ref=e582] [cursor=pointer]:
+                - generic [ref=e583]: Mistral-AI
+        - tooltip
+    - complementary:
+      - tablist:
+        - tab [selected]: Info
+        - tab: Datenflüsse
+        - tab: Sicherheit & Policies
+      - generic:
+        - generic:
+          - heading [level=3]: Argumentationslinie
+          - paragraph: Der Authoring-Workflow verbindet Didaktik, Governance und Publishing.
+        - generic:
+          - heading [level=3]: AP-Bezug
+          - paragraph: Erklaert den Mehrwert fuer Lehrende ohne technische Ueberfrachtung.
+        - generic:
+          - heading [level=3]: Datenschutzsignal
+          - paragraph: Kerninhalte und Freigaben bleiben lokal steuerbar.
+        - generic:
+          - heading [level=3]: Optionale Erweiterung
+          - paragraph: Lokalisierung kann optional als non-PII Batch-Service genutzt werden.
+        - generic:
+          - heading [level=3]: In 3 Schritten erklaert
+          - list:
+            - listitem: Lehrende erstellen Inhalte im Authoring Studio.
+            - listitem: Inhalte werden im Content Core versioniert und bei Bedarf freigegeben.
+            - listitem: Freigegebene Inhalte werden in Moodle publiziert, optional lokalisiert.
+        - generic:
+          - heading [level=3]: Leseschluessel
+          - list:
+            - listitem: Plattform-Karte = bestehendes Kernsystem (Moodle).
+            - listitem: Rechteck = lokaler Architekturbaustein.
+            - listitem: Akteur-Chip = Rolle im Prozess (Lehrende, Studierende, QS/Betrieb).
+            - listitem: Service-Badge = optionale externe Erweiterung.
+            - listitem: Magenta Linie = PII (lokal), Gruen Linie = non-PII.
+        - generic:
+          - heading [level=3]: Warum ist das sicher?
+          - list:
+            - listitem: PII bleibt lokal im DE/On-Prem Kern.
+            - listitem: Externe Aufrufe sind ausschliesslich non-PII und optional.
+            - listitem: Alle externen Requests laufen ueber die zentrale AI Workflow & Policy Engine.
+            - listitem: QA/Freigabe und Logging sichern Governance und Nachvollziehbarkeit.
+            - listitem: SDG-Campus und DE/On-Prem bleiben visuell und architektonisch die Haupt-Ebenen.
+        - generic:
+          - heading [level=3]: Bezug zu den APs
+          - paragraph: Diese Sicht verweist auf die folgenden Arbeitspakete des Auftraggebers.
+          - generic:
+            - article:
+              - generic:
+                - generic: AP 2.07
+                - paragraph: Integration in die Lernplattform
+              - paragraph: Moodle LMS inkl. LTI Interface, Course UI, Author UI und lokale Integrationspfade
+            - article:
+              - generic:
+                - generic: AP 2.08
+                - paragraph: KI in der Kurserstellung
+              - paragraph: Authoring Studio, Content & Competency Core, QA/Freigabe

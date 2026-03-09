@@ -1,0 +1,1008 @@
+{
+  "viewModes": [
+    {
+      "id": "overview",
+      "label": "Uebersicht",
+      "enabled": false,
+      "description": "Ruhiges Gesamtbild mit Kernbausteinen und wenigen Hero-Flows.",
+      "secondaryLabel": "Fokus",
+      "defaultScenarioId": "overview-main",
+      "scenarioIds": [
+        "overview-main"
+      ]
+    },
+    {
+      "id": "architecture-layers",
+      "label": "Architektur-Ebenen",
+      "description": "Schichtweise Perspektiven: Ausgangssituation, Plattform, lokaler Kern, externe Services, Gesamtbild.",
+      "secondaryLabel": "Ebene",
+      "defaultScenarioId": "layer-full-picture",
+      "scenarioIds": [
+        "layer-starting-point",
+        "layer-platform",
+        "layer-local-core",
+        "layer-optional-extensions",
+        "layer-full-picture"
+      ]
+    },
+    {
+      "id": "usage-scenarios",
+      "label": "Nutzungsszenarien",
+      "description": "Story-getriebene Sichten fuer Authoring, Lernen, Tutor/Lernpfad, Mehrsprachigkeit und Governance.",
+      "secondaryLabel": "Szenario",
+      "defaultScenarioId": "usage-authoring",
+      "scenarioIds": [
+        "usage-authoring",
+        "usage-learning",
+        "usage-tutor-pathway",
+        "usage-translation",
+        "usage-governance"
+      ]
+    },
+    {
+      "id": "security-flows",
+      "label": "Sicherheit & Datenfluesse",
+      "description": "Transparente Fluesse fuer Datenschutz, Routing, lokale Verarbeitung und optionale externe Pfade.",
+      "secondaryLabel": "Datenfluss",
+      "defaultScenarioId": "flow-content-publishing",
+      "scenarioIds": [
+        "flow-content-publishing",
+        "flow-learner-activity",
+        "flow-insights-pathways",
+        "flow-external-requests"
+      ]
+    },
+    {
+      "id": "rwth-aps",
+      "label": "RWTH-APs",
+      "description": "Arbeitspakete des Auftraggebers und ihre Abdeckung durch Bausteine, Rollen und Datenfluesse.",
+      "secondaryLabel": "Arbeitspaket",
+      "defaultScenarioId": "ap-203",
+      "scenarioIds": [
+        "ap-203",
+        "ap-204",
+        "ap-205",
+        "ap-206",
+        "ap-207",
+        "ap-208",
+        "ap-209"
+      ]
+    }
+  ],
+  "architectureLayers": [
+    {
+      "id": "starting-point",
+      "label": "Ebene 0: Ausgangssituation",
+      "scenarioId": "layer-starting-point",
+      "description": "Die bestehende SDG-Campus Moodle-Plattform fuer Lernangebote vor LTI- und KI-Erweiterungen."
+    },
+    {
+      "id": "platform",
+      "label": "Ebene 1: Plattform / SDG-Campus / Moodle",
+      "scenarioId": "layer-platform",
+      "description": "Die bestehende Lernplattform ist der Startpunkt aller Interaktionen."
+    },
+    {
+      "id": "local-core",
+      "label": "Ebene 2: Lokaler Kern / On-Prem",
+      "scenarioId": "layer-local-core",
+      "description": "Datenhoheit, Governance, Insights und KI-Kernlogik bleiben lokal in DE."
+    },
+    {
+      "id": "optional-extensions",
+      "label": "Ebene 3: Externe Services",
+      "scenarioId": "layer-optional-extensions",
+      "description": "Externe Services erscheinen erst hier als kontrollierte non-PII-Erweiterungen."
+    },
+    {
+      "id": "full-picture",
+      "label": "Ebene 4",
+      "scenarioId": "layer-full-picture",
+      "description": "Alle Ebenen zusammen zeigen Innovation mit klaren Governance-Leitplanken."
+    }
+  ],
+  "inspectorSummary": {
+    "overview-main": {
+      "whatHappens": "Moodle bildet das Zentrum. Der lokale DE/On-Prem Kern ergaenzt Authoring, Wissensbasis, Insights und kontrollierte Workflows.",
+      "whyRelevant": "Stakeholder sehen in Sekunden den Kern der Architektur statt eines technischen Netzwerks.",
+      "localData": "PII bleibt im SKIS; Basismaterialien, Kurslogik und Medien bleiben in LRS, CCS und AML im lokalen DE/On-Prem Kern.",
+      "optionalServices": "EU- und US/Global-Services sind klar als optionale Badges markiert."
+    }
+  },
+  "scenarios": [
+    {
+      "id": "overview-main",
+      "viewModeId": "overview",
+      "label": "Gesamtbild",
+      "description": "Kernarchitektur in ruhiger Darstellung mit den wichtigsten Flows.",
+      "strictNodeScope": true,
+      "visibleZoneIds": [
+        "sdg-campus",
+        "de-onprem",
+        "eu-cloud",
+        "us-global"
+      ],
+      "visibleGroupIds": [
+        "sdg-campus-cluster",
+        "core-cluster",
+        "capabilities-cluster"
+      ],
+      "visibleNodeIds": [
+        "moodle-lms",
+        "skis",
+        "content-core",
+        "lrs",
+        "authoring-studio",
+        "learning-companion"
+      ],
+      "visibleActorIds": [
+        "actor-authors",
+        "actor-students",
+        "actor-qa"
+      ],
+      "visibleServiceBadgeIds": [
+        "badge-openai-germany",
+        "badge-openai-enterprise",
+        "badge-mistral-ai"
+      ],
+      "visibleEdgeIds": [
+        "edge-content-publishing",
+        "edge-publish-to-moodle",
+        "edge-learner-activity",
+        "edge-routing"
+      ],
+      "edgeIds": [
+        "edge-content-publishing",
+        "edge-publish-to-moodle",
+        "edge-learner-activity",
+        "edge-routing"
+      ],
+      "nodeIds": [
+        "moodle-lms",
+        "skis",
+        "content-core",
+        "lrs",
+        "authoring-studio",
+        "learning-companion"
+      ],
+      "storySteps": [
+        "Moodle ist die Plattformmitte fuer Lehrende und Studierende.",
+        "Der lokale DE/On-Prem Kern verarbeitet Inhalte, Lernsignale und Governance.",
+        "Optionale externe Services sind nachgelagert und nur fuer non-PII gedacht."
+      ],
+      "inspectorSummary": {
+        "whatHappens": "Die Kernkette zeigt Authoring, Kursnutzung, lokalen Studenten-Kontext und workflow-gesteuertes Routing.",
+        "whyRelevant": "Stakeholder verstehen schnell, was Kernsystem und was optionale Erweiterung ist.",
+        "localData": "Lernaktivitaeten (PII) bleiben lokal im SKIS; Basismaterialien und Kurslogik bleiben ebenfalls in LRS, CCS und AML on-prem.",
+        "optionalServices": "EU/US-Services erscheinen nur als optionale Badges an der Aussenzone."
+      },
+      "apIds": [
+        "2.07",
+        "2.08",
+        "2.04",
+        "2.05",
+        "2.09"
+      ]
+    },
+    {
+      "id": "layer-starting-point",
+      "viewModeId": "architecture-layers",
+      "label": "Ebene 0 - Ausgangssituation",
+      "description": "Bestehende SDG-Campus Moodle-Plattform fuer digitale Lernangebote als Ausgangsbasis vor CampusConnect-Erweiterungen.",
+      "strictNodeScope": true,
+      "visibleZoneIds": [
+        "sdg-campus"
+      ],
+      "visibleGroupIds": [
+        "sdg-campus-cluster"
+      ],
+      "visibleNodeIds": [
+        "moodle-lms"
+      ],
+      "hiddenEmbeddedIds": [
+        "embedded-ai-interface",
+        "embedded-course-ui",
+        "embedded-author-ui"
+      ],
+      "visibleActorIds": [
+        "actor-authors",
+        "actor-students"
+      ],
+      "visibleServiceBadgeIds": [],
+      "visibleEdgeIds": [],
+      "edgeIds": [],
+      "nodeIds": [
+        "moodle-lms",
+        "actor-authors",
+        "actor-students"
+      ],
+      "storySteps": [
+        "Ausgangsbasis ist die bestehende SDG-Campus Moodle-Plattform fuer Lernangebote zu nachhaltiger Entwicklung und Zukunftsthemen.",
+        "Lehrende und Studierende bewegen sich zunaechst nur im vertrauten Moodle-Kern ohne Zusatzoberflaechen.",
+        "CampusConnect erweitert spaeter genau diese Plattform ueber LTI und lokale Services statt ein neues LMS einzufuehren."
+      ],
+      "inspectorSummary": {
+        "whatHappens": "Die Sicht zeigt nur die bestehende SDG-Campus Moodle-Plattform als digitale Ausgangsbasis vor jeder CampusConnect-Erweiterung.",
+        "whyRelevant": "Macht klar, dass auf einer vorhandenen Lernplattform aufgebaut wird und kein Parallel-Frontend noetig ist.",
+        "localData": "Kurs- und Nutzungskontext verbleiben vollstaendig im bestehenden Plattformrahmen.",
+        "optionalServices": "Noch keine LTI-, KI- oder externen Servicepfade sichtbar."
+      },
+      "apIds": [
+        "2.07"
+      ]
+    },
+    {
+      "id": "layer-platform",
+      "viewModeId": "architecture-layers",
+      "label": "Ebene 1 - Plattform",
+      "description": "Fokus auf SDG-Campus / Moodle als Startpunkt.",
+      "strictNodeScope": true,
+      "visibleZoneIds": [
+        "sdg-campus"
+      ],
+      "visibleGroupIds": [
+        "sdg-campus-cluster"
+      ],
+      "visibleNodeIds": [
+        "moodle-lms"
+      ],
+      "visibleActorIds": [
+        "actor-authors",
+        "actor-students"
+      ],
+      "visibleServiceBadgeIds": [],
+      "visibleEdgeIds": [],
+      "edgeIds": [],
+      "nodeIds": [
+        "moodle-lms",
+        "actor-authors",
+        "actor-students"
+      ],
+      "storySteps": [
+        "Moodle bleibt der zentrale Einstiegspunkt fuer alle Rollen.",
+        "LTI Interface, Course UI und Author UI sind direkt in die Plattform eingebettet.",
+        "Das minimiert Reibung fuer die Nutzung und Einfuehrung."
+      ],
+      "inspectorSummary": {
+        "whatHappens": "Die Plattformebene zeigt nur den SDG-Campus Kern ohne Zusatzkomplexitaet.",
+        "whyRelevant": "Stakeholder sehen sofort, dass kein Parallel-LMS aufgebaut wird.",
+        "localData": "Plattformkontext bleibt im Campus-Umfeld.",
+        "optionalServices": "Noch keine externen Services aktiv."
+      },
+      "apIds": [
+        "2.07"
+      ]
+    },
+    {
+      "id": "layer-local-core",
+      "viewModeId": "architecture-layers",
+      "label": "Ebene 2 - Lokaler Kern",
+      "description": "On-Prem Kern mit Datenhoheit, Governance und KI-Funktionen.",
+      "disableDimming": true,
+      "visibleZoneIds": [
+        "sdg-campus",
+        "de-onprem"
+      ],
+      "visibleGroupIds": [
+        "sdg-campus-cluster",
+        "core-cluster",
+        "capabilities-cluster"
+      ],
+      "visibleActorIds": [
+        "actor-authors",
+        "actor-students",
+        "actor-qa",
+        "actor-ops"
+      ],
+      "forceVisibleActorIds": [
+        "actor-ops"
+      ],
+      "visibleServiceBadgeIds": [],
+      "visibleEdgeIds": [
+        "edge-learner-activity",
+        "edge-authoring-rag",
+        "edge-asset-context",
+        "edge-content-publishing",
+        "edge-asset-sync",
+        "edge-publish-to-moodle",
+        "edge-insights",
+        "edge-pathways",
+        "edge-insights-sync",
+        "edge-tutor-content",
+        "edge-student-pathway-context",
+        "edge-student-companion-context",
+        "edge-routing",
+        "edge-pathway-routing"
+      ],
+      "edgeIds": [],
+      "nodeIds": [],
+      "storySteps": [
+        "Im lokalen Kern liegen Student Knowledge Information System (SKIS), Content & Competence Store (CCS), Learning Resource Store (LRS), Asset & Media Library (AML) und die KI-Funktionsbausteine.",
+        "PII wird lokal verarbeitet und nicht extern ausgelagert.",
+        "Externe Pfade sind technisch noch nicht im Fokus dieser Ebene."
+      ],
+      "inspectorSummary": {
+        "whatHappens": "Die Architektur zeigt den vollstaendigen lokalen Betriebsmodus ohne externe Erweiterungen.",
+        "whyRelevant": "Datenschutz und Governance werden als tragender Kern sichtbar.",
+        "localData": "PII bleibt im SKIS und in lokalen Insights/Pathways; Quellen, Medien und Kurslogik bleiben ebenfalls in LRS, AML und CCS on-prem.",
+        "optionalServices": "Externe Services sind in dieser Ebene ausgeblendet."
+      },
+      "apIds": [
+        "2.08",
+        "2.04",
+        "2.03",
+        "2.05",
+        "2.09"
+      ]
+    },
+    {
+      "id": "layer-optional-extensions",
+      "viewModeId": "architecture-layers",
+      "label": "Ebene 3 - Externe Services",
+      "description": "OpenAI, Anthropic, EU- und US/Global-Services als kontrollierte externe Pfade fuer non-PII.",
+      "disableDimming": true,
+      "visibleZoneIds": [
+        "sdg-campus",
+        "de-onprem",
+        "eu-cloud",
+        "us-global"
+      ],
+      "visibleGroupIds": [
+        "sdg-campus-cluster",
+        "core-cluster",
+        "capabilities-cluster"
+      ],
+      "visibleActorIds": [
+        "actor-authors",
+        "actor-students",
+        "actor-qa",
+        "actor-ops"
+      ],
+      "visibleServiceBadgeIds": [
+        "badge-openai-germany",
+        "badge-openai-enterprise",
+        "badge-mistral-ai",
+        "badge-elevenlabs",
+        "badge-openai-frontier",
+        "badge-anthropic"
+      ],
+      "visibleEdgeIds": [
+        "edge-routing",
+        "edge-pathway-routing",
+        "edge-sap-gateway-routing",
+        "edge-localization",
+        "edge-model-inference",
+        "edge-external-api",
+        "edge-frontier-openai",
+        "edge-frontier-anthropic"
+      ],
+      "edgeIds": [
+        "edge-sap-gateway-routing",
+        "edge-localization",
+        "edge-model-inference",
+        "edge-external-api",
+        "edge-frontier-openai",
+        "edge-frontier-anthropic"
+      ],
+      "nodeIds": [
+        "learning-companion",
+        "pathway-engine"
+      ],
+      "storySteps": [
+        "Externe Services erscheinen erst auf dieser Ebene als Badges entlang der aeußeren Schutzzonen.",
+        "Alle externen Aufrufe laufen zentral ueber die LMS AI Workflow Engine.",
+        "Datenklasse fuer externe Pfade bleibt konsequent non-PII."
+      ],
+      "inspectorSummary": {
+        "whatHappens": "Hier werden die externen Servicepfade und ihre Governance-Leitplanken sichtbar gemacht.",
+        "whyRelevant": "Zeigt klar: externe Integration erscheint erst nach dem lokalen Kern und bleibt kontrolliert sowie austauschbar.",
+        "localData": "PII-Daten bleiben weiterhin im lokalen Kern.",
+        "optionalServices": "Badges markieren die externen Services entlang EU/US-Zonen."
+      },
+      "apIds": [
+        "2.06",
+        "2.05",
+        "2.09"
+      ]
+    },
+    {
+      "id": "layer-full-picture",
+      "viewModeId": "architecture-layers",
+      "label": "Ebene 4",
+      "description": "Vollstaendiges Architekturgesamtbild ueber alle Zonen und Rollen.",
+      "disableDimming": true,
+      "visibleZoneIds": [
+        "sdg-campus",
+        "de-onprem",
+        "eu-cloud",
+        "us-global"
+      ],
+      "visibleGroupIds": [
+        "sdg-campus-cluster",
+        "core-cluster",
+        "capabilities-cluster"
+      ],
+      "visibleActorIds": [
+        "actor-authors",
+        "actor-students",
+        "actor-qa",
+        "actor-ops"
+      ],
+      "visibleServiceBadgeIds": [
+        "badge-openai-germany",
+        "badge-openai-enterprise",
+        "badge-mistral-ai",
+        "badge-elevenlabs",
+        "badge-openai-frontier",
+        "badge-anthropic"
+      ],
+      "visibleEdgeIds": [
+        "edge-learner-activity",
+        "edge-authoring-rag",
+        "edge-asset-context",
+        "edge-content-publishing",
+        "edge-asset-sync",
+        "edge-publish-to-moodle",
+        "edge-insights",
+        "edge-pathways",
+        "edge-insights-sync",
+        "edge-tutor-content",
+        "edge-student-pathway-context",
+        "edge-student-companion-context",
+        "edge-routing",
+        "edge-pathway-routing",
+        "edge-sap-gateway-routing",
+        "edge-localization",
+        "edge-model-inference",
+        "edge-external-api",
+        "edge-frontier-openai",
+        "edge-frontier-anthropic"
+      ],
+      "edgeIds": [],
+      "nodeIds": [],
+      "storySteps": [
+        "Die Gesamtansicht verbindet Plattform, lokalen Kern und externe Services.",
+        "Fluesse machen die Trennung zwischen PII-lokal und non-PII-extern transparent.",
+        "Governance, Freigabe und Workflow-Regeln bleiben durchgaengig sichtbar."
+      ],
+      "inspectorSummary": {
+        "whatHappens": "Alle Bausteine und Datenpfade werden in einer konsistenten Gesamtstory kombiniert.",
+        "whyRelevant": "Geeignet fuer Management- und Stakeholder-Praesentationen.",
+        "localData": "PII bleibt im lokalen Kern, auch im Vollbild der Architektur.",
+        "optionalServices": "Optionale Badges sind sichtbar, aber visuell bewusst nachgeordnet."
+      },
+      "apIds": [
+        "2.07",
+        "2.08",
+        "2.04",
+        "2.03",
+        "2.05",
+        "2.06",
+        "2.09"
+      ]
+    },
+    {
+      "id": "usage-authoring",
+      "viewModeId": "usage-scenarios",
+      "label": "Kurs erstellen",
+      "description": "Von Authoring ueber Qualitaetssicherung bis zur Bereitstellung in Moodle, optional mit Spezialmedien-Pfaden.",
+      "edgeIds": [
+        "edge-authoring-rag",
+        "edge-asset-context",
+        "edge-content-publishing",
+        "edge-asset-sync",
+        "edge-publish-to-moodle",
+        "edge-localization",
+        "edge-frontier-openai",
+        "edge-frontier-anthropic"
+      ],
+      "nodeIds": [
+        "lrs",
+        "asset-media-library",
+        "authoring-studio",
+        "content-core",
+        "moodle-lms",
+        "actor-authors",
+        "actor-qa",
+        "badge-mistral-ai",
+        "badge-openai-frontier",
+        "badge-anthropic"
+      ],
+      "visibleActorIds": [
+        "actor-authors",
+        "actor-qa"
+      ],
+      "visibleServiceBadgeIds": [
+        "badge-mistral-ai",
+        "badge-openai-frontier",
+        "badge-anthropic"
+      ],
+      "storySteps": [
+        "Lehrende erstellen Inhalte im AI Authoring Studio (AAS) auf Basis lokaler Quellen, Assets und Medien.",
+        "Struktur, Lernziele und Aufgaben werden im Content & Competence Store (CCS) versioniert; Medien bleiben in der Asset & Media Library (AML).",
+        "Freigegebene Inhalte werden in Moodle publiziert und koennen optional ueber EU- oder US/Global-Spezialpfade fuer Lokalisierung, Bild- oder Assetgenerierung erweitert werden."
+      ],
+      "inspectorSummary": {
+        "whatHappens": "Der Authoring-Workflow verbindet Didaktik, Governance und Publishing.",
+        "whyRelevant": "Erklaert den Mehrwert fuer Lehrende ohne technische Ueberfrachtung.",
+        "localData": "Kerninhalte und Freigaben bleiben lokal steuerbar.",
+        "optionalServices": "Lokalisierung sowie datenschutzunkritische Bild-, Asset- oder Spezialaufrufe koennen optional ueber EU- oder US/Global-Services genutzt werden."
+      },
+      "apIds": [
+        "2.08",
+        "2.07"
+      ]
+    },
+    {
+      "id": "usage-learning",
+      "viewModeId": "usage-scenarios",
+      "label": "Kurs nutzen",
+      "description": "Studierende lernen im Kurs; PII bleibt lokal im SKIS.",
+      "edgeIds": [
+        "edge-learner-activity",
+        "edge-insights"
+      ],
+      "nodeIds": [
+        "moodle-lms",
+        "skis",
+        "insights-engine",
+        "actor-students"
+      ],
+      "visibleActorIds": [
+        "actor-students"
+      ],
+      "visibleServiceBadgeIds": [],
+      "storySteps": [
+        "Studierende lernen in der Course UI im Moodle-Kontext.",
+        "Aktivitaeten gehen als PII in das lokale SKIS.",
+        "Insights werden lokal berechnet und zur Lernunterstuetzung genutzt."
+      ],
+      "inspectorSummary": {
+        "whatHappens": "Die Lernnutzung zeigt den lokalen PII-Pfad vom Kurs in die Analyse.",
+        "whyRelevant": "Datenschutz wird als konkreter Datenweg sichtbar, nicht nur als Claim.",
+        "localData": "Lernerdaten und Insights bleiben im DE/On-Prem Kern.",
+        "optionalServices": "Keine externen Services fuer diesen Basispfad erforderlich."
+      },
+      "apIds": [
+        "2.04",
+        "2.05"
+      ]
+    },
+    {
+      "id": "usage-tutor-pathway",
+      "viewModeId": "usage-scenarios",
+      "label": "Tutor & Lernpfad",
+      "description": "LCT und APE kombinieren Content, Studenten-Kontext, LIE-Signale und Workflow-Routing.",
+      "edgeIds": [
+        "edge-insights-sync",
+        "edge-pathways",
+        "edge-tutor-content",
+        "edge-student-pathway-context",
+        "edge-student-companion-context",
+        "edge-routing",
+        "edge-pathway-routing",
+        "edge-sap-gateway-routing",
+        "edge-model-inference"
+      ],
+      "nodeIds": [
+        "skis",
+        "insights-engine",
+        "pathway-engine",
+        "content-core",
+        "learning-companion",
+        "badge-openai-germany",
+        "badge-openai-enterprise",
+        "actor-students"
+      ],
+      "visibleActorIds": [
+        "actor-students",
+        "actor-ops"
+      ],
+      "visibleServiceBadgeIds": [
+        "badge-openai-germany",
+        "badge-openai-enterprise"
+      ],
+      "storySteps": [
+        "LCT und APE nutzen lokale Inhalte, Kompetenzlogik, Studenten-Kontext und LIE-Signale.",
+        "Die LMS AI Workflow Engine prueft jeden externen Aufruf zentral.",
+        "Externe Modelle erhalten ausschliesslich non-PII Daten."
+      ],
+      "inspectorSummary": {
+        "whatHappens": "Personalisierung entsteht aus lokalem Kernwissen plus optionaler Modellunterstuetzung.",
+        "whyRelevant": "Zeigt Innovation, ohne Governance und Datenschutz aufzugeben.",
+        "localData": "PII-Signale fuer Personalisierung bleiben lokal.",
+        "optionalServices": "OpenAI Germany und OpenAI Enterprise werden nur optional und workflow-gesteuert eingebunden."
+      },
+      "apIds": [
+        "2.03",
+        "2.05",
+        "2.09"
+      ]
+    },
+    {
+      "id": "usage-translation",
+      "viewModeId": "usage-scenarios",
+      "label": "Uebersetzung / Mehrsprachigkeit",
+      "description": "Batch-Lokalisierung und EU-gehostete Runtime-Uebersetzung fuer non-PII Inhalte.",
+      "edgeIds": [
+        "edge-localization",
+        "edge-model-inference"
+      ],
+      "nodeIds": [
+        "authoring-studio",
+        "content-core",
+        "learning-companion",
+        "badge-mistral-ai",
+        "badge-openai-enterprise",
+        "actor-authors",
+        "actor-students"
+      ],
+      "visibleActorIds": [
+        "actor-authors",
+        "actor-students"
+      ],
+      "visibleServiceBadgeIds": [
+        "badge-mistral-ai",
+        "badge-openai-enterprise"
+      ],
+      "storySteps": [
+        "Content und Authoring-Ergebnisse koennen optional ueber einen EU-gehosteten Spezialpfad lokalisiert werden.",
+        "Tutor-Antworten koennen optional ueber einen EU-gehosteten Enterprise-LLM-Pfad erzeugt oder angepasst werden.",
+        "Beide Pfade sind auf non-PII und Policy-Regeln begrenzt."
+      ],
+      "inspectorSummary": {
+        "whatHappens": "Mehrsprachigkeit wird als optionale Erweiterung des lokalen Kerns dargestellt.",
+        "whyRelevant": "Erklaert internationale Nutzbarkeit ohne Datenhoheit aufzugeben.",
+        "localData": "PII-Anteile bleiben lokal; nur non-PII wird ausgelagert.",
+        "optionalServices": "EU-Services koennen je Bedarf aktiviert oder deaktiviert werden."
+      },
+      "apIds": [
+        "2.06"
+      ]
+    },
+    {
+      "id": "usage-governance",
+      "viewModeId": "usage-scenarios",
+      "label": "Sicherheit & Governance",
+      "description": "Governance, Workflow-Regeln und Freigaben als durchgaengige Leitplanken.",
+      "edgeIds": [
+        "edge-learner-activity",
+        "edge-routing",
+        "edge-pathway-routing",
+        "edge-sap-gateway-routing",
+        "edge-model-inference",
+        "edge-localization",
+        "edge-external-api",
+        "edge-frontier-openai",
+        "edge-frontier-anthropic"
+      ],
+      "nodeIds": [
+        "skis",
+        "learning-companion",
+        "pathway-engine",
+        "badge-openai-germany",
+        "badge-openai-enterprise",
+        "badge-elevenlabs",
+        "badge-openai-frontier",
+        "badge-anthropic",
+        "actor-qa",
+        "actor-ops"
+      ],
+      "visibleActorIds": [
+        "actor-qa",
+        "actor-ops"
+      ],
+      "visibleServiceBadgeIds": [
+        "badge-openai-germany",
+        "badge-openai-enterprise",
+        "badge-elevenlabs",
+        "badge-openai-frontier",
+        "badge-anthropic"
+      ],
+      "storySteps": [
+        "Die LMS AI Workflow Engine bildet den zentralen Kontrollpunkt fuer externe Aufrufe.",
+        "QA/Freigabe ergaenzt technische Regeln durch menschliche Entscheidungen.",
+        "Extern werden ausschliesslich non-PII Requests zugelassen, auch bei US/Global-Frontier-Ausnahmen."
+      ],
+      "inspectorSummary": {
+        "whatHappens": "Governance-Regeln werden entlang realer Datenpfade sichtbar gemacht.",
+        "whyRelevant": "Stakeholder sehen, wie Steuerbarkeit und Nachvollziehbarkeit technisch umgesetzt sind.",
+        "localData": "PII bleibt im SKIS und in lokalen Verarbeitungspfaden.",
+        "optionalServices": "Externe Dienste einschliesslich EU- und US/Global-Frontier-Modelle sind klar als optional und policy-gebunden markiert."
+      },
+      "apIds": [
+        "2.09"
+      ]
+    },
+    {
+      "id": "flow-content-publishing",
+      "viewModeId": "security-flows",
+      "label": "Content-Publishing",
+      "description": "Sicherer non-PII Publikationspfad von Authoring bis Moodle.",
+      "edgeIds": [
+        "edge-content-publishing",
+        "edge-publish-to-moodle"
+      ],
+      "nodeIds": [
+        "authoring-studio",
+        "content-core",
+        "moodle-lms",
+        "actor-authors"
+      ],
+      "visibleActorIds": [
+        "actor-authors"
+      ],
+      "visibleServiceBadgeIds": [],
+      "inspectorSummary": {
+        "whatHappens": "Nicht-personenbezogene Inhalte wandern kontrolliert vom Authoring in den Kurs.",
+        "whyRelevant": "Zeigt Governance auch fuer den Alltagsprozess der Kurserstellung.",
+        "localData": "Der gesamte Pfad bleibt im lokalen Kern und in Moodle.",
+        "optionalServices": "Keine externen Services fuer den Basis-Publishingpfad notwendig."
+      },
+      "apIds": [
+        "2.08",
+        "2.07"
+      ]
+    },
+    {
+      "id": "flow-learner-activity",
+      "viewModeId": "security-flows",
+      "label": "Learner Activity / PII",
+      "description": "PII-Fluss von der Kursnutzung in die lokale PII-Zone.",
+      "edgeIds": [
+        "edge-learner-activity",
+        "edge-insights"
+      ],
+      "nodeIds": [
+        "moodle-lms",
+        "skis",
+        "insights-engine",
+        "actor-students"
+      ],
+      "visibleActorIds": [
+        "actor-students"
+      ],
+      "visibleServiceBadgeIds": [],
+      "inspectorSummary": {
+        "whatHappens": "Lernaktivitaeten gehen in das lokale SKIS und werden dort fuer Analyse und Feedback verarbeitet.",
+        "whyRelevant": "Datenschutz wird als klarer technischer Pfad erklaerbar.",
+        "localData": "PII wird nicht extern geroutet.",
+        "optionalServices": "Keine externen Services in diesem PII-Pfad."
+      },
+      "apIds": [
+        "2.04"
+      ]
+    },
+    {
+      "id": "flow-insights-pathways",
+      "viewModeId": "security-flows",
+      "label": "Insights / Pathways",
+      "description": "Lokale Kette fuer Insights-Sync und adaptive Lernpfade.",
+      "edgeIds": [
+        "edge-insights",
+        "edge-insights-sync",
+        "edge-pathways",
+        "edge-student-pathway-context"
+      ],
+      "nodeIds": [
+        "skis",
+        "insights-engine",
+        "pathway-engine",
+        "content-core"
+      ],
+      "visibleActorIds": [
+        "actor-students",
+        "actor-qa"
+      ],
+      "visibleServiceBadgeIds": [],
+      "inspectorSummary": {
+        "whatHappens": "Insights und Pfadentscheidungen werden lokal erzeugt und kontrolliert weitergeleitet.",
+        "whyRelevant": "Zeigt den Kern fuer personalisiertes Lernen bei lokaler Datenhoheit.",
+        "localData": "PII-nahe Lernsignale verbleiben im DE/On-Prem Kern.",
+        "optionalServices": "Externe Services sind fuer den Kernpfad nicht erforderlich."
+      },
+      "apIds": [
+        "2.04",
+        "2.03"
+      ]
+    },
+    {
+      "id": "flow-external-requests",
+      "viewModeId": "security-flows",
+      "label": "Externe Requests / non-PII only",
+      "description": "Alle externen Aufrufe laufen ueber die LMS AI Workflow Engine und bleiben non-PII.",
+      "edgeIds": [
+        "edge-routing",
+        "edge-pathway-routing",
+        "edge-sap-gateway-routing",
+        "edge-model-inference",
+        "edge-external-api",
+        "edge-localization",
+        "edge-frontier-openai",
+        "edge-frontier-anthropic"
+      ],
+      "nodeIds": [
+        "authoring-studio",
+        "learning-companion",
+        "pathway-engine",
+        "content-core",
+        "badge-openai-germany",
+        "badge-openai-enterprise",
+        "badge-elevenlabs",
+        "badge-mistral-ai",
+        "badge-openai-frontier",
+        "badge-anthropic"
+      ],
+      "visibleActorIds": [
+        "actor-qa",
+        "actor-ops"
+      ],
+      "visibleServiceBadgeIds": [
+        "badge-openai-germany",
+        "badge-openai-enterprise",
+        "badge-elevenlabs",
+        "badge-mistral-ai",
+        "badge-openai-frontier",
+        "badge-anthropic"
+      ],
+      "inspectorSummary": {
+        "whatHappens": "Externe Requests werden zentral ueber die LMS AI Workflow Engine geprueft und nur als non-PII ausgeliefert.",
+        "whyRelevant": "Macht Sicherheits- und Governance-Regeln fuer alle externen Integrationen sichtbar.",
+        "localData": "PII bleibt lokal; externe Zielsysteme erhalten nur freigegebene non-PII Anteile.",
+        "optionalServices": "Alle externen Services sind optional und einzeln steuerbar."
+      },
+      "apIds": [
+        "2.05",
+        "2.06",
+        "2.09"
+      ]
+    },
+    {
+      "id": "ap-207",
+      "viewModeId": "rwth-aps",
+      "label": "AP 2.07 - Lernplattform",
+      "description": "Zeigt, wie Moodle, LTI und lokale Publishing-Pfade die Integration in die Lernplattform abdecken.",
+      "storySteps": [
+        "Moodle bleibt der primaere Nutzungskontext fuer Lehrende und Studierende.",
+        "LTI Interface, Course UI und Author UI binden neue Funktionen ohne Systembruch ein.",
+        "Lokale Publishing-Pfade spielen Ergebnisse kontrolliert zurueck in den Kurs."
+      ],
+      "inspectorSummary": {
+        "whatHappens": "Die Plattformintegration wird ueber Moodle, LTI und Publishing als zusammenhaengende Kette sichtbar.",
+        "whyRelevant": "Zeigt klar, dass kein Parallel-System aufgebaut wird.",
+        "localData": "Kurs- und Rollen-Kontext bleiben im SDG-Campus und im lokalen Kern.",
+        "optionalServices": "Die Kernintegration funktioniert ohne externe Pflichtkomponenten."
+      },
+      "apFocusId": "2.07",
+      "apIds": [
+        "2.07"
+      ]
+    },
+    {
+      "id": "ap-208",
+      "viewModeId": "rwth-aps",
+      "label": "AP 2.08 - Kurserstellung",
+      "description": "Zeigt die Abdeckung der KI-unterstuetzten Kurserstellung durch Authoring, lokalen RAG-Kontext, Medienbasis und Freigabe.",
+      "storySteps": [
+        "Lehrende arbeiten ueber Author UI und AI Authoring Studio (AAS) im bestehenden Kurskontext.",
+        "Quellen, Medien sowie Lernziele und Aufgaben werden lokal ueber Learning Resource Store (LRS), Asset & Media Library (AML) und Content & Competence Store (CCS) zusammengefuehrt.",
+        "QA/Freigabe und Publishing schliessen den Weg bis in Moodle kontrolliert ab; optionale Spezialmedien koennen ueber US/Global-Frontier-Modelle erzeugt werden."
+      ],
+      "inspectorSummary": {
+        "whatHappens": "AP 2.08 verbindet Autorenworkflow, Inhaltsbasis und Freigabe zu einer lokalen Produktkette.",
+        "whyRelevant": "Macht den Mehrwert fuer Lehrende und die technische Umsetzbarkeit sofort greifbar.",
+        "localData": "Inhalte und Governance bleiben im lokalen Kern steuerbar.",
+        "optionalServices": "Mehrsprachigkeits- und Frontier-Services fuer Bild-, Asset- oder Spezialmedien koennen optional andocken, sind aber nicht Voraussetzung."
+      },
+      "apFocusId": "2.08",
+      "apIds": [
+        "2.08"
+      ]
+    },
+    {
+      "id": "ap-204",
+      "viewModeId": "rwth-aps",
+      "label": "AP 2.04 - Analyse & Feedback",
+      "description": "Zeigt, wie lokale Lerndaten in SKIS und die Learning Insight Engine (LIE) die Analyse- und Feedbackfaehigkeit abdecken.",
+      "storySteps": [
+        "Lernaktivitaeten aus Moodle laufen als PII in das lokale SKIS.",
+        "Die Learning Insight Engine (LIE) verarbeitet diese Signale ausschliesslich im DE/On-Prem Kern.",
+        "Feedback und Auswertung bleiben damit datenschutzfest und technisch nachvollziehbar."
+      ],
+      "inspectorSummary": {
+        "whatHappens": "AP 2.04 wird ueber lokale Datenerfassung, Analyse und Rueckspiegelung an die Lernlogik abgedeckt.",
+        "whyRelevant": "Belegt die Analysefaehigkeit ohne PII-Abfluss nach aussen.",
+        "localData": "PII verbleibt komplett im lokalen SKIS- und Insights-Pfad.",
+        "optionalServices": "Externe Services sind fuer den Analysekern nicht erforderlich."
+      },
+      "apFocusId": "2.04",
+      "apIds": [
+        "2.04"
+      ]
+    },
+    {
+      "id": "ap-203",
+      "viewModeId": "rwth-aps",
+      "label": "AP 2.03 - Lernpfade",
+      "description": "Zeigt die Systemabdeckung fuer adaptive Lernpfade durch Adaptive Pathway Engine (APE), SKIS, Content & Competence Store (CCS) und Insights Sync.",
+      "storySteps": [
+        "Der Content & Competence Store (CCS) liefert Kompetenz- und Inhaltsstruktur fuer Lernpfade.",
+        "SKIS und Insights Sync speisen lokalen Studenten-Kontext in die Adaptive Pathway Engine (APE) ein.",
+        "Workflow-gesteuertes Routing haelt auch spaetere externe Entscheidungen kontrollierbar."
+      ],
+      "inspectorSummary": {
+        "whatHappens": "AP 2.03 koppelt Inhaltsmodell, Lernsignale und Pfadlogik zu einem lokalen Personalisierungsbaustein.",
+        "whyRelevant": "Zeigt, dass Adaptivitaet aus dem Kernsystem heraus entsteht und nicht aus einer Black Box.",
+        "localData": "PII-nahe Signale bleiben im lokalen Sync zwischen LIE und APE.",
+        "optionalServices": "Externe Erweiterungen sind nur optional fuer spaetere Ausbaustufen relevant."
+      },
+      "apFocusId": "2.03",
+      "apIds": [
+        "2.03"
+      ]
+    },
+    {
+      "id": "ap-205",
+      "viewModeId": "rwth-aps",
+      "label": "AP 2.05 - KI-Tutor",
+      "description": "Zeigt, wie Learning Companion Tutor (LCT), SKIS und die LMS AI Workflow Engine den KI-Tutor abdecken.",
+      "storySteps": [
+        "Der Learning Companion Tutor (LCT) arbeitet im Kurskontext mit kuratiertem Content aus dem Core.",
+        "Jeder weiterfuehrende KI-Request wird zuerst ueber die LMS AI Workflow Engine bewertet.",
+        "Externe Inferenz oder Uebersetzung bleiben optional und non-PII."
+      ],
+      "inspectorSummary": {
+        "whatHappens": "AP 2.05 verbindet lokalen Tutor-Kontext mit workflow-gesteuerter KI-Nutzung.",
+        "whyRelevant": "Zeigt Innovation, ohne Datenschutz und Governance preiszugeben.",
+        "localData": "Tutor-nahe Lernkontexte bleiben lokal; externe Pfade arbeiten nur mit freigegebenen non-PII Anteilen.",
+        "optionalServices": "OpenAI Germany, OpenAI Enterprise, Mistral-AI und Eleven Labs sind einzeln zuschaltbar."
+      },
+      "apFocusId": "2.05",
+      "apIds": [
+        "2.05"
+      ]
+    },
+    {
+      "id": "ap-206",
+      "viewModeId": "rwth-aps",
+      "label": "AP 2.06 - Mehrsprachigkeit",
+      "description": "Zeigt die Abdeckung von Mehrsprachigkeit durch EU-gehostete Batch-Lokalisierung und Runtime-Uebersetzung.",
+      "storySteps": [
+        "Nicht-personenbezogene Inhalte und Authoring-Ergebnisse koennen optional ueber Mistral-AI lokalisiert werden.",
+        "Der Learning Companion Tutor (LCT) kann Antworten optional ueber OpenAI Enterprise in der EU-Zone uebersetzen.",
+        "Beide Pfade bleiben klar als optionale non-PII Services markiert."
+      ],
+      "inspectorSummary": {
+        "whatHappens": "AP 2.06 wird ueber zwei kontrollierte Sprachpfade fuer Content und Laufzeitdialog abgedeckt.",
+        "whyRelevant": "Zeigt Erweiterungsfaehigkeit fuer internationale Nutzung ohne Architekturbruch.",
+        "localData": "Die Ausgangsdaten bleiben klassifiziert; nur freigegebene non-PII Inhalte duerfen in externe Sprachdienste.",
+        "optionalServices": "Die Mehrsprachigkeitsbausteine sind bewusst modular und abschaltbar."
+      },
+      "apFocusId": "2.06",
+      "apIds": [
+        "2.06"
+      ]
+    },
+    {
+      "id": "ap-209",
+      "viewModeId": "rwth-aps",
+      "label": "AP 2.09 - Governance",
+      "description": "Zeigt die Abdeckung von Governance, Ethik und Handreichungen durch LMS AI Workflow Engine, QA/Freigabe und kontrollierte externe Pfade.",
+      "storySteps": [
+        "Die LMS AI Workflow Engine bildet die zentrale Durchsetzungs- und Logging-Stelle.",
+        "QA/Freigabe sichert Nachvollziehbarkeit und menschliche Kontrolle.",
+        "Auch optionale EU- und US/Global-Frontier-Pfade bleiben dadurch regelbasiert, abschaltbar und dokumentierbar."
+      ],
+      "inspectorSummary": {
+        "whatHappens": "AP 2.09 spannt Governance ueber lokale Kernprozesse und optionale externe Requests.",
+        "whyRelevant": "Macht Ethik, Kontrolle und technische Nachweisbarkeit als Systemfunktion sichtbar.",
+        "localData": "PII bleibt lokal; Governance entscheidet ueber alle Grenzueberschreitungen.",
+        "optionalServices": "Externe Services einschliesslich US/Global-Frontier-Modelle erscheinen nur als kontrollierte, policy-gebundene Ausnahmen."
+      },
+      "apFocusId": "2.09",
+      "apIds": [
+        "2.09"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,298 @@
+{
+  "edges": [
+    {
+      "id": "edge-learner-activity",
+      "source": "moodle-lms",
+      "target": "skis",
+      "label": "Lernaktivitaet / Progress",
+      "dataClass": "pii",
+      "style": "solid",
+      "optional": false,
+      "why": "Lerninteraktionen, Kurshistorie sowie Aufgaben- und Testergebnisse werden lokal im studentischen Kontextsystem konsolidiert.",
+      "policyHint": "PII verbleibt im lokalen DE/On-Prem Kern.",
+      "apIds": [
+        "2.04",
+        "2.07"
+      ]
+    },
+    {
+      "id": "edge-authoring-rag",
+      "source": "lrs",
+      "target": "authoring-studio",
+      "label": "RAG Kontext / Quellen",
+      "dataClass": "non-pii",
+      "style": "solid",
+      "optional": false,
+      "why": "Inputmaterialien und Basismaterialien werden als lokaler RAG-Kontext in das Authoring eingespeist.",
+      "policyHint": "Basismaterial bleibt lokal im DE/On-Prem Kern.",
+      "apIds": [
+        "2.08"
+      ]
+    },
+    {
+      "id": "edge-asset-context",
+      "source": "asset-media-library",
+      "target": "authoring-studio",
+      "label": "Asset Kontext / Medien",
+      "dataClass": "non-pii",
+      "style": "solid",
+      "optional": false,
+      "why": "Lokale Assets und Metadaten stehen dem Authoring fuer wiederverwendbare Kursbausteine bereit.",
+      "policyHint": "Medien und Metadaten bleiben lokal steuerbar.",
+      "apIds": [
+        "2.08",
+        "2.07"
+      ]
+    },
+    {
+      "id": "edge-content-publishing",
+      "source": "authoring-studio",
+      "target": "content-core",
+      "label": "Kursstruktur / Kompetenzmodell",
+      "dataClass": "non-pii",
+      "style": "solid",
+      "optional": false,
+      "why": "Authoring erzeugt strukturierte Inhalte, Lernziele und Aufgaben fuer den zentralen Content & Competence Store (CCS).",
+      "policyHint": "Non-PII Content darf intern weiterverarbeitet werden.",
+      "apIds": [
+        "2.08"
+      ]
+    },
+    {
+      "id": "edge-asset-sync",
+      "source": "authoring-studio",
+      "target": "asset-media-library",
+      "label": "Asset Sync / Medien",
+      "dataClass": "non-pii",
+      "style": "solid",
+      "optional": false,
+      "why": "Im Authoring erzeugte oder verwendete Medien werden lokal versioniert in der Asset & Media Library (AML) abgelegt.",
+      "policyHint": "Medien bleiben lokal und koennen mit Kursen und Kompetenzen verknuepft werden.",
+      "apIds": [
+        "2.08",
+        "2.07"
+      ]
+    },
+    {
+      "id": "edge-publish-to-moodle",
+      "source": "content-core",
+      "target": "moodle-lms",
+      "label": "Kurs-Publishing zu Moodle",
+      "dataClass": "non-pii",
+      "style": "solid",
+      "optional": false,
+      "why": "Freigegebene Inhalte werden aus dem Core in Moodle ausgerollt.",
+      "policyHint": "Transfer bleibt innerhalb SDG-Campus plus DE/On-Prem Architektur.",
+      "apIds": [
+        "2.07",
+        "2.08"
+      ]
+    },
+    {
+      "id": "edge-insights",
+      "source": "skis",
+      "target": "insights-engine",
+      "label": "Lernsignale / Analyse",
+      "dataClass": "pii",
+      "style": "solid",
+      "optional": false,
+      "why": "Der studentische Kontext aus SKIS wird lokal analysiert, um Lernfortschritt, Muster und Feedbacksignale abzuleiten.",
+      "policyHint": "Lokale Verarbeitung im DE/On-Prem Ring.",
+      "apIds": [
+        "2.04"
+      ]
+    },
+    {
+      "id": "edge-pathways",
+      "source": "content-core",
+      "target": "pathway-engine",
+      "label": "Pathways / Kompetenzen",
+      "dataClass": "non-pii",
+      "style": "solid",
+      "optional": false,
+      "why": "Kompetenzmodelle liefern den inhaltlichen Rahmen fuer adaptive Pfade.",
+      "policyHint": "Keine PII im Transfer erforderlich.",
+      "apIds": [
+        "2.03"
+      ]
+    },
+    {
+      "id": "edge-insights-sync",
+      "source": "insights-engine",
+      "target": "pathway-engine",
+      "label": "Insights Sync",
+      "dataClass": "pii",
+      "style": "solid",
+      "optional": false,
+      "why": "Personalisierung benoetigt aktuelle lernendenbezogene Insight-Signale.",
+      "policyHint": "PII bleibt lokal und wird nur intern geteilt.",
+      "apIds": [
+        "2.04",
+        "2.03"
+      ]
+    },
+    {
+      "id": "edge-tutor-content",
+      "source": "content-core",
+      "target": "learning-companion",
+      "label": "Tutor Content",
+      "dataClass": "non-pii",
+      "style": "solid",
+      "optional": false,
+      "why": "Der Tutor erhaelt kuratierte Inhalte als primaeren Antwortkontext.",
+      "policyHint": "Content stammt aus kontrollierter SSOT.",
+      "apIds": [
+        "2.05"
+      ]
+    },
+    {
+      "id": "edge-student-pathway-context",
+      "source": "skis",
+      "target": "pathway-engine",
+      "label": "Student Context / Pathways",
+      "dataClass": "pii",
+      "style": "solid",
+      "optional": false,
+      "why": "Adaptive Lernpfade benoetigen lokalen Studenten-Kontext, Fortschritt und Historie aus SKIS.",
+      "policyHint": "PII bleibt lokal und wird nur intern geteilt.",
+      "apIds": [
+        "2.03",
+        "2.04"
+      ]
+    },
+    {
+      "id": "edge-student-companion-context",
+      "source": "skis",
+      "target": "learning-companion",
+      "label": "Student Context / LCT",
+      "dataClass": "pii",
+      "style": "solid",
+      "optional": false,
+      "why": "Der Learning Companion Tutor (LCT) nutzt lokalen Studenten-Kontext fuer situative, personalisierte Hilfen im Kurs.",
+      "policyHint": "PII bleibt lokal und wird nicht direkt extern weitergereicht.",
+      "apIds": [
+        "2.05",
+        "2.04"
+      ]
+    },
+    {
+      "id": "edge-routing",
+      "source": "learning-companion",
+      "target": "capabilities-cluster",
+      "label": "LCT Routing",
+      "dataClass": "non-pii",
+      "style": "solid",
+      "optional": false,
+      "why": "LCT-Requests laufen in die zentrale Workflow-Schicht, bevor optionale externe Pfade aktiviert werden.",
+      "policyHint": "Die LMS AI Workflow Engine erzwingt Datenklassen-, Logging- und Freigaberegeln.",
+      "apIds": [
+        "2.05",
+        "2.09"
+      ]
+    },
+    {
+      "id": "edge-pathway-routing",
+      "source": "pathway-engine",
+      "target": "capabilities-cluster",
+      "label": "APE Routing",
+      "dataClass": "non-pii",
+      "style": "solid",
+      "optional": false,
+      "why": "Optionale Pathway-Requests werden ueber dieselbe Workflow-Schicht geroutet und nachvollziehbar gehalten.",
+      "policyHint": "Einheitliche Datenklassenpruefung, Enforcement und Logging.",
+      "apIds": [
+        "2.03",
+        "2.09"
+      ]
+    },
+    {
+      "id": "edge-sap-gateway-routing",
+      "source": "capabilities-cluster",
+      "target": "badge-openai-germany",
+      "label": "DE KI-Gateway",
+      "dataClass": "non-pii",
+      "style": "dashed",
+      "optional": true,
+      "why": "Optionaler regionaler KI-Pfad ueber OpenAI Germany Gateway.",
+      "policyHint": "Nur non-PII, ueber die LMS AI Workflow Engine freigegeben und vollstaendig protokolliert.",
+      "apIds": [
+        "2.05",
+        "2.09"
+      ]
+    },
+    {
+      "id": "edge-external-api",
+      "source": "capabilities-cluster",
+      "target": "badge-elevenlabs",
+      "label": "Audio / Voice API",
+      "dataClass": "non-pii",
+      "style": "dashed",
+      "optional": true,
+      "why": "Spezialisierte Audio-, Voice- und Video-Services werden nur mit freigegebenen non-PII Daten angesprochen.",
+      "policyHint": "Optional, abschaltbar und auditierbar.",
+      "apIds": [
+        "2.09"
+      ]
+    },
+    {
+      "id": "edge-model-inference",
+      "source": "capabilities-cluster",
+      "target": "badge-openai-enterprise",
+      "label": "Enterprise LLM",
+      "dataClass": "non-pii",
+      "style": "dashed",
+      "optional": true,
+      "why": "EU-gehostete Enterprise-Inferenz ist nur fuer policy-konforme non-PII Requests vorgesehen.",
+      "policyHint": "PII wird blockiert; nur non-PII darf passieren.",
+      "apIds": [
+        "2.05",
+        "2.09"
+      ]
+    },
+    {
+      "id": "edge-localization",
+      "source": "capabilities-cluster",
+      "target": "badge-mistral-ai",
+      "label": "Lokalisierung / EU Modell",
+      "dataClass": "non-pii",
+      "style": "dashed",
+      "optional": true,
+      "why": "Lokalisierung oder spezialisierte EU-Modellnutzung wird optional ueber die Workflow-Schicht an Mistral-AI geleitet.",
+      "policyHint": "Optionaler EU-Cloud-Pfad mit klarer Datenklasse, Logging und europaeischem Hosting.",
+      "apIds": [
+        "2.06",
+        "2.09"
+      ]
+    },
+    {
+      "id": "edge-frontier-openai",
+      "source": "capabilities-cluster",
+      "target": "badge-openai-frontier",
+      "label": "Frontier Multimodal",
+      "dataClass": "non-pii",
+      "style": "dashed",
+      "optional": true,
+      "why": "Datenschutzunkritische Spezialaufrufe fuer Bild-, Asset- oder multimodale Generierung koennen optional an aktuelle Frontier-Modelle von OpenAI gehen.",
+      "policyHint": "Nur non-PII, nur optional und nur ueber die LMS AI Workflow Engine freigegeben.",
+      "apIds": [
+        "2.08",
+        "2.09"
+      ]
+    },
+    {
+      "id": "edge-frontier-anthropic",
+      "source": "capabilities-cluster",
+      "target": "badge-anthropic",
+      "label": "Frontier Spezial-LLM",
+      "dataClass": "non-pii",
+      "style": "dashed",
+      "optional": true,
+      "why": "Komplexe, datenschutzunkritische Spezialanfragen koennen optional an grosse aktuelle Anthropic-Modelle geroutet werden, wenn DE/EU-Pfade nicht ausreichen.",
+      "policyHint": "Nur non-PII, nur optional und nachvollziehbar ueber die LMS AI Workflow Engine.",
+      "apIds": [
+        "2.08",
+        "2.09"
+      ]
+    }
+  ]
+}

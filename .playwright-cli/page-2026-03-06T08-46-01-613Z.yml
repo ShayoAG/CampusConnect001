@@ -1,0 +1,139 @@
+- generic [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - paragraph [ref=e4]: RWTH CampusConnect
+      - heading "CampusConnect – Zielarchitektur" [level=1] [ref=e5]
+      - paragraph [ref=e6]: Datenschutzfeste KI-Unterstuetzung direkt im Moodle-Oekosystem statt als parallele Inselloesung.
+    - group "Dashboard-Steuerung" [ref=e7]:
+      - generic "Hauptansicht" [ref=e8]:
+        - generic [ref=e9]: Hauptansicht
+        - tablist "Hauptansichten" [ref=e10]:
+          - tab "Architektur-Ebenen" [selected] [ref=e11] [cursor=pointer]
+          - tab "Nutzungsszenarien" [ref=e12] [cursor=pointer]
+          - tab "Sicherheit & Datenfluesse" [ref=e13] [cursor=pointer]
+          - tab "RWTH-APs" [ref=e14] [cursor=pointer]
+      - generic [ref=e15]:
+        - generic [ref=e16]: Ebene
+        - combobox "Ebene" [active] [ref=e17]:
+          - option "Ebene 0 - Ausgangssituation"
+          - option "Ebene 1 - Plattform" [selected]
+          - option "Ebene 2 - Lokaler Kern"
+          - option "Ebene 3 - Optionale Erweiterungen"
+          - option "Ebene 4 - Gesamtbild"
+      - generic "Datenklasse filtern" [ref=e18]:
+        - generic [ref=e19]: Datenklasse
+        - group "Datenklassen-Filter" [ref=e20]:
+          - button "Alle" [ref=e21] [cursor=pointer]
+          - button "Nur PII" [ref=e22] [cursor=pointer]
+          - button "Nur non-PII" [ref=e23] [cursor=pointer]
+      - generic "Schnellaktionen" [ref=e24]:
+        - button "Optionale Services ausblenden" [pressed] [ref=e25] [cursor=pointer]:
+          - img [ref=e26]
+        - button "Dark-Theme aktivieren" [ref=e28] [cursor=pointer]:
+          - img [ref=e29]
+        - button "Ansicht zentrieren" [ref=e31] [cursor=pointer]:
+          - img [ref=e32]
+  - main [ref=e35]:
+    - region "Architekturdiagramm" [ref=e36]:
+      - generic [ref=e39]:
+        - paragraph [ref=e40]: Architektur-Ebenen
+        - heading "Ebene 1 - Plattform" [level=2] [ref=e41]
+        - paragraph [ref=e42]: Fokus auf SDG-Campus / Moodle als Startpunkt.
+      - generic [ref=e43]:
+        - img "CampusConnect Architekturdiagramm" [ref=e44]:
+          - generic [ref=e45]:
+            - generic [ref=e46]:
+              - generic: SDG-Campus / Moodle
+            - generic [ref=e49]:
+              - generic [ref=e51]: "Plattformebene: SDG-Campus /"
+              - generic [ref=e52]: Moodle
+            - generic [ref=e53]:
+              - button "Element Moodle LMS, Zone SDG-Campus / Moodle, Datenklasse system" [ref=e54] [cursor=pointer]:
+                - generic [ref=e56]: Moodle LMS (bestehend)
+                - button "LTI Interface, system" [ref=e57]:
+                  - generic [ref=e59]: LTI Interface
+                - button "Course UI, mixed" [ref=e60]:
+                  - generic [ref=e62]: Course UI
+                - button "Author UI, non-PII" [ref=e63]:
+                  - generic [ref=e65]: Author UI
+              - button "Element Lehrende / Autor:innen, Zone SDG-Campus / Moodle, Datenklasse mixed" [ref=e66] [cursor=pointer]:
+                - generic [ref=e69]: L
+                - generic [ref=e70]: Lehrende
+                - generic [ref=e71]: Akteur
+              - button "Element Studierende, Zone SDG-Campus / Moodle, Datenklasse mixed" [ref=e72] [cursor=pointer]:
+                - generic [ref=e75]: S
+                - generic [ref=e76]: Studierende
+                - generic [ref=e77]: Akteur
+        - generic "Legende":
+          - paragraph: Leseschluessel
+          - generic:
+            - generic: PII / nur lokal
+          - generic:
+            - generic: non-PII / extern erlaubt
+          - generic:
+            - generic: optional / externe Services
+          - generic:
+            - generic: 🛡️
+            - generic: Policy enforced
+          - generic:
+            - generic: Zu entwickelnder Baustein
+          - generic:
+            - generic: Service-Badge (optional)
+          - generic:
+            - generic: Akteur
+        - tooltip
+    - complementary "Inspector" [ref=e78]:
+      - generic [ref=e79]:
+        - heading "Argumente & AP-Bezug" [level=2] [ref=e80]
+        - paragraph [ref=e81]: Nutzen, Datenschutz, Policies und Auftraggeber-APs zur aktuellen Auswahl.
+      - tablist "Inspector Tabs" [ref=e82]:
+        - tab "Info" [selected] [ref=e83] [cursor=pointer]
+        - tab "Datenflüsse" [ref=e84] [cursor=pointer]
+        - tab "Sicherheit & Policies" [ref=e85] [cursor=pointer]
+      - generic [ref=e86]:
+        - generic [ref=e87]:
+          - paragraph [ref=e88]:
+            - strong [ref=e89]: Architektur-Ebenen - Ebene 1 - Plattform
+          - paragraph [ref=e90]: Fokus auf SDG-Campus / Moodle als Startpunkt.
+        - generic [ref=e91]:
+          - heading "Argumentationslinie" [level=3] [ref=e92]
+          - paragraph [ref=e93]: Die Plattformebene zeigt nur den SDG-Campus Kern ohne Zusatzkomplexitaet.
+        - generic [ref=e94]:
+          - heading "AP-Bezug" [level=3] [ref=e95]
+          - paragraph [ref=e96]: Stakeholder sehen sofort, dass kein Parallel-LMS aufgebaut wird.
+        - generic [ref=e97]:
+          - heading "Datenschutzsignal" [level=3] [ref=e98]
+          - paragraph [ref=e99]: Plattformkontext bleibt im Campus-Umfeld.
+        - generic [ref=e100]:
+          - heading "Optionale Erweiterung" [level=3] [ref=e101]
+          - paragraph [ref=e102]: Noch keine externen Services aktiv.
+        - generic [ref=e103]:
+          - heading "In 3 Schritten erklaert" [level=3] [ref=e104]
+          - list [ref=e105]:
+            - listitem [ref=e106]: Moodle bleibt der zentrale Einstiegspunkt fuer alle Rollen.
+            - listitem [ref=e107]: LTI Interface, Course UI und Author UI sind direkt in die Plattform eingebettet.
+            - listitem [ref=e108]: Das minimiert Reibung fuer die Nutzung und Einfuehrung.
+        - generic [ref=e109]:
+          - heading "Leseschluessel" [level=3] [ref=e110]
+          - list [ref=e111]:
+            - listitem [ref=e112]: Plattform-Karte = bestehendes Kernsystem (Moodle).
+            - listitem [ref=e113]: Rechteck = lokaler Architekturbaustein.
+            - listitem [ref=e114]: Akteur-Chip = Rolle im Prozess (Lehrende, Studierende, QS/Betrieb).
+            - listitem [ref=e115]: Service-Badge = optionale externe Erweiterung.
+            - listitem [ref=e116]: Magenta Linie = PII (lokal), Gruen Linie = non-PII.
+        - generic [ref=e117]:
+          - heading "Warum ist das sicher?" [level=3] [ref=e118]
+          - list [ref=e119]:
+            - listitem [ref=e120]: PII bleibt lokal im DE/On-Prem Kern.
+            - listitem [ref=e121]: Externe Aufrufe sind ausschliesslich non-PII und optional.
+            - listitem [ref=e122]: Alle externen Requests laufen ueber die zentrale AI Workflow & Policy Engine.
+            - listitem [ref=e123]: Audit/HITL und Logging sichern Governance und Nachvollziehbarkeit.
+            - listitem [ref=e124]: SDG-Campus und DE/On-Prem bleiben visuell und architektonisch die Haupt-Ebenen.
+        - generic [ref=e125]:
+          - heading "Bezug zu den APs" [level=3] [ref=e126]
+          - paragraph [ref=e127]: Diese Sicht verweist auf die folgenden Arbeitspakete des Auftraggebers.
+          - article [ref=e129]:
+            - generic [ref=e130]:
+              - generic [ref=e131]: AP 2.07
+              - paragraph [ref=e132]: Integration in die Lernplattform
+            - paragraph [ref=e133]: Moodle LMS inkl. LTI Interface, Course UI, Author UI und lokale Integrationspfade
