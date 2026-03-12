@@ -27,8 +27,18 @@
     },
     "edges": {
       "edge-learner-activity": 1,
+      "edge-course-ui-entry": 0.86,
+      "edge-course-ui-context": 0.9,
+      "edge-lti-tutor-request": 0.9,
+      "edge-lti-pathway-request": 0.88,
+      "edge-pathway-course-return": 0.82,
+      "edge-tutor-course-return": 0.84,
+      "edge-author-ui-entry": 0.82,
+      "edge-author-ui-context": 0.84,
+      "edge-lti-authoring-request": 0.88,
       "edge-content-publishing": 0.94,
       "edge-publish-to-moodle": 0.92,
+      "edge-qa-review": 0.82,
       "edge-insights": 0.88,
       "edge-pathways": 0.86,
       "edge-insights-sync": 0.84,
@@ -40,6 +50,8 @@
       "edge-student-companion-context": 0.88,
       "edge-routing": 0.9,
       "edge-pathway-routing": 0.82,
+      "edge-qa-policy-gate": 0.8,
+      "edge-ops-policy-config": 0.78,
       "edge-sap-gateway-routing": 0.62,
       "edge-external-api": 0.54,
       "edge-model-inference": 0.56,
@@ -60,6 +72,10 @@
     {
       "q": "Wie wird Qualitaet gesichert?",
       "a": "Ueber QA/Freigabe, zentrale Policy-Regeln und vollstaendige Nachvollziehbarkeit."
+    },
+    {
+      "q": "Wie funktioniert Mehrsprachigkeit?",
+      "a": "Sprachvarianten werden lokal gespeichert; nur Live-Uebersetzung nutzt optional einen EU-gehosteten non-PII Pfad."
     }
   ],
   "apMappingSummary": [
@@ -76,33 +92,30 @@
     {
       "ap": "2.05",
       "focus": "KI-Tutor / Assistenz",
-      "components": "Learning Companion Tutor (LCT), LMS AI Workflow Engine, SKIS, optionale Modellanbindung"
+      "components": "Learning Companion Tutor (LCT), Course UI / LTI, LMS AI Workflow Engine, SKIS, optionale Modellanbindung"
     },
     {
       "ap": "2.06",
       "focus": "Mehrsprachigkeit",
-      "components": "Mistral-AI, OpenAI Enterprise und workflow-gepruefte Sprachpfade fuer non-PII"
+      "components": "Lokale Sprachvarianten im Content Core, Course UI / Author UI und optionaler OpenAI Enterprise Pfad fuer Live-Uebersetzung"
     },
     {
       "ap": "2.07",
       "focus": "Integration in die Lernplattform",
-      "components": "Moodle LMS inkl. LTI Interface, Course UI, Author UI und lokale Integrationspfade"
+      "components": "Bestehendes Moodle LMS inkl. LTI Interface, Course UI, Author UI und lokale Integrationspfade"
     },
     {
       "ap": "2.08",
       "focus": "KI in der Kurserstellung",
       "components": "AI Authoring Studio (AAS), Learning Resource Store (LRS), Asset & Media Library (AML), Content & Competence Store (CCS), optionale Frontier-Modelle fuer Spezialmedien"
-    },
-    {
-      "ap": "2.09",
-      "focus": "Governance / Ethik / Handreichungen",
-      "components": "LMS AI Workflow Engine, QA/Freigabe, Logging, kontrollierte EU- und US/Global-Ausnahmewege"
     }
   ],
   "securityPrinciples": [
     "PII bleibt lokal im DE/On-Prem Kern.",
+    "Sicherheits- und Datenschutzregeln sind zonenbasiert gestuft: SDG-Campus, DE/On-Prem, EU und US/Global haben unterschiedliche Anforderungen.",
     "Externe Aufrufe sind ausschliesslich non-PII und optional.",
     "Alle externen Requests laufen ueber die zentrale LMS AI Workflow Engine.",
+    "Lokale Sprachvarianten reduzieren wiederholte Laufzeit-Tokens; nur Live-Uebersetzung nutzt optionale EU-Pfade.",
     "QA/Freigabe und Logging sichern Governance und Nachvollziehbarkeit.",
     "SDG-Campus und DE/On-Prem bleiben visuell und architektonisch die Haupt-Ebenen."
   ]

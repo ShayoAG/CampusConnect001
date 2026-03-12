@@ -16,6 +16,144 @@
       ]
     },
     {
+      "id": "edge-course-ui-entry",
+      "source": "actor-students",
+      "target": "embedded-course-ui",
+      "label": "Kursinteraktion",
+      "dataClass": "pii",
+      "style": "solid",
+      "optional": false,
+      "why": "Studierende interagieren im Moodle-Kurs ueber die Course UI; Fragen, Klickpfade und Lernereignisse bleiben zunaechst in der SDG-Zone.",
+      "policyHint": "Kursinteraktion bleibt im Plattformkontext und geht erst ueber LTI kontrolliert weiter.",
+      "apIds": [
+        "2.07",
+        "2.04",
+        "2.05",
+        "2.03"
+      ]
+    },
+    {
+      "id": "edge-course-ui-context",
+      "source": "embedded-course-ui",
+      "target": "embedded-ai-interface",
+      "label": "Course UI / LTI",
+      "dataClass": "pii",
+      "style": "solid",
+      "optional": false,
+      "why": "Die Course UI uebergibt Kurs-, Rollen- und Sitzungskontext ueber das LTI Interface an die lokalen KI-Funktionen.",
+      "policyHint": "PII-nahe Kontexte bleiben im SDG-/DE-Pfad und gehen nicht direkt extern.",
+      "apIds": [
+        "2.07",
+        "2.05",
+        "2.03"
+      ]
+    },
+    {
+      "id": "edge-lti-tutor-request",
+      "source": "embedded-ai-interface",
+      "target": "learning-companion",
+      "label": "Tutor Request",
+      "dataClass": "pii",
+      "style": "solid",
+      "optional": false,
+      "why": "Tutor-Anfragen aus dem Kurs werden ueber LTI in den lokalen Learning Companion Tutor (LCT) geleitet.",
+      "policyHint": "Tutor-Requests bleiben lokal; externe Schritte duerfen nur non-PII und erst nach Workflow-Pruefung sein.",
+      "apIds": [
+        "2.07",
+        "2.05"
+      ]
+    },
+    {
+      "id": "edge-lti-pathway-request",
+      "source": "embedded-ai-interface",
+      "target": "pathway-engine",
+      "label": "Lernpfad Request",
+      "dataClass": "pii",
+      "style": "solid",
+      "optional": false,
+      "why": "Personalisierte Lernpfadempfehlungen werden ueber das LTI Interface im lokalen APE angefragt.",
+      "policyHint": "PII-nahe Lernpfadkontexte bleiben im lokalen Kern.",
+      "apIds": [
+        "2.07",
+        "2.03"
+      ]
+    },
+    {
+      "id": "edge-pathway-course-return",
+      "source": "pathway-engine",
+      "target": "embedded-course-ui",
+      "label": "Pfad-Empfehlung",
+      "dataClass": "pii",
+      "style": "solid",
+      "optional": false,
+      "why": "Empfohlene Lernpfade werden aus dem lokalen APE zurueck in die Course UI gespiegelt.",
+      "policyHint": "Personalisierte Empfehlungen bleiben im lokalen Lernkontext.",
+      "apIds": [
+        "2.03",
+        "2.07"
+      ]
+    },
+    {
+      "id": "edge-tutor-course-return",
+      "source": "learning-companion",
+      "target": "embedded-course-ui",
+      "label": "Tutor Antwort",
+      "dataClass": "pii",
+      "style": "solid",
+      "optional": false,
+      "why": "Tutor-Hinweise und Erklaerungen fliessen in die Course UI zurueck.",
+      "policyHint": "Antworten bleiben im lokalen Lernkontext; externe Generierung ist nur optional und non-PII.",
+      "apIds": [
+        "2.05",
+        "2.07"
+      ]
+    },
+    {
+      "id": "edge-author-ui-entry",
+      "source": "actor-authors",
+      "target": "embedded-author-ui",
+      "label": "Authoring Start",
+      "dataClass": "non-pii",
+      "style": "solid",
+      "optional": false,
+      "why": "Lehrende starten Kurserstellung im vertrauten Moodle-Kontext ueber die Author UI.",
+      "policyHint": "Didaktische und strukturelle Arbeit startet in der Plattform und bleibt lokal integrierbar.",
+      "apIds": [
+        "2.07",
+        "2.08"
+      ]
+    },
+    {
+      "id": "edge-author-ui-context",
+      "source": "embedded-author-ui",
+      "target": "embedded-ai-interface",
+      "label": "Author UI / LTI",
+      "dataClass": "non-pii",
+      "style": "solid",
+      "optional": false,
+      "why": "Die Author UI uebergibt Kurs- und Rollen-Kontext ueber das LTI Interface an die lokalen Authoring-Funktionen.",
+      "policyHint": "Kontext verbleibt im SDG- und DE/On-Prem Rahmen.",
+      "apIds": [
+        "2.07",
+        "2.08"
+      ]
+    },
+    {
+      "id": "edge-lti-authoring-request",
+      "source": "embedded-ai-interface",
+      "target": "authoring-studio",
+      "label": "Authoring Request",
+      "dataClass": "non-pii",
+      "style": "solid",
+      "optional": false,
+      "why": "Authoring-Auftraege werden ueber das LTI Interface an das lokale AI Authoring Studio (AAS) weitergereicht.",
+      "policyHint": "Authoring bleibt lokal; externe Spezialpfade sind optional und separat policy-gesteuert.",
+      "apIds": [
+        "2.07",
+        "2.08"
+      ]
+    },
+    {
       "id": "edge-authoring-rag",
       "source": "lrs",
       "target": "authoring-studio",
@@ -85,6 +223,20 @@
       "policyHint": "Transfer bleibt innerhalb SDG-Campus plus DE/On-Prem Architektur.",
       "apIds": [
         "2.07",
+        "2.08"
+      ]
+    },
+    {
+      "id": "edge-qa-review",
+      "source": "content-core",
+      "target": "actor-qa",
+      "label": "QA / Freigabe",
+      "dataClass": "non-pii",
+      "style": "solid",
+      "optional": false,
+      "why": "Freigabefaehige Kursstrukturen und Bewertungslogiken koennen vor dem Publishing durch QA/Freigabe geprueft werden.",
+      "policyHint": "Human-in-the-Loop ist Teil des lokalen Freigabepfads.",
+      "apIds": [
         "2.08"
       ]
     },
@@ -186,8 +338,7 @@
       "why": "LCT-Requests laufen in die zentrale Workflow-Schicht, bevor optionale externe Pfade aktiviert werden.",
       "policyHint": "Die LMS AI Workflow Engine erzwingt Datenklassen-, Logging- und Freigaberegeln.",
       "apIds": [
-        "2.05",
-        "2.09"
+        "2.05"
       ]
     },
     {
@@ -201,8 +352,35 @@
       "why": "Optionale Pathway-Requests werden ueber dieselbe Workflow-Schicht geroutet und nachvollziehbar gehalten.",
       "policyHint": "Einheitliche Datenklassenpruefung, Enforcement und Logging.",
       "apIds": [
-        "2.03",
-        "2.09"
+        "2.03"
+      ]
+    },
+    {
+      "id": "edge-qa-policy-gate",
+      "source": "actor-qa",
+      "target": "capabilities-cluster",
+      "label": "Human in the Loop",
+      "dataClass": "non-pii",
+      "style": "solid",
+      "optional": false,
+      "why": "QA/Freigabe kann kritische KI-Schritte, externe Spezialpfade oder sensible Entscheidungen explizit absichern.",
+      "policyHint": "Menschliche Freigabe ergaenzt technische Policies, Logging und Rollenrechte.",
+      "apIds": [
+        "2.08"
+      ]
+    },
+    {
+      "id": "edge-ops-policy-config",
+      "source": "actor-ops",
+      "target": "capabilities-cluster",
+      "label": "Policy / Betrieb",
+      "dataClass": "non-pii",
+      "style": "solid",
+      "optional": false,
+      "why": "Der Plattformbetrieb steuert Rollen, Konfigurationen und die Aktivierung optionaler Servicepfade.",
+      "policyHint": "Betriebsparameter und Servicefreigaben werden lokal im Rechenzentrum kontrolliert.",
+      "apIds": [
+        "2.07"
       ]
     },
     {
@@ -216,8 +394,7 @@
       "why": "Optionaler regionaler KI-Pfad ueber OpenAI Germany Gateway.",
       "policyHint": "Nur non-PII, ueber die LMS AI Workflow Engine freigegeben und vollstaendig protokolliert.",
       "apIds": [
-        "2.05",
-        "2.09"
+        "2.05"
       ]
     },
     {
@@ -228,10 +405,10 @@
       "dataClass": "non-pii",
       "style": "dashed",
       "optional": true,
-      "why": "Spezialisierte Audio-, Voice- und Video-Services werden nur mit freigegebenen non-PII Daten angesprochen.",
+      "why": "Spezialisierte Audio-, Voice-, Live-Transkriptions- oder Video-Services werden nur mit freigegebenen non-PII Daten angesprochen.",
       "policyHint": "Optional, abschaltbar und auditierbar.",
       "apIds": [
-        "2.09"
+        "2.06"
       ]
     },
     {
@@ -242,11 +419,11 @@
       "dataClass": "non-pii",
       "style": "dashed",
       "optional": true,
-      "why": "EU-gehostete Enterprise-Inferenz ist nur fuer policy-konforme non-PII Requests vorgesehen.",
+      "why": "EU-gehostete Enterprise-Inferenz ist fuer policy-konforme non-PII Requests wie Live-Uebersetzung oder komplexe Tutor-Dialoge vorgesehen.",
       "policyHint": "PII wird blockiert; nur non-PII darf passieren.",
       "apIds": [
         "2.05",
-        "2.09"
+        "2.06"
       ]
     },
     {
@@ -257,11 +434,10 @@
       "dataClass": "non-pii",
       "style": "dashed",
       "optional": true,
-      "why": "Lokalisierung oder spezialisierte EU-Modellnutzung wird optional ueber die Workflow-Schicht an Mistral-AI geleitet.",
+      "why": "Zusaetzliche Lokalisierung oder spezialisierte EU-Modellnutzung wird optional ueber die Workflow-Schicht an Mistral-AI geleitet.",
       "policyHint": "Optionaler EU-Cloud-Pfad mit klarer Datenklasse, Logging und europaeischem Hosting.",
       "apIds": [
-        "2.06",
-        "2.09"
+        "2.06"
       ]
     },
     {
@@ -275,8 +451,7 @@
       "why": "Datenschutzunkritische Spezialaufrufe fuer Bild-, Asset- oder multimodale Generierung koennen optional an aktuelle Frontier-Modelle von OpenAI gehen.",
       "policyHint": "Nur non-PII, nur optional und nur ueber die LMS AI Workflow Engine freigegeben.",
       "apIds": [
-        "2.08",
-        "2.09"
+        "2.08"
       ]
     },
     {
@@ -290,8 +465,7 @@
       "why": "Komplexe, datenschutzunkritische Spezialanfragen koennen optional an grosse aktuelle Anthropic-Modelle geroutet werden, wenn DE/EU-Pfade nicht ausreichen.",
       "policyHint": "Nur non-PII, nur optional und nachvollziehbar ueber die LMS AI Workflow Engine.",
       "apIds": [
-        "2.08",
-        "2.09"
+        "2.08"
       ]
     }
   ]

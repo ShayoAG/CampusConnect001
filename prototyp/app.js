@@ -506,6 +506,7 @@ class ArchitectureDashboard {
     }
 
     return (
+      this.state.viewMode === 'usage-scenarios' ||
       this.state.activeTab === 'flows' ||
       this.state.viewMode === 'security-flows' ||
       this.state.viewMode === 'rwth-aps'
@@ -802,14 +803,54 @@ class ArchitectureDashboard {
       });
     }
 
-    const visibleNodeIds = new Set(visibleNodes.map((node) => node.id));
+    const highlightedEdgeIds = new Set(scenario?.edgeIds || []);
+    const scenarioRelevantNodeIds = new Set(scenario?.nodeIds || []);
+    const scenarioDimmingEnabled = scenario?.id !== 'overview-main' && !scenario?.disableDimming;
+    const shouldDimByScenario =
+      scenarioDimmingEnabled &&
+      (highlightedEdgeIds.size > 0 || scenarioRelevantNodeIds.size > 0);
+
+    const nodeModels = visibleNodes.map((node) => {
+      const nodeData = { ...node, ...(nodeOverrides[node.id] || {}) };
+      const narrativeWeight = this.getNarrativeWeight(nodeData);
+      const byNarrative = !(scenario?.id === 'overview-main' && narrativeWeight < 0.52);
+
+      return {
+        ...nodeData,
+        visualType: this.getNodeVisualType(nodeData),
+        bounds: this.getNodeBounds(nodeData),
+        zoneViolation: false,
+        isDimmed: !byNarrative,
+        narrativeWeight,
+      };
+    });
+
+    const resolvedNodes = this.resolveNodeOverlaps(nodeModels, groupByNode, ringById);
+    const resolvedNodeMap = new Map(resolvedNodes.map((node) => [node.id, node]));
+    const resolvedNodeIdSet = new Set(resolvedNodes.map((node) => node.id));
+
+    const embeddedModels = (this.data.embeddedNodes || [])
+      .filter((item) => {
+        if (item.scenarios?.length && !item.scenarios.includes(scenario?.id)) return false;
+        if (hiddenEmbeddedIds?.has(item.id)) return false;
+        if (!resolvedNodeIdSet.has(item.parentNodeId)) return false;
+        if (scopedZoneIds && !scopedZoneIds.has(item.zone)) return false;
+        return true;
+      })
+      .map((item) => ({
+        ...item,
+        bounds: this.getEmbeddedBounds(item, resolvedNodeMap.get(item.parentNodeId)),
+      }));
+
+    const visibleNodeIds = new Set(resolvedNodes.map((node) => node.id));
     const visibleGroupIds = new Set(groupModels.map((group) => group.id));
+    const visibleEmbeddedIds = new Set(embeddedModels.map((item) => item.id));
 
     let baseEdges = this.getEnabledItems(this.data.edges).filter(
       (edge) =>
         (this.state.showOptional || !edge.optional) &&
-        (visibleNodeIds.has(edge.source) || visibleGroupIds.has(edge.source)) &&
-        (visibleNodeIds.has(edge.target) || visibleGroupIds.has(edge.target))
+        (visibleNodeIds.has(edge.source) || visibleGroupIds.has(edge.source) || visibleEmbeddedIds.has(edge.source)) &&
+        (visibleNodeIds.has(edge.target) || visibleGroupIds.has(edge.target) || visibleEmbeddedIds.has(edge.target))
     );
 
     if (scopedEdgeIds) {
@@ -820,13 +861,6 @@ class ArchitectureDashboard {
       (edge) => this.state.filter === 'all' || edge.dataClass === this.state.filter
     );
 
-    const highlightedEdgeIds = new Set(scenario?.edgeIds || []);
-    const scenarioRelevantNodeIds = new Set(scenario?.nodeIds || []);
-    const scenarioDimmingEnabled = scenario?.id !== 'overview-main' && !scenario?.disableDimming;
-    const shouldDimByScenario =
-      scenarioDimmingEnabled &&
-      (highlightedEdgeIds.size > 0 || scenarioRelevantNodeIds.size > 0);
-
     if (shouldDimByScenario) {
       filteredEdges.forEach((edge) => {
         if (highlightedEdgeIds.size === 0 || highlightedEdgeIds.has(edge.id)) {
@@ -836,36 +870,26 @@ class ArchitectureDashboard {
       });
     }
 
-    const selectionFocus = this.buildSelectionFocus(filteredEdges, visibleNodes);
+    const selectionFocus = this.buildSelectionFocus(filteredEdges, resolvedNodes);
     const filteredRelevantNodes = new Set();
     filteredEdges.forEach((edge) => {
       filteredRelevantNodes.add(edge.source);
       filteredRelevantNodes.add(edge.target);
     });
 
-    const nodeModels = visibleNodes.map((node) => {
-      const nodeData = { ...node, ...(nodeOverrides[node.id] || {}) };
-      const byFilter = this.isNodeRelevantForFilter(nodeData, filteredRelevantNodes);
-      const byScenario = !shouldDimByScenario || scenarioRelevantNodeIds.has(nodeData.id);
+    const visibleNodeModels = resolvedNodes.map((node) => {
+      const byFilter = this.isNodeRelevantForFilter(node, filteredRelevantNodes);
+      const byScenario = !shouldDimByScenario || scenarioRelevantNodeIds.has(node.id);
       const bySelection =
         !selectionFocus.active ||
-        selectionFocus.nodeIds.has(nodeData.id) ||
-        (this.state.selectedType === 'node' && this.state.selectedId === nodeData.id);
-
-      const narrativeWeight = this.getNarrativeWeight(nodeData);
-      const byNarrative = !(scenario?.id === 'overview-main' && narrativeWeight < 0.52);
+        selectionFocus.nodeIds.has(node.id) ||
+        (this.state.selectedType === 'node' && this.state.selectedId === node.id);
 
       return {
-        ...nodeData,
-        visualType: this.getNodeVisualType(nodeData),
-        bounds: this.getNodeBounds(nodeData),
-        zoneViolation: false,
-        isDimmed: !byFilter || !byScenario || !bySelection || !byNarrative,
-        narrativeWeight,
+        ...node,
+        isDimmed: node.isDimmed || !byFilter || !byScenario || !bySelection,
       };
     });
-
-    const resolvedNodes = this.resolveNodeOverlaps(nodeModels, groupByNode, ringById);
 
     const edgeModels = filteredEdges.map((edge) => {
       const selectionDimmed =
@@ -881,17 +905,6 @@ class ArchitectureDashboard {
       };
     });
 
-    const resolvedNodeIdSet = new Set(resolvedNodes.map((node) => node.id));
-    const embeddedModels = (this.data.embeddedNodes || [])
-      .filter((item) => {
-        if (item.scenarios?.length && !item.scenarios.includes(scenario?.id)) return false;
-        if (hiddenEmbeddedIds?.has(item.id)) return false;
-        if (!resolvedNodeIdSet.has(item.parentNodeId)) return false;
-        if (scopedZoneIds && !scopedZoneIds.has(item.zone)) return false;
-        return true;
-      })
-      .map((item) => ({ ...item }));
-
     const embeddedByParent = new Map();
     embeddedModels.forEach((item) => {
       const list = embeddedByParent.get(item.parentNodeId) || [];
@@ -899,7 +912,7 @@ class ArchitectureDashboard {
       embeddedByParent.set(item.parentNodeId, list);
     });
 
-    const zoneViolations = resolvedNodes.filter(
+    const zoneViolations = visibleNodeModels.filter(
       (node) => node.zoneViolation && !node.allowOutsideZone && node.entityKind !== 'actor' && node.entityKind !== 'service-badge'
     );
 
@@ -909,13 +922,13 @@ class ArchitectureDashboard {
       forceEdgeLabels: this.shouldForceEdgeLabels(),
       rings: ringModels,
       groups: groupModels,
-      nodes: resolvedNodes,
+      nodes: visibleNodeModels,
       edges: edgeModels,
       embeddedNodes: embeddedModels,
       embeddedByParent,
       zoneViolations,
       groupIdSet: new Set(groupModels.map((group) => group.id)),
-      nodeIdSet: new Set(resolvedNodes.map((node) => node.id)),
+      nodeIdSet: new Set(visibleNodeModels.map((node) => node.id)),
       edgeIdSet: new Set(edgeModels.map((edge) => edge.id)),
       embeddedIdSet: new Set(embeddedModels.map((item) => item.id)),
     };
@@ -962,13 +975,13 @@ class ArchitectureDashboard {
       return focus;
     }
 
-    if (this.state.selectedType !== 'node') return focus;
+    if (this.state.selectedType !== 'node' && this.state.selectedType !== 'embedded') return focus;
 
     const selected = this.getEntityById(this.state.selectedId);
     if (!selected) return focus;
 
     focus.active = true;
-    focus.nodeIds.add(selected.id);
+    this.addFocusEntity(selected.id, focus);
 
     if (selected.visualType === 'actor') {
       (selected.touchNodeIds || []).forEach((nodeId) => this.addFocusEntity(nodeId, focus));
@@ -993,8 +1006,19 @@ class ArchitectureDashboard {
       return focus;
     }
 
+    const relatedEntityIds = new Set([selected.id]);
+    if (selected.parentNodeId) {
+      relatedEntityIds.add(selected.parentNodeId);
+    } else {
+      (this.data.embeddedNodes || []).forEach((item) => {
+        if (item.parentNodeId === selected.id) {
+          relatedEntityIds.add(item.id);
+        }
+      });
+    }
+
     edges.forEach((edge) => {
-      if (edge.source === selected.id || edge.target === selected.id) {
+      if (relatedEntityIds.has(edge.source) || relatedEntityIds.has(edge.target)) {
         focus.edgeIds.add(edge.id);
         this.addFocusEntity(edge.source, focus);
         this.addFocusEntity(edge.target, focus);
@@ -1021,6 +1045,12 @@ class ArchitectureDashboard {
     const group = this.getRenderedGroup(entityId);
     if (group) {
       (group.nodeIds || []).forEach((nodeId) => focus.nodeIds.add(nodeId));
+      return;
+    }
+
+    const entity = this.getEntityById(entityId);
+    if (entity?.parentNodeId) {
+      focus.nodeIds.add(entity.parentNodeId);
       return;
     }
 
@@ -1315,6 +1345,9 @@ class ArchitectureDashboard {
 
   renderEdges(model) {
     const entityMap = new Map(model.nodes.map((node) => [node.id, node]));
+    model.embeddedNodes.forEach((item) => {
+      entityMap.set(item.id, item);
+    });
     model.groups.forEach((group) => {
       entityMap.set(group.id, {
         ...group,
@@ -2595,7 +2628,22 @@ class ArchitectureDashboard {
 
   getEdgesForEntityId(entityId) {
     if (!entityId) return [];
-    return Array.from(this.edgesById.values()).filter((edge) => edge.source === entityId || edge.target === entityId);
+    const relatedIds = new Set([entityId]);
+    const entity = this.getEntityById(entityId);
+
+    if (entity?.parentNodeId) {
+      relatedIds.add(entity.parentNodeId);
+    } else {
+      (this.data.embeddedNodes || []).forEach((item) => {
+        if (item.parentNodeId === entityId) {
+          relatedIds.add(item.id);
+        }
+      });
+    }
+
+    return Array.from(this.edgesById.values()).filter(
+      (edge) => relatedIds.has(edge.source) || relatedIds.has(edge.target)
+    );
   }
 
   orderApIds(apIds) {
@@ -2660,7 +2708,14 @@ class ArchitectureDashboard {
   }
 
   getEntityById(id) {
-    return this.nodesById.get(id) || this.actorsById.get(id) || this.serviceBadgesById.get(id) || this.groupsById.get(id) || null;
+    return (
+      this.nodesById.get(id) ||
+      this.actorsById.get(id) ||
+      this.serviceBadgesById.get(id) ||
+      this.embeddedById.get(id) ||
+      this.groupsById.get(id) ||
+      null
+    );
   }
 
   getRenderedNode(nodeId) {
@@ -2756,6 +2811,7 @@ class ArchitectureDashboard {
   renderMoodleShellNode(group, node, model) {
     const embeddedItems = model.embeddedByParent?.get(node.id) || [];
     const embeddedById = new Map(embeddedItems.map((item) => [item.id, item]));
+    const embeddedLayout = this.getMoodleShellEmbeddedLayout(node);
     const padX = 16;
     const top = 16;
 
@@ -2814,13 +2870,9 @@ class ArchitectureDashboard {
     });
     group.appendChild(logo);
 
-    const ltiX = padX;
-    const ltiY = logoY + logoHeight + 10;
-    const ltiWidth = node.bounds.width - padX * 2;
-    const ltiHeight = Math.max(120, node.bounds.height - ltiY - 16);
-
     const ltiItem = embeddedById.get('embedded-ai-interface');
-    if (!ltiItem) {
+    const ltiFrame = embeddedLayout['embedded-ai-interface'];
+    if (!ltiItem || !ltiFrame) {
       return;
     }
 
@@ -2832,10 +2884,10 @@ class ArchitectureDashboard {
     ltiGroup.appendChild(
       this.createSvgElement('rect', {
         class: 'node-inner-lti',
-        x: ltiX,
-        y: ltiY,
-        width: ltiWidth,
-        height: ltiHeight,
+        x: ltiFrame.x,
+        y: ltiFrame.y,
+        width: ltiFrame.width,
+        height: ltiFrame.height,
         rx: 14,
         ry: 14,
       })
@@ -2843,28 +2895,22 @@ class ArchitectureDashboard {
 
     const ltiTitle = this.createSvgElement('text', {
       class: 'node-inner-title',
-      x: ltiX + ltiWidth / 2,
-      y: ltiY + 23,
+      x: ltiFrame.x + ltiFrame.width / 2,
+      y: ltiFrame.y + 23,
     });
     ltiTitle.textContent = 'LTI Interface';
     ltiGroup.appendChild(ltiTitle);
     group.appendChild(ltiGroup);
 
-    const badgeInnerPad = 10;
-    const badgeWidth = ltiWidth - badgeInnerPad * 2;
-    const badgeHeight = 30;
-    const badgeGap = 8;
-    const firstBadgeY = ltiY + 30;
     const badges = [
       { id: 'embedded-course-ui', label: 'Course UI', className: 'course' },
       { id: 'embedded-author-ui', label: 'Author UI', className: 'author' },
     ];
 
-    badges.forEach((badge, index) => {
-      const badgeX = ltiX + badgeInnerPad;
-      const badgeY = firstBadgeY + index * (badgeHeight + badgeGap);
+    badges.forEach((badge) => {
       const item = embeddedById.get(badge.id);
-      if (!item) {
+      const badgeFrame = embeddedLayout[badge.id];
+      if (!item || !badgeFrame) {
         return;
       }
       const badgeGroup = this.createEmbeddedInteractiveGroup(
@@ -2875,10 +2921,10 @@ class ArchitectureDashboard {
       badgeGroup.appendChild(
         this.createSvgElement('rect', {
           class: `node-ui-badge ${badge.className}`,
-          x: badgeX,
-          y: badgeY,
-          width: badgeWidth,
-          height: badgeHeight,
+          x: badgeFrame.x,
+          y: badgeFrame.y,
+          width: badgeFrame.width,
+          height: badgeFrame.height,
           rx: 9,
           ry: 9,
         })
@@ -2886,13 +2932,103 @@ class ArchitectureDashboard {
 
       const badgeText = this.createSvgElement('text', {
         class: 'node-ui-badge-text',
-        x: badgeX + badgeWidth / 2,
-        y: badgeY + 19.2,
+        x: badgeFrame.x + badgeFrame.width / 2,
+        y: badgeFrame.y + 19.2,
       });
       badgeText.textContent = badge.label;
       badgeGroup.appendChild(badgeText);
       group.appendChild(badgeGroup);
     });
+  }
+
+  getMoodleShellEmbeddedLayout(node) {
+    const padX = 16;
+    const top = 16;
+    const hasSecondaryLogo = Boolean(node.secondaryLogoSrc);
+    const logoGap = hasSecondaryLogo ? 10 : 0;
+    const availableLogoWidth = Math.min(206, node.bounds.width - padX * 2);
+    const primaryAspectRatio = node.logoAspectRatio || 3.94;
+    const secondaryAspectRatio = node.secondaryLogoAspectRatio || 4.11;
+    let logoHeight = hasSecondaryLogo ? 26 : 54;
+    let primaryLogoWidth = logoHeight * primaryAspectRatio;
+    let secondaryLogoWidth = hasSecondaryLogo ? logoHeight * secondaryAspectRatio : 0;
+    const totalLogoWidth = primaryLogoWidth + secondaryLogoWidth + logoGap;
+
+    if (totalLogoWidth > availableLogoWidth) {
+      const scale = availableLogoWidth / totalLogoWidth;
+      logoHeight *= scale;
+      primaryLogoWidth *= scale;
+      secondaryLogoWidth *= scale;
+    }
+
+    const logoY = top + 24;
+    const ltiX = padX;
+    const ltiY = logoY + logoHeight + 10;
+    const ltiWidth = node.bounds.width - padX * 2;
+    const ltiHeight = Math.max(120, node.bounds.height - ltiY - 16);
+    const badgeInnerPad = 10;
+    const badgeWidth = ltiWidth - badgeInnerPad * 2;
+    const badgeHeight = 30;
+    const badgeGap = 8;
+    const firstBadgeY = ltiY + 30;
+
+    return {
+      'embedded-ai-interface': {
+        x: ltiX,
+        y: ltiY,
+        width: ltiWidth,
+        height: ltiHeight,
+      },
+      'embedded-course-ui': {
+        x: ltiX + badgeInnerPad,
+        y: firstBadgeY,
+        width: badgeWidth,
+        height: badgeHeight,
+      },
+      'embedded-author-ui': {
+        x: ltiX + badgeInnerPad,
+        y: firstBadgeY + badgeHeight + badgeGap,
+        width: badgeWidth,
+        height: badgeHeight,
+      },
+    };
+  }
+
+  getEmbeddedBounds(item, parentNode) {
+    if (!item || !parentNode) {
+      return {
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        cx: 0,
+        cy: 0,
+      };
+    }
+
+    const localBounds = this.getMoodleShellEmbeddedLayout(parentNode)[item.id];
+    if (!localBounds) {
+      return {
+        x: parentNode.bounds.x,
+        y: parentNode.bounds.y,
+        width: 0,
+        height: 0,
+        cx: parentNode.bounds.cx,
+        cy: parentNode.bounds.cy,
+      };
+    }
+
+    const x = parentNode.bounds.x + localBounds.x;
+    const y = parentNode.bounds.y + localBounds.y;
+
+    return {
+      x,
+      y,
+      width: localBounds.width,
+      height: localBounds.height,
+      cx: x + localBounds.width / 2,
+      cy: y + localBounds.height / 2,
+    };
   }
 
   createEmbeddedInteractiveGroup(item, fallbackLabel, fallbackTooltip) {

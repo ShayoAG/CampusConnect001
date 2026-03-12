@@ -55,6 +55,7 @@
       ],
       "apIds": [
         "2.07",
+        "2.06",
         "2.05",
         "2.03"
       ]
@@ -84,6 +85,7 @@
       ],
       "apIds": [
         "2.07",
+        "2.06",
         "2.08"
       ]
     }
@@ -171,7 +173,7 @@
       "y": 501,
       "width": 208,
       "height": 68,
-      "shortDescription": "Strukturierter Store fuer Lernziele, Punktesysteme, Kurseinheiten und Aufgaben als Basis der Kompetenzbildung.",
+      "shortDescription": "Strukturierter Store fuer Lernziele, Punktesysteme, Kurseinheiten, Aufgaben und lokale Sprachvarianten als Basis der Kompetenzbildung.",
       "purpose": [
         "Didaktische Kurslogik und Kompetenzbasis zentral halten",
         "Lernziele, Aufgaben und Bewertungsschemata konsistent versionieren",
@@ -180,16 +182,23 @@
       "inputs": [
         "Strukturierte Authoring-Outputs",
         "Kompetenzmodelle und Lernzieldefinitionen",
-        "Freigegebene Lokalisierungsartefakte"
+        "Freigegebene Lokalisierungsartefakte",
+        "Lokale Sprachvarianten fuer mehrsprachige Kurse"
       ],
       "outputs": [
         "Tutor Content",
         "Pathway- und Kompetenzdaten",
-        "Kurs-Publishing zu Moodle"
+        "Kurs-Publishing zu Moodle",
+        "Lokale Sprachvarianten fuer Course UI und Tutor"
       ],
       "securityNotes": [
         "Strukturdaten sind primaer non-PII und bleiben lokal versioniert.",
+        "Sprachvarianten koennen lokal persistiert und wiederverwendet werden, um Laufzeit-Token zu sparen.",
         "Freigaben koennen ueber QA/Freigabe abgesichert werden."
+      ],
+      "apIds": [
+        "2.06",
+        "2.08"
       ],
       "apMapping": "AP 2.08 - Grundlage fuer Authoring, Tutor und Pathways"
     },
@@ -292,6 +301,10 @@
         "Standardmaessig non-PII.",
         "Quellenmaterial und Medien bleiben im lokalen Kern und koennen ueber QA/Freigabe abgesichert werden."
       ],
+      "apIds": [
+        "2.06",
+        "2.08"
+      ],
       "apMapping": "AP 2.08 - KI-gestuetztes Authoring"
     },
     {
@@ -380,6 +393,10 @@
         "Mixed-Datenklasse durch Lernkontext.",
         "Keine externen Calls ohne Freigabe durch die orchestrierende Workflow-Ebene."
       ],
+      "apIds": [
+        "2.05",
+        "2.06"
+      ],
       "apMapping": "AP 2.05 - KI-Tutor im Lernkontext"
     }
   ],
@@ -421,6 +438,8 @@
       ],
       "systemsTouched": [
         "Moodle LMS",
+        "Author UI",
+        "LTI Interface",
         "AI Authoring Studio (AAS)",
         "Learning Resource Store (LRS)",
         "Asset & Media Library (AML)",
@@ -434,12 +453,15 @@
         "Freigaben koennen ueber QA/Freigabe abgesichert werden."
       ],
       "flowEdgeIds": [
+        "edge-author-ui-entry",
+        "edge-author-ui-context",
+        "edge-lti-authoring-request",
         "edge-authoring-rag",
         "edge-asset-context",
         "edge-content-publishing",
         "edge-asset-sync",
         "edge-publish-to-moodle",
-        "edge-localization",
+        "edge-qa-review",
         "edge-frontier-openai",
         "edge-frontier-anthropic"
       ],
@@ -498,6 +520,8 @@
       ],
       "systemsTouched": [
         "Moodle LMS",
+        "Course UI",
+        "LTI Interface",
         "SKIS",
         "Learning Insight Engine (LIE)",
         "Learning Companion Tutor (LCT)",
@@ -508,10 +532,16 @@
         "Externe Services sehen keine PII."
       ],
       "flowEdgeIds": [
+        "edge-course-ui-entry",
+        "edge-course-ui-context",
+        "edge-lti-tutor-request",
+        "edge-lti-pathway-request",
         "edge-learner-activity",
         "edge-insights",
         "edge-student-pathway-context",
-        "edge-student-companion-context"
+        "edge-student-companion-context",
+        "edge-pathway-course-return",
+        "edge-tutor-course-return"
       ],
       "touchNodeIds": [
         "moodle-lms",
@@ -563,6 +593,7 @@
         "Entscheidungsprotokolle (system)"
       ],
       "systemsTouched": [
+        "Content & Competence Store (CCS)",
         "LMS AI Workflow Engine"
       ],
       "securityNotes": [
@@ -570,9 +601,10 @@
         "Freigaben bleiben nachvollziehbar dokumentiert."
       ],
       "flowEdgeIds": [
+        "edge-qa-review",
+        "edge-qa-policy-gate",
         "edge-routing",
         "edge-pathway-routing",
-        "edge-sap-gateway-routing",
         "edge-frontier-openai",
         "edge-frontier-anthropic"
       ],
@@ -580,7 +612,7 @@
         "capabilities-cluster"
       ],
       "apIds": [
-        "2.09"
+        "2.08"
       ]
     },
     {
@@ -624,6 +656,7 @@
         "Konfiguration folgt Governance-Vorgaben."
       ],
       "flowEdgeIds": [
+        "edge-ops-policy-config",
         "edge-sap-gateway-routing",
         "edge-model-inference",
         "edge-external-api",
@@ -640,7 +673,7 @@
         "badge-anthropic"
       ],
       "apIds": [
-        "2.09"
+        "2.07"
       ]
     }
   ],
@@ -685,8 +718,7 @@
         "relevance": "Zeigt, wie Innovation datenschutzkonform angebunden werden kann."
       },
       "apIds": [
-        "2.05",
-        "2.09"
+        "2.05"
       ]
     },
     {
@@ -726,8 +758,7 @@
       ],
       "apIds": [
         "2.05",
-        "2.06",
-        "2.09"
+        "2.06"
       ]
     },
     {
@@ -766,8 +797,7 @@
         "Keine PII-Weitergabe an externe Verarbeitung."
       ],
       "apIds": [
-        "2.06",
-        "2.09"
+        "2.06"
       ]
     },
     {
@@ -806,8 +836,7 @@
         "Nutzung bleibt optional und auditierbar."
       ],
       "apIds": [
-        "2.05",
-        "2.09"
+        "2.06"
       ]
     },
     {
@@ -847,8 +876,7 @@
         "PII bleibt lokal; der Pfad ist optional, kontrolliert und abschaltbar."
       ],
       "apIds": [
-        "2.08",
-        "2.09"
+        "2.08"
       ]
     },
     {
@@ -888,8 +916,7 @@
         "PII bleibt lokal; der Pfad ist optional, dokumentierbar und abschaltbar."
       ],
       "apIds": [
-        "2.08",
-        "2.09"
+        "2.08"
       ]
     }
   ]

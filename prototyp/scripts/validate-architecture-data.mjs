@@ -86,9 +86,9 @@ const scenarioIds = collectIds(scenarios, 'scenarios');
 const layerIds = collectIds(layers, 'architectureLayers');
 
 const entityIds = new Set();
-for (const id of [...nodeIds.keys(), ...actorIds.keys(), ...badgeIds.keys(), ...groupIds.keys()]) {
+for (const id of [...nodeIds.keys(), ...actorIds.keys(), ...badgeIds.keys(), ...embeddedIds.keys(), ...groupIds.keys()]) {
   if (entityIds.has(id)) {
-    err(`Duplicate entity id across nodes/actors/serviceBadges/groups: '${id}'.`);
+    err(`Duplicate entity id across nodes/actors/serviceBadges/embeddedNodes/groups: '${id}'.`);
   }
   entityIds.add(id);
 }
