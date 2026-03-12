@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap");
+
 @layer skin.tokens {
   :root[data-skin="admin-intelligence"] {
     color-scheme: light dark;
@@ -15,14 +17,14 @@
     --ai-brand-green-contrast: oklch(0.96 0.01 250);
 
     /* Typography */
-    --font-heading: ui-rounded, "Poppins", system-ui, sans-serif;
-    --font-body: ui-sans-serif, "Inter", system-ui, sans-serif;
-    --font-mono: ui-monospace, "Fira Code", SFMono-Regular, Menlo, monospace;
-    --leading: 1.45;
-    --leading-tight: 1.25;
-    --h1: 2rem;
-    --h2: 1.5rem;
-    --h3: 1.125rem;
+    --font-heading: "Manrope", "Avenir Next", "Segoe UI", sans-serif;
+    --font-body: "IBM Plex Sans", "Segoe UI", sans-serif;
+    --font-mono: "IBM Plex Mono", "Fira Code", SFMono-Regular, Menlo, monospace;
+    --leading: 1.52;
+    --leading-tight: 1.18;
+    --h1: 2.1rem;
+    --h2: 1.55rem;
+    --h3: 1.14rem;
     --body: 1rem;
     --small: 0.875rem;
 
@@ -44,8 +46,8 @@
     --gradient-hero: linear-gradient(110deg, var(--ai-brand-green) 0%, var(--ai-brand-magenta) 100%);
     --gradient-soft: linear-gradient(
       110deg,
-      color-mix(in oklch, var(--ai-brand-green) 70%, white 30%),
-      color-mix(in oklch, var(--ai-brand-magenta) 85%, white 15%)
+      color-mix(in oklch, var(--ai-brand-green) 68%, white 32%),
+      color-mix(in oklch, var(--ai-brand-magenta) 82%, white 18%)
     );
     --gradient-progress: var(--gradient-hero);
 
@@ -60,16 +62,16 @@
     --shadow-focus: 0 0 0 3px color-mix(in oklch, var(--focus) 35%, transparent);
 
     /* Radius */
-    --radius-s: 8px;
-    --radius-m: 12px;
-    --radius-l: 16px;
-    --radius-xl: 24px;
+    --radius-s: 10px;
+    --radius-m: 16px;
+    --radius-l: 22px;
+    --radius-xl: 28px;
     --radius-full: 9999px;
 
     /* Shadows */
-    --shadow-s: 0 1px 2px rgba(15, 10, 22, 0.1);
-    --shadow-m: 0 6px 18px rgba(15, 10, 22, 0.16);
-    --shadow-l: 0 12px 32px rgba(15, 10, 22, 0.2);
+    --shadow-s: 0 6px 16px rgba(14, 24, 36, 0.06);
+    --shadow-m: 0 18px 42px rgba(14, 24, 36, 0.1);
+    --shadow-l: 0 28px 64px rgba(14, 24, 36, 0.14);
 
     /* Motion */
     --transition-base: 160ms ease;
@@ -80,8 +82,8 @@
     --bg: oklch(0.99 0.01 250);
     --bg-muted: #f5f3ff;
     --bg-muted: oklch(0.96 0.01 250);
-    --surface: #f1f0fb;
-    --surface: oklch(0.95 0.01 250);
+    --surface: #fdfcff;
+    --surface: oklch(0.99 0.006 250);
     --surface-contrast: #171321;
     --surface-contrast: oklch(0.14 0.02 250);
 

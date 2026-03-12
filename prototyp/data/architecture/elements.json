@@ -1,0 +1,923 @@
+{
+  "serviceNodeIds": [
+    "moodle-lms"
+  ],
+  "embeddedNodes": [
+    {
+      "id": "embedded-ai-interface",
+      "parentNodeId": "moodle-lms",
+      "label": "LTI Interface",
+      "zone": "sdg-campus",
+      "dataClass": "system",
+      "shortDescription": "LTI-basierte Integrationsschicht fuer KI-Funktionen im Moodle-Kontext.",
+      "purpose": [
+        "Moodle-Kontext sicher uebergeben",
+        "AI-Features in die Plattform einbetten"
+      ],
+      "inputs": [
+        "Moodle Kurs-/Sessionkontext",
+        "LTI Launch-Informationen"
+      ],
+      "outputs": [
+        "Course UI Kontexte",
+        "Author UI Kontexte"
+      ],
+      "securityNotes": [
+        "Keine eigenstaendige PII-Speicherung.",
+        "Kommunikation bleibt in der SDG-Zone."
+      ],
+      "apIds": [
+        "2.07"
+      ]
+    },
+    {
+      "id": "embedded-course-ui",
+      "parentNodeId": "moodle-lms",
+      "label": "Course UI",
+      "zone": "sdg-campus",
+      "dataClass": "mixed",
+      "shortDescription": "Lernoberflaeche fuer Studierende innerhalb des Moodle-Kurses.",
+      "purpose": [
+        "Lernaktivitaeten im Kurs ermoeglichen",
+        "Tutor- und Pfadfunktionen nutzerfreundlich bereitstellen"
+      ],
+      "inputs": [
+        "Kurskontext aus LTI Interface",
+        "Kursinhalte aus Moodle"
+      ],
+      "outputs": [
+        "Lerninteraktionen",
+        "Anfragen an CampusConnect-Kernbausteine"
+      ],
+      "securityNotes": [
+        "PII-nahe Nutzungsdaten entstehen lokal.",
+        "Externe Weitergabe nur ueber Policy-Pfade."
+      ],
+      "apIds": [
+        "2.07",
+        "2.06",
+        "2.05",
+        "2.03"
+      ]
+    },
+    {
+      "id": "embedded-author-ui",
+      "parentNodeId": "moodle-lms",
+      "label": "Author UI",
+      "zone": "sdg-campus",
+      "dataClass": "non-pii",
+      "shortDescription": "Autorenoberflaeche fuer KI-unterstuetzte Kurserstellung in Moodle.",
+      "purpose": [
+        "Lehrendenworkflow in Moodle integrieren",
+        "Kurserstellung vereinfachen"
+      ],
+      "inputs": [
+        "Lehrenden-Kontext aus LTI Interface",
+        "Kurs-/Strukturdaten"
+      ],
+      "outputs": [
+        "Authoring-Anfragen",
+        "Inhaltsentwuerfe"
+      ],
+      "securityNotes": [
+        "Fokus auf non-PII Inhaltsarbeit.",
+        "Rechtekontext bleibt in der Plattform."
+      ],
+      "apIds": [
+        "2.07",
+        "2.06",
+        "2.08"
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "moodle-lms",
+      "label": "Moodle LMS",
+      "zone": "sdg-campus",
+      "dataClass": "system",
+      "x": 582,
+      "y": 438,
+      "width": 268,
+      "height": 242,
+      "visualType": "platform",
+      "renderKind": "moodle-shell",
+      "logoSrc": "assets/moodle-logo.svg",
+      "logoAspectRatio": 3.94,
+      "secondaryLogoSrc": "assets/SDG-Campus-Logo-Beta.png",
+      "secondaryLogoAspectRatio": 4.11,
+      "shortDescription": "Bestehendes LMS, in das LTI Interface, Course UI und Author UI eingebettet werden.",
+      "purpose": [
+        "Bestehende SDG-Campus Plattform nutzen.",
+        "Neue KI-Funktionen ohne Systembruch integrieren.",
+        "Kurskontext fuer den lokalen Kern bereitstellen."
+      ],
+      "inputs": [
+        "Kursinhalte aus dem Content & Competence Store (CCS)",
+        "Rollen, Enrollment und Kurskonfiguration"
+      ],
+      "outputs": [
+        "Course UI Interaktionen",
+        "Author UI Requests",
+        "Moodle/LTI-Kontext fuer Kernbausteine"
+      ],
+      "securityNotes": [
+        "Campus-intern betrieben.",
+        "PII bleibt in lokalen Systemgrenzen."
+      ],
+      "apIds": [
+        "2.07"
+      ]
+    },
+    {
+      "id": "skis",
+      "label": "Student Knowledge Information System (SKIS)",
+      "subtitle": "Student Knowledge Information System",
+      "zone": "de-onprem",
+      "dataClass": "pii",
+      "x": 172,
+      "y": 423,
+      "width": 208,
+      "height": 68,
+      "shortDescription": "Lokales AI-/RAG-System fuer Lernfortschritt, Kurshistorie, Aufgaben- und Testergebnisse von Studierenden.",
+      "purpose": [
+        "Studentische Lernprofile und Historien lokal konsolidieren",
+        "Adaptive Pfade, Learning Companion Tutor (LCT) und Learning Insight Engine (LIE) mit belastbarem Kontext versorgen",
+        "PII-konforme Personalisierung im lokalen Kern ermoeglichen"
+      ],
+      "inputs": [
+        "Lernaktivitaeten aus Moodle",
+        "Kurs- und Nutzungshistorie",
+        "Aufgaben- und Testergebnisse"
+      ],
+      "outputs": [
+        "Student Context fuer LIE, APE und LCT"
+      ],
+      "securityNotes": [
+        "Definitiv PII und ausschliesslich im DE/On-Prem Kern.",
+        "Keine direkte externe Ausleitung; nur freigegebene non-PII Kontexte duerfen spaeter weitergereicht werden."
+      ],
+      "apIds": [
+        "2.03",
+        "2.04",
+        "2.05"
+      ]
+    },
+    {
+      "id": "content-core",
+      "label": "Content & Competence Store (CCS)",
+      "subtitle": "Lernziele, Aufgaben, Punkte",
+      "zone": "de-onprem",
+      "dataClass": "non-pii",
+      "x": 172,
+      "y": 501,
+      "width": 208,
+      "height": 68,
+      "shortDescription": "Strukturierter Store fuer Lernziele, Punktesysteme, Kurseinheiten, Aufgaben und lokale Sprachvarianten als Basis der Kompetenzbildung.",
+      "purpose": [
+        "Didaktische Kurslogik und Kompetenzbasis zentral halten",
+        "Lernziele, Aufgaben und Bewertungsschemata konsistent versionieren",
+        "AAS, APE, LCT und Publishing auf eine gemeinsame Struktur stutzen"
+      ],
+      "inputs": [
+        "Strukturierte Authoring-Outputs",
+        "Kompetenzmodelle und Lernzieldefinitionen",
+        "Freigegebene Lokalisierungsartefakte",
+        "Lokale Sprachvarianten fuer mehrsprachige Kurse"
+      ],
+      "outputs": [
+        "Tutor Content",
+        "Pathway- und Kompetenzdaten",
+        "Kurs-Publishing zu Moodle",
+        "Lokale Sprachvarianten fuer Course UI und Tutor"
+      ],
+      "securityNotes": [
+        "Strukturdaten sind primaer non-PII und bleiben lokal versioniert.",
+        "Sprachvarianten koennen lokal persistiert und wiederverwendet werden, um Laufzeit-Token zu sparen.",
+        "Freigaben koennen ueber QA/Freigabe abgesichert werden."
+      ],
+      "apIds": [
+        "2.06",
+        "2.08"
+      ],
+      "apMapping": "AP 2.08 - Grundlage fuer Authoring, Tutor und Pathways"
+    },
+    {
+      "id": "lrs",
+      "label": "Learning Resource Store (LRS)",
+      "subtitle": "RAG Basismaterialien",
+      "zone": "de-onprem",
+      "dataClass": "non-pii",
+      "x": 172,
+      "y": 579,
+      "width": 208,
+      "height": 68,
+      "shortDescription": "Lokaler RAG-Speicher fuer Inputmaterialien und Basismaterialien der Kurserstellung in einer Vektordatenbank.",
+      "purpose": [
+        "Inputmaterialien fuer die Kurserstellung lokal aufbereiten",
+        "RAG-Kontext fuer Authoring abrufbar machen",
+        "Versionierte Wissensbasis fuer Quellen und Referenzen bereitstellen"
+      ],
+      "inputs": [
+        "Inputdokumente, Referenzen und Fachmaterialien",
+        "Freigegebene Autorenquellen"
+      ],
+      "outputs": [
+        "RAG-Kontext fuer AI Authoring Studio (AAS)"
+      ],
+      "securityNotes": [
+        "Vektordatenbank bleibt lokal im DE/On-Prem Kern.",
+        "Keine Pflicht zur Ausleitung von Basismaterialien an externe Dienste."
+      ],
+      "faq": [
+        {
+          "q": "Wo liegen die Basismaterialien fuer Authoring?",
+          "a": "Im lokalen Learning Resource Store (LRS) als on-prem RAG-Speicher fuer Quellen und Inputmaterialien."
+        }
+      ],
+      "apIds": [
+        "2.08"
+      ]
+    },
+    {
+      "id": "asset-media-library",
+      "label": "Asset & Media Library (AML)",
+      "subtitle": "Dateien, Medien, Metadaten",
+      "zone": "de-onprem",
+      "dataClass": "non-pii",
+      "x": 172,
+      "y": 657,
+      "width": 208,
+      "height": 68,
+      "shortDescription": "Lokaler Speicher fuer Assets und Medien aus Inputmaterialien sowie im Authoring erzeugte Dateien mit Metadatenbezug.",
+      "purpose": [
+        "Assets und Medien wiederverwendbar speichern",
+        "Dateien mit Kursen, Lernzielen und Kompetenzen verknuepfen",
+        "Authoring und Publishing mit konsistenten Medienpaketen versorgen"
+      ],
+      "inputs": [
+        "Inputmedien und Assets",
+        "Im Authoring erzeugte Grafiken, Audio- und Videoelemente",
+        "Metadaten aus Kurs- und Kompetenzkontext"
+      ],
+      "outputs": [
+        "Medienpakete fuer Authoring und Kurs-Publishing"
+      ],
+      "securityNotes": [
+        "Assets und Metadaten bleiben lokal steuerbar.",
+        "Rechte- und Freigabebezuge koennen lokal dokumentiert werden."
+      ],
+      "apIds": [
+        "2.08",
+        "2.07"
+      ]
+    },
+    {
+      "id": "authoring-studio",
+      "label": "AI Authoring Studio (AAS)",
+      "subtitle": "AI-assisted",
+      "zone": "de-onprem",
+      "dataClass": "non-pii",
+      "x": 1067,
+      "y": 423,
+      "width": 208,
+      "height": 68,
+      "shortDescription": "KI-unterstuetzte Erstellung und Ueberarbeitung von Lernangeboten auf Basis lokaler RAG- und Asset-Kontexte.",
+      "purpose": [
+        "Autor:innen produktiver machen",
+        "Didaktische Konsistenz staerken",
+        "Freigabefaehige Inhalte und Medien erzeugen"
+      ],
+      "inputs": [
+        "RAG-Kontext aus Learning Resource Store (LRS)",
+        "Medien und Metadaten aus Asset & Media Library (AML)",
+        "Lernziele und Kompetenzmodelle aus Content & Competence Store (CCS)"
+      ],
+      "outputs": [
+        "Strukturierte Kursentwuerfe fuer den Content & Competence Store (CCS)",
+        "Asset Sync in die Asset & Media Library (AML)"
+      ],
+      "securityNotes": [
+        "Standardmaessig non-PII.",
+        "Quellenmaterial und Medien bleiben im lokalen Kern und koennen ueber QA/Freigabe abgesichert werden."
+      ],
+      "apIds": [
+        "2.06",
+        "2.08"
+      ],
+      "apMapping": "AP 2.08 - KI-gestuetztes Authoring"
+    },
+    {
+      "id": "insights-engine",
+      "label": "Learning Insight Engine (LIE)",
+      "zone": "de-onprem",
+      "dataClass": "pii",
+      "x": 1067,
+      "y": 501,
+      "width": 208,
+      "height": 68,
+      "shortDescription": "Berechnet aus studentischem Kontext Lernfortschritt und Signale fuer adaptive Entscheidungen.",
+      "purpose": [
+        "Lernmuster erkennen",
+        "Adaptionssignale bereitstellen",
+        "Datengestuetzte Pfade ermoeglichen"
+      ],
+      "inputs": [
+        "PII-Kontext und Leistungsdaten aus SKIS"
+      ],
+      "outputs": [
+        "Insights Sync an Adaptive Pathway Engine (APE)",
+        "Lokale Analysesignale fuer Feedback und Tutorlogik"
+      ],
+      "securityNotes": [
+        "PII-Verarbeitung bleibt lokal im DE/On-Prem Ring.",
+        "Keine direkten externen Exporte."
+      ],
+      "apMapping": "AP 2.04 - Learning Insights als Input fuer Feedback und Pfade"
+    },
+    {
+      "id": "pathway-engine",
+      "label": "Adaptive Pathway Engine (APE)",
+      "zone": "de-onprem",
+      "dataClass": "mixed",
+      "x": 1067,
+      "y": 579,
+      "width": 208,
+      "height": 68,
+      "shortDescription": "Leitet personalisierte Lernpfade aus Insights und Kompetenzmodellen ab.",
+      "purpose": [
+        "Lernpfade personalisieren",
+        "Kompetenzluecken adressieren",
+        "Tutor-Interaktionen kontextualisieren"
+      ],
+      "inputs": [
+        "Insights Sync",
+        "Kompetenzdaten aus Content & Competence Store (CCS)",
+        "Studentischer Kontext aus SKIS"
+      ],
+      "outputs": [
+        "Empfehlungen fuer Course UI",
+        "Optionale non-PII Requests ueber die LMS AI Workflow Engine"
+      ],
+      "securityNotes": [
+        "Mixed-Datenklasse durch Kombination aus PII- und non-PII-Signalen.",
+        "Externe Weitergabe erfolgt nur ueber die orchestrierende Workflow-Ebene."
+      ],
+      "apMapping": "AP 2.03 - Adaptive Lernpfade"
+    },
+    {
+      "id": "learning-companion",
+      "label": "Learning Companion Tutor (LCT)",
+      "subtitle": "In-Course Tutor",
+      "zone": "de-onprem",
+      "dataClass": "mixed",
+      "x": 1067,
+      "y": 657,
+      "width": 208,
+      "height": 68,
+      "shortDescription": "Tutor-Assistent im Kurs mit kontextbasierten Hilfen und Erklaerungen.",
+      "purpose": [
+        "Tutor-Funktion im Kurs anbieten",
+        "Kontextbezogene Hilfe liefern",
+        "Kontrollierte Modellnutzung ermoeglichen"
+      ],
+      "inputs": [
+        "Tutor Content aus Content & Competence Store (CCS)",
+        "Lernkontext und Historie aus SKIS"
+      ],
+      "outputs": [
+        "Tutor-Hinweise im Course UI",
+        "Optionale non-PII Requests ueber die LMS AI Workflow Engine"
+      ],
+      "securityNotes": [
+        "Mixed-Datenklasse durch Lernkontext.",
+        "Keine externen Calls ohne Freigabe durch die orchestrierende Workflow-Ebene."
+      ],
+      "apIds": [
+        "2.05",
+        "2.06"
+      ],
+      "apMapping": "AP 2.05 - KI-Tutor im Lernkontext"
+    }
+  ],
+  "actors": [
+    {
+      "id": "actor-authors",
+      "label": "Lehrende / Autor:innen",
+      "shortLabel": "Lehrende",
+      "zone": "sdg-campus",
+      "dataClass": "mixed",
+      "visualType": "actor",
+      "x": 389,
+      "y": 276,
+      "width": 210,
+      "height": 64,
+      "markerScale": 2,
+      "avatarIcon": "person",
+      "avatar": "L",
+      "role": "Erstellen und pflegen Kurse mit KI-Unterstuetzung im Authoring-Kontext.",
+      "shortDescription": "Lehrende erstellen Inhalte und geben den didaktischen Rahmen vor.",
+      "purpose": [
+        "Kursmaterial erstellen und verbessern.",
+        "Qualitaet der Inhalte steuern.",
+        "KI-Unterstuetzung gezielt einsetzen."
+      ],
+      "inputs": [
+        "Fachinhalte",
+        "Kursziele",
+        "didaktische Vorgaben"
+      ],
+      "outputs": [
+        "Authoring-Anfragen",
+        "Kursinhalte",
+        "Freigabeantraege"
+      ],
+      "dataProduced": [
+        "Kursinhalte (non-PII)",
+        "teilweise kontextnahe Metadaten"
+      ],
+      "systemsTouched": [
+        "Moodle LMS",
+        "Author UI",
+        "LTI Interface",
+        "AI Authoring Studio (AAS)",
+        "Learning Resource Store (LRS)",
+        "Asset & Media Library (AML)",
+        "Content & Competence Store (CCS)",
+        "LMS AI Workflow Engine",
+        "OpenAI / Anthropic (optional)",
+        "QA/Freigabe"
+      ],
+      "securityNotes": [
+        "Keine direkte externe KI-Nutzung ausser ueber die LMS AI Workflow Engine.",
+        "Freigaben koennen ueber QA/Freigabe abgesichert werden."
+      ],
+      "flowEdgeIds": [
+        "edge-author-ui-entry",
+        "edge-author-ui-context",
+        "edge-lti-authoring-request",
+        "edge-authoring-rag",
+        "edge-asset-context",
+        "edge-content-publishing",
+        "edge-asset-sync",
+        "edge-publish-to-moodle",
+        "edge-qa-review",
+        "edge-frontier-openai",
+        "edge-frontier-anthropic"
+      ],
+      "touchNodeIds": [
+        "moodle-lms",
+        "authoring-studio",
+        "lrs",
+        "asset-media-library",
+        "content-core",
+        "capabilities-cluster",
+        "badge-openai-frontier",
+        "badge-anthropic"
+      ],
+      "inspectorSummary": {
+        "what": "Rolle fuer Kursdesign und Kurspflege.",
+        "relevance": "Praegt die Qualitaet und Didaktik der Lernangebote."
+      },
+      "apIds": [
+        "2.08",
+        "2.07"
+      ]
+    },
+    {
+      "id": "actor-students",
+      "label": "Studierende",
+      "shortLabel": "Studierende",
+      "zone": "sdg-campus",
+      "dataClass": "mixed",
+      "visualType": "actor",
+      "x": 850,
+      "y": 738,
+      "width": 192,
+      "height": 64,
+      "markerScale": 2,
+      "avatarIcon": "person",
+      "avatar": "S",
+      "role": "Nutzen Kurse in Moodle und interagieren mit Tutor, Lernpfaden und Lerninhalten.",
+      "shortDescription": "Studierende lernen im Kurskontext und erzeugen Lernsignale.",
+      "purpose": [
+        "Kurse bearbeiten",
+        "Feedback nutzen",
+        "adaptive Empfehlungen erhalten"
+      ],
+      "inputs": [
+        "Kursinhalte",
+        "Tutor-Hinweise",
+        "Lernpfadempfehlungen"
+      ],
+      "outputs": [
+        "Lernaktivitaeten (PII)",
+        "Fragen und Interaktionen"
+      ],
+      "dataProduced": [
+        "PII-nahe Lernaktivitaeten",
+        "non-PII Inhalteingaben je nach Kontext"
+      ],
+      "systemsTouched": [
+        "Moodle LMS",
+        "Course UI",
+        "LTI Interface",
+        "SKIS",
+        "Learning Insight Engine (LIE)",
+        "Learning Companion Tutor (LCT)",
+        "Adaptive Pathway Engine (APE)"
+      ],
+      "securityNotes": [
+        "PII-Aktivitaeten werden lokal im SKIS verarbeitet und bleiben im DE/On-Prem Kern.",
+        "Externe Services sehen keine PII."
+      ],
+      "flowEdgeIds": [
+        "edge-course-ui-entry",
+        "edge-course-ui-context",
+        "edge-lti-tutor-request",
+        "edge-lti-pathway-request",
+        "edge-learner-activity",
+        "edge-insights",
+        "edge-student-pathway-context",
+        "edge-student-companion-context",
+        "edge-pathway-course-return",
+        "edge-tutor-course-return"
+      ],
+      "touchNodeIds": [
+        "moodle-lms",
+        "skis",
+        "insights-engine",
+        "pathway-engine",
+        "learning-companion"
+      ],
+      "inspectorSummary": {
+        "what": "Zentrale Lernrolle im System.",
+        "relevance": "Zeigt, wo PII entsteht und wie lokale Verarbeitung funktioniert."
+      },
+      "apIds": [
+        "2.04",
+        "2.03",
+        "2.05"
+      ]
+    },
+    {
+      "id": "actor-qa",
+      "label": "Qualitaetssicherung / Freigabe",
+      "shortLabel": "QA/Freigabe",
+      "zone": "de-onprem",
+      "dataClass": "system",
+      "visualType": "actor",
+      "x": 841,
+      "y": 276,
+      "width": 210,
+      "height": 64,
+      "markerScale": 2,
+      "avatarIcon": "person",
+      "avatar": "Q",
+      "role": "Prueft kritische Inhalte, Freigaben und Governance-Vorgaben.",
+      "shortDescription": "Sichert Qualitaet und Nachvollziehbarkeit vor produktiver Nutzung.",
+      "purpose": [
+        "Freigabeschritte absichern",
+        "Governance dokumentieren",
+        "Risiken minimieren"
+      ],
+      "inputs": [
+        "Freigabeantraege",
+        "Governance-Hinweise"
+      ],
+      "outputs": [
+        "Freigaben / Ablehnungen",
+        "Freigabenachweise"
+      ],
+      "dataProduced": [
+        "Entscheidungsprotokolle (system)"
+      ],
+      "systemsTouched": [
+        "Content & Competence Store (CCS)",
+        "LMS AI Workflow Engine"
+      ],
+      "securityNotes": [
+        "Human-in-the-Loop reduziert Fehlentscheidungen.",
+        "Freigaben bleiben nachvollziehbar dokumentiert."
+      ],
+      "flowEdgeIds": [
+        "edge-qa-review",
+        "edge-qa-policy-gate",
+        "edge-routing",
+        "edge-pathway-routing",
+        "edge-frontier-openai",
+        "edge-frontier-anthropic"
+      ],
+      "touchNodeIds": [
+        "capabilities-cluster"
+      ],
+      "apIds": [
+        "2.08"
+      ]
+    },
+    {
+      "id": "actor-ops",
+      "label": "Plattformbetrieb",
+      "shortLabel": "Betrieb",
+      "zone": "de-onprem",
+      "dataClass": "system",
+      "visualType": "actor",
+      "x": 398,
+      "y": 738,
+      "width": 192,
+      "height": 64,
+      "markerScale": 2,
+      "avatarIcon": "person",
+      "avatar": "O",
+      "role": "Konfiguriert Betriebsmodi und schaltet optionale Services kontrolliert zu.",
+      "shortDescription": "Steuert technische Aktivierung optionaler Integrationen.",
+      "purpose": [
+        "Betrieb stabil halten",
+        "Optionale Services kontrolliert aktivieren",
+        "Policies technisch durchsetzen"
+      ],
+      "inputs": [
+        "Betriebsrichtlinien",
+        "Compliance-Vorgaben"
+      ],
+      "outputs": [
+        "Konfigurationsaenderungen",
+        "Betriebs- und Monitoring-Logs"
+      ],
+      "dataProduced": [
+        "System- und Betriebsdaten"
+      ],
+      "systemsTouched": [
+        "LMS AI Workflow Engine",
+        "Externe Services (optional)"
+      ],
+      "securityNotes": [
+        "Keine Freigabe von PII an externe Services.",
+        "Konfiguration folgt Governance-Vorgaben."
+      ],
+      "flowEdgeIds": [
+        "edge-ops-policy-config",
+        "edge-sap-gateway-routing",
+        "edge-model-inference",
+        "edge-external-api",
+        "edge-frontier-openai",
+        "edge-frontier-anthropic"
+      ],
+      "touchNodeIds": [
+        "capabilities-cluster",
+        "badge-openai-germany",
+        "badge-openai-enterprise",
+        "badge-mistral-ai",
+        "badge-elevenlabs",
+        "badge-openai-frontier",
+        "badge-anthropic"
+      ],
+      "apIds": [
+        "2.07"
+      ]
+    }
+  ],
+  "serviceBadges": [
+    {
+      "id": "badge-openai-germany",
+      "label": "OpenAI Germany",
+      "zone": "de-onprem",
+      "dataClass": "non-pii",
+      "visualType": "service-badge",
+      "shape": "orb",
+      "renderKind": "logo-orb",
+      "x": 374,
+      "y": 182,
+      "width": 146,
+      "height": 110,
+      "circleRadius": 34,
+      "optional": true,
+      "logoSrc": "assets/openai-symbol.webp",
+      "logoWidth": 42,
+      "logoHeight": 42,
+      "shortDescription": "Regionales OpenAI-Gateway am Uebergang vom lokalen Kern zum externen Pfad mit DE-Hosting-Kontext.",
+      "purpose": [
+        "Regionale KI-Verarbeitung ermoeglichen",
+        "Regulierte Nutzung unterstuetzen",
+        "Policy-konformen Zugriff sichern"
+      ],
+      "inputs": [
+        "Von der LMS AI Workflow Engine freigegebene non-PII Requests"
+      ],
+      "outputs": [
+        "Modellantworten fuer LCT/APE"
+      ],
+      "allowedDataClass": "non-pii",
+      "policy": "Nur non-PII, nur ueber die LMS AI Workflow Engine, mit Logging und Freigaberegeln.",
+      "securityNotes": [
+        "PII bleibt lokal im DE/On-Prem Kern.",
+        "Nutzung ist optional und kontrollierbar."
+      ],
+      "inspectorSummary": {
+        "what": "Regionaler externer KI-Service mit klarer Zugriffskontrolle.",
+        "relevance": "Zeigt, wie Innovation datenschutzkonform angebunden werden kann."
+      },
+      "apIds": [
+        "2.05"
+      ]
+    },
+    {
+      "id": "badge-openai-enterprise",
+      "label": "OpenAI Enterprise",
+      "zone": "eu-cloud",
+      "dataClass": "non-pii",
+      "visualType": "service-badge",
+      "shape": "orb",
+      "renderKind": "logo-orb",
+      "x": 828,
+      "y": 68,
+      "width": 150,
+      "height": 110,
+      "circleRadius": 34,
+      "optional": true,
+      "logoSrc": "assets/openai-symbol.webp",
+      "logoWidth": 42,
+      "logoHeight": 42,
+      "shortDescription": "OpenAI Enterprise sichert die Verarbeitung generativer LLM-Aufgaben auf EU-gehosteten Servern.",
+      "purpose": [
+        "EU-gehostete LLM-Verarbeitung ermoeglichen",
+        "Enterprise-Nutzung fuer generative Aufgaben absichern",
+        "Nicht-lokale LLM-Pfade kontrolliert verfuegbar machen"
+      ],
+      "inputs": [
+        "Von der LMS AI Workflow Engine freigegebene non-PII Requests"
+      ],
+      "outputs": [
+        "LLM-Antworten fuer lokale Workflows"
+      ],
+      "allowedDataClass": "non-pii",
+      "policy": "Nur non-PII, optional aktivierbar und ueber die LMS AI Workflow Engine nachvollziehbar steuerbar.",
+      "securityNotes": [
+        "EU-gehostete Verarbeitung im Enterprise-Plan.",
+        "PII bleibt lokal und wird nicht ausgelagert."
+      ],
+      "apIds": [
+        "2.05",
+        "2.06"
+      ]
+    },
+    {
+      "id": "badge-mistral-ai",
+      "label": "Mistral-AI",
+      "zone": "eu-cloud",
+      "dataClass": "non-pii",
+      "visualType": "service-badge",
+      "shape": "orb",
+      "renderKind": "logo-orb",
+      "x": 816,
+      "y": 924,
+      "width": 136,
+      "height": 108,
+      "circleRadius": 32,
+      "optional": true,
+      "logoSrc": "assets/mistral-logo.svg",
+      "logoWidth": 30,
+      "logoHeight": 30,
+      "shortDescription": "Europaeischer KI-Anbieter mit EU-gehosteter Verarbeitung fuer spezialisierte KI-Anforderungen.",
+      "purpose": [
+        "Europaeische KI-Option fuer spezialisierte Anforderungen bereitstellen",
+        "EU-Hosting fuer non-PII Pfade absichern",
+        "Alternative Modellkompetenz fuer externe KI-Faelle ergaenzen"
+      ],
+      "inputs": [
+        "Von der LMS AI Workflow Engine freigegebene non-PII Content- und Modell-Requests"
+      ],
+      "outputs": [
+        "Spezialisierte Modellantworten und lokalisierte Varianten"
+      ],
+      "allowedDataClass": "non-pii",
+      "policy": "Nur non-PII; optional aktivierbar und ueber die LMS AI Workflow Engine steuerbar.",
+      "securityNotes": [
+        "Europaeischer Anbieter mit EU-Servern.",
+        "Keine PII-Weitergabe an externe Verarbeitung."
+      ],
+      "apIds": [
+        "2.06"
+      ]
+    },
+    {
+      "id": "badge-elevenlabs",
+      "label": "Eleven Labs",
+      "zone": "us-global",
+      "dataClass": "non-pii",
+      "visualType": "service-badge",
+      "shape": "orb",
+      "renderKind": "logo-orb",
+      "x": 1086,
+      "y": 968,
+      "width": 136,
+      "height": 108,
+      "circleRadius": 32,
+      "optional": true,
+      "logoSrc": "assets/elevenlabs-symbol.svg",
+      "logoWidth": 30,
+      "logoHeight": 30,
+      "shortDescription": "Spezialisierter KI-Anbieter fuer Audio-, Video- und Voice-Funktionen im optionalen US/Global-Pfad.",
+      "purpose": [
+        "Audio-, Voice- und Video-nahe KI-Funktionen anbinden",
+        "Spezialisierte Medienfaelle modular ergaenzen",
+        "Externe Servicefaehigkeiten getrennt vom lokalen Kern halten"
+      ],
+      "inputs": [
+        "Von der LMS AI Workflow Engine freigegebene non-PII Audio-, Voice- und Video-Requests"
+      ],
+      "outputs": [
+        "Spezialisierte Medienantworten fuer lokale Workflows"
+      ],
+      "allowedDataClass": "non-pii",
+      "policy": "Nur non-PII und nur ueber die LMS AI Workflow Engine erreichbar.",
+      "securityNotes": [
+        "Spezialisierte US/Global-Erweiterung fuer Medienfunktionen.",
+        "Nutzung bleibt optional und auditierbar."
+      ],
+      "apIds": [
+        "2.06"
+      ]
+    },
+    {
+      "id": "badge-openai-frontier",
+      "label": "OpenAI",
+      "zone": "us-global",
+      "dataClass": "non-pii",
+      "visualType": "service-badge",
+      "shape": "orb",
+      "renderKind": "logo-orb",
+      "x": 446,
+      "y": -12,
+      "width": 132,
+      "height": 98,
+      "circleRadius": 30,
+      "orbCenterY": 42,
+      "optional": true,
+      "logoSrc": "assets/openai-symbol.webp",
+      "logoWidth": 34,
+      "logoHeight": 34,
+      "shortDescription": "Optionaler US/Global-Frontier-Service fuer aktuelle multimodale OpenAI-Modelle bei datenschutzunkritischen Spezialaufrufen im Authoring.",
+      "purpose": [
+        "Aktuelle multimodale Frontier-Modelle fuer Bild- und Asset-Erzeugung anbindbar machen",
+        "Spezialaufrufe fuer die Kurserstellung modular zuschaltbar halten",
+        "Nur datenschutzunkritische Requests ueber einen kontrollierten Ausnahmeweg erlauben"
+      ],
+      "inputs": [
+        "Von der LMS AI Workflow Engine freigegebene non-PII Spezial- und Asset-Requests"
+      ],
+      "outputs": [
+        "Bild-, Asset- und multimodale Antworten fuer Authoring-Workflows"
+      ],
+      "allowedDataClass": "non-pii",
+      "policy": "Nur non-PII und nur optional ueber die LMS AI Workflow Engine fuer Spezialaufrufe erreichbar.",
+      "securityNotes": [
+        "Gedacht fuer datenschutzunkritische Spezialaufrufe wie Bildgenerierung zur Kurserstellung.",
+        "PII bleibt lokal; der Pfad ist optional, kontrolliert und abschaltbar."
+      ],
+      "apIds": [
+        "2.08"
+      ]
+    },
+    {
+      "id": "badge-anthropic",
+      "label": "Anthropic",
+      "zone": "us-global",
+      "dataClass": "non-pii",
+      "visualType": "service-badge",
+      "shape": "orb",
+      "renderKind": "logo-orb",
+      "x": 968,
+      "y": -10,
+      "width": 146,
+      "height": 98,
+      "circleRadius": 30,
+      "orbCenterY": 42,
+      "optional": true,
+      "logoSrc": "assets/anthropic.svg",
+      "logoWidth": 28,
+      "logoHeight": 28,
+      "shortDescription": "Optionaler US/Global-Frontier-Service fuer grosse aktuelle LLM-Aufrufe bei komplexen, datenschutzunkritischen Spezialanfragen.",
+      "purpose": [
+        "Aktuelle grosse LLMs fuer spezialisierte Authoring- und Planungsaufgaben zuschaltbar machen",
+        "Komplexe non-PII Sonderfaelle jenseits der EU/DE-Pfade abdecken",
+        "US/Global-Aufrufe als kontrollierte Ausnahme statt als Standardpfad behandeln"
+      ],
+      "inputs": [
+        "Von der LMS AI Workflow Engine freigegebene non-PII Spezial-Requests"
+      ],
+      "outputs": [
+        "Reasoning- und Spezialantworten fuer Authoring-Workflows"
+      ],
+      "allowedDataClass": "non-pii",
+      "policy": "Nur non-PII und nur optional ueber die LMS AI Workflow Engine fuer kontrollierte Frontier-Aufrufe erreichbar.",
+      "securityNotes": [
+        "Nur fuer datenschutzunkritische Spezialanfragen gedacht.",
+        "PII bleibt lokal; der Pfad ist optional, dokumentierbar und abschaltbar."
+      ],
+      "apIds": [
+        "2.08"
+      ]
+    }
+  ]
+}
